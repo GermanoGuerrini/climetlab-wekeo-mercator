@@ -87,10 +87,15 @@ class Main(Dataset):
         options.update(self.default_options["xarray_open_dataset_kwargs"])
         options.update(kwargs.get("xarray_open_dataset_kwargs", {}))
 
-        datasets = [
-            xr.open_dataset(s, **options) for s in self.source.sources
-        ]
-        datasets = self.pre_concat(datasets)
-        array = xr.concat(datasets, dim="time")
-        array = self.post_concat(datasets, array)
-        return array
+        try:
+            datasets = [
+                xr.open_dataset(s, **options) for s in self.source.sources
+            ]
+            datasets = self.pre_concat(datasets)
+            array = xr.concat(datasets, dim="time")
+            array = self.post_concat(datasets, array)
+            return array
+        except AttributeError:
+            # Single file
+            return super().to_xarray(**options)
+
