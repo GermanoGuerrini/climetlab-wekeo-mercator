@@ -11,14 +11,18 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs_glo_bgc3d_rep_weekly_202112",  # Global ocean 3d chlorophyll-a concentration, particulate backscattering coeffient and particulate organic carbon
     "cmems_obs_glo_bgc3d_rep_clim_202112",  # Global ocean 3d chlorophyll-a concentration, particulate backscattering coeffient and particulate organic carbon monthly climatology
+    "cmems_obs_glo_bgc3d_rep_weekly_202112",  # Global ocean 3d chlorophyll-a concentration, particulate backscattering coeffient and particulate organic carbon
 ]
 
 
 class multiobs_glo_bio_bgc_3d_rep(Main):
     name = "EO:MO:DAT:MULTIOBS_GLO_BIO_BGC_3D_REP_015_010"
     dataset = "EO:MO:DAT:MULTIOBS_GLO_BIO_BGC_3D_REP_015_010"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")

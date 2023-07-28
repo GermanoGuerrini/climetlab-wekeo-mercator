@@ -19,6 +19,10 @@ class sealevel_glo_phy_l4_nrt_observations(Main):
     name = "EO:MO:DAT:SEALEVEL_GLO_PHY_L4_NRT_OBSERVATIONS_008_046"
     dataset = "EO:MO:DAT:SEALEVEL_GLO_PHY_L4_NRT_OBSERVATIONS_008_046"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -59,7 +63,7 @@ class sealevel_glo_phy_l4_nrt_observations(Main):
                 start = "2019-11-30T12:00:00Z"
 
             if end is None:
-                end = "2023-07-10T12:00:00Z"
+                end = "2023-07-27T12:00:00Z"
 
         super().__init__(
             layer=layer,

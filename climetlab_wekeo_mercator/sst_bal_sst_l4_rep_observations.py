@@ -19,6 +19,10 @@ class sst_bal_sst_l4_rep_observations(Main):
     name = "EO:MO:DAT:SST_BAL_SST_L4_REP_OBSERVATIONS_010_016"
     dataset = "EO:MO:DAT:SST_BAL_SST_L4_REP_OBSERVATIONS_010_016"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")

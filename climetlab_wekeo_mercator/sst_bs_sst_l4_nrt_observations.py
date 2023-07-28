@@ -11,16 +11,20 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "SST_BS_SSTA_L4_NRT_OBSERVATIONS_010_006_d",  # Black sea sst anomaly, l4, 1km daily (sst bs ssta l4 NRT observations 010 006 d)
-    "SST_BS_SSTA_L4_NRT_OBSERVATIONS_010_006_b",  # Black sea sst anomaly, l4, 1/16deg daily (sst bs ssta l4 NRT observations 010 006 b)
     "SST_BS_SST_L4_NRT_OBSERVATIONS_010_006_a_V2",  # Black sea sst analysis, l4, 1/16deg daily (sst bs sst l4 NRT observations 010 006 a v2)
     "SST_BS_SST_L4_NRT_OBSERVATIONS_010_006_c_V2",  # Black sea sst analysis, l4, 1km daily (sst bs sst l4 NRT observations 010 006 c v2)
+    "SST_BS_SSTA_L4_NRT_OBSERVATIONS_010_006_b",  # Black sea sst anomaly, l4, 1/16deg daily (sst bs ssta l4 NRT observations 010 006 b)
+    "SST_BS_SSTA_L4_NRT_OBSERVATIONS_010_006_d",  # Black sea sst anomaly, l4, 1km daily (sst bs ssta l4 NRT observations 010 006 d)
 ]
 
 
 class sst_bs_sst_l4_nrt_observations(Main):
     name = "EO:MO:DAT:SST_BS_SST_L4_NRT_OBSERVATIONS_010_006"
     dataset = "EO:MO:DAT:SST_BS_SST_L4_NRT_OBSERVATIONS_010_006"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -35,6 +39,7 @@ class sst_bs_sst_l4_nrt_observations(Main):
             "lon",
             "mask",
             "sea_ice_fraction",
+            "sst_anomaly",
             "time",
         ],
         multiple=True,
@@ -47,33 +52,33 @@ class sst_bs_sst_l4_nrt_observations(Main):
         end=None,
         variables=None,
     ):
-        if layer == "SST_BS_SSTA_L4_NRT_OBSERVATIONS_010_006_d":
+        if layer == "SST_BS_SST_L4_NRT_OBSERVATIONS_010_006_a_V2":
             if start is None:
-                start = "2007-12-31T00:00:00Z"
+                start = "2007-12-31T19:00:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
+                end = "2023-07-27T07:00:00Z"
 
         if layer == "SST_BS_SSTA_L4_NRT_OBSERVATIONS_010_006_b":
             if start is None:
                 start = "2007-12-31T00:00:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
-        if layer == "SST_BS_SST_L4_NRT_OBSERVATIONS_010_006_a_V2":
+        if layer == "SST_BS_SSTA_L4_NRT_OBSERVATIONS_010_006_d":
             if start is None:
-                start = "2007-12-31T19:00:00Z"
+                start = "2007-12-31T00:00:00Z"
 
             if end is None:
-                end = "2023-07-10T07:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
         if layer == "SST_BS_SST_L4_NRT_OBSERVATIONS_010_006_c_V2":
             if start is None:
                 start = "2007-12-31T19:00:00Z"
 
             if end is None:
-                end = "2023-07-10T07:00:00Z"
+                end = "2023-07-27T07:00:00Z"
 
         super().__init__(
             layer=layer,

@@ -20,6 +20,10 @@ class medsea_multiyear_wav(Main):
     name = "EO:MO:DAT:MEDSEA_MULTIYEAR_WAV_006_012"
     dataset = "EO:MO:DAT:MEDSEA_MULTIYEAR_WAV_006_012"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -58,19 +62,19 @@ class medsea_multiyear_wav(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_mod_med_wav_myint_4.2km_PT1H-i_202112":
-            if start is None:
-                start = "2022-09-20T00:00:00Z"
-
-            if end is None:
-                end = "2023-06-20T00:00:00Z"
-
         if layer == "med-hcmr-wav-rean-h_202105":
             if start is None:
                 start = "2020-06-01T00:00:00Z"
 
             if end is None:
                 end = "2022-06-01T00:00:00Z"
+
+        if layer == "cmems_mod_med_wav_myint_4.2km_PT1H-i_202112":
+            if start is None:
+                start = "2022-09-20T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-20T00:00:00Z"
 
         super().__init__(
             layer=layer,

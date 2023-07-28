@@ -11,19 +11,23 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs-oc_med_bgc-reflectance_my_l3-multi-1km_P1D_202207",  # Cmems obs-oc med bgc-reflectance my l3-multi-1km p1d
     "cmems_obs-oc_med_bgc-optics_my_l3-multi-1km_P1D_202207",  # Cmems obs-oc med bgc-optics my l3-multi-1km p1d
-    "cmems_obs-oc_med_bgc-reflectance_my_l3-olci-300m_P1D_202211",  # Cmems obs-oc med bgc-reflectance my l3-olci-300m p1d
-    "cmems_obs-oc_med_bgc-transp_my_l3-olci-300m_P1D_202211",  # Cmems obs-oc med bgc-transp my l3-olci-300m p1d
-    "cmems_obs-oc_med_bgc-transp_my_l3-multi-1km_P1D_202207",  # Cmems obs-oc med bgc-transp my l3-multi-1km p1d
     "cmems_obs-oc_med_bgc-plankton_my_l3-multi-1km_P1D_202207",  # Cmems obs-oc med bgc-plankton my l3-multi-1km p1d
     "cmems_obs-oc_med_bgc-plankton_my_l3-olci-300m_P1D_202211",  # Cmems obs-oc med bgc-plankton my l3-olci-300m p1d
+    "cmems_obs-oc_med_bgc-reflectance_my_l3-multi-1km_P1D_202207",  # Cmems obs-oc med bgc-reflectance my l3-multi-1km p1d
+    "cmems_obs-oc_med_bgc-reflectance_my_l3-olci-300m_P1D_202211",  # Cmems obs-oc med bgc-reflectance my l3-olci-300m p1d
+    "cmems_obs-oc_med_bgc-transp_my_l3-multi-1km_P1D_202207",  # Cmems obs-oc med bgc-transp my l3-multi-1km p1d
+    "cmems_obs-oc_med_bgc-transp_my_l3-olci-300m_P1D_202211",  # Cmems obs-oc med bgc-transp my l3-olci-300m p1d
 ]
 
 
 class oceancolour_med_bgc_l3_my(Main):
     name = "EO:MO:DAT:OCEANCOLOUR_MED_BGC_L3_MY_009_143"
     dataset = "EO:MO:DAT:OCEANCOLOUR_MED_BGC_L3_MY_009_143"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -32,9 +36,54 @@ class oceancolour_med_bgc_l3_my(Main):
     @normalize(
         "variables",
         [
+            "ADG443",
+            "APH443",
+            "BBP443",
             "CHL",
+            "CRYPTO",
+            "DIATO",
+            "DINO",
+            "GREEN",
+            "HAPTO",
+            "KD490",
+            "MICRO",
+            "NANO",
+            "PICO",
+            "PROKAR",
+            "QI_ADG443",
+            "QI_APH443",
+            "QI_BBP443",
             "QI_CHL",
+            "QI_KD490",
+            "QI_RRS412",
+            "QI_RRS412_5",
+            "QI_RRS442_5",
+            "QI_RRS443",
+            "QI_RRS490",
+            "QI_RRS510",
+            "QI_RRS555",
+            "QI_RRS560",
+            "QI_RRS670",
+            "QI_RRS673_75",
+            "RRS400",
+            "RRS412",
+            "RRS412_5",
+            "RRS442_5",
+            "RRS443",
+            "RRS490",
+            "RRS510",
+            "RRS555",
+            "RRS560",
+            "RRS620",
+            "RRS665",
+            "RRS670",
+            "RRS673_75",
+            "RRS681_25",
+            "RRS708_75",
+            "RRS778_75",
+            "RRS865",
             "SENSORMASK",
+            "WTM",
             "lat",
             "lon",
             "time",
@@ -49,54 +98,54 @@ class oceancolour_med_bgc_l3_my(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_obs-oc_med_bgc-reflectance_my_l3-multi-1km_P1D_202207":
-            if start is None:
-                start = "1997-09-16T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-02T00:00:00Z"
-
         if layer == "cmems_obs-oc_med_bgc-optics_my_l3-multi-1km_P1D_202207":
             if start is None:
                 start = "1997-09-16T00:00:00Z"
 
             if end is None:
-                end = "2023-07-02T00:00:00Z"
-
-        if layer == "cmems_obs-oc_med_bgc-reflectance_my_l3-olci-300m_P1D_202211":
-            if start is None:
-                start = "2016-04-26T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-02T00:00:00Z"
-
-        if layer == "cmems_obs-oc_med_bgc-transp_my_l3-olci-300m_P1D_202211":
-            if start is None:
-                start = "2016-04-26T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-02T00:00:00Z"
-
-        if layer == "cmems_obs-oc_med_bgc-transp_my_l3-multi-1km_P1D_202207":
-            if start is None:
-                start = "1997-09-16T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-02T00:00:00Z"
+                end = "2023-07-24T00:00:00Z"
 
         if layer == "cmems_obs-oc_med_bgc-plankton_my_l3-multi-1km_P1D_202207":
             if start is None:
                 start = "1997-09-16T00:00:00Z"
 
             if end is None:
-                end = "2023-07-02T00:00:00Z"
+                end = "2023-07-24T00:00:00Z"
+
+        if layer == "cmems_obs-oc_med_bgc-reflectance_my_l3-multi-1km_P1D_202207":
+            if start is None:
+                start = "1997-09-16T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-24T00:00:00Z"
+
+        if layer == "cmems_obs-oc_med_bgc-transp_my_l3-multi-1km_P1D_202207":
+            if start is None:
+                start = "1997-09-16T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-24T00:00:00Z"
 
         if layer == "cmems_obs-oc_med_bgc-plankton_my_l3-olci-300m_P1D_202211":
             if start is None:
                 start = "2016-04-26T00:00:00Z"
 
             if end is None:
-                end = "2023-07-02T00:00:00Z"
+                end = "2023-07-19T00:00:00Z"
+
+        if layer == "cmems_obs-oc_med_bgc-reflectance_my_l3-olci-300m_P1D_202211":
+            if start is None:
+                start = "2016-04-26T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-19T00:00:00Z"
+
+        if layer == "cmems_obs-oc_med_bgc-transp_my_l3-olci-300m_P1D_202211":
+            if start is None:
+                start = "2016-04-26T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-19T00:00:00Z"
 
         super().__init__(
             layer=layer,

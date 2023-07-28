@@ -11,17 +11,21 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs-oc_blk_bgc-transp_nrt_l4-olci-300m_P1M_202207",  # Cmems obs-oc blk bgc-transp NRT l4-olci-300m p1m
-    "cmems_obs-oc_blk_bgc-plankton_nrt_l4-olci-300m_P1M_202207",  # Cmems obs-oc blk bgc-plankton NRT l4-olci-300m p1m
-    "cmems_obs-oc_blk_bgc-plankton_nrt_l4-multi-1km_P1M_202207",  # Cmems obs-oc blk bgc-plankton NRT l4-multi-1km p1m
-    "cmems_obs-oc_blk_bgc-transp_nrt_l4-multi-1km_P1M_202207",  # Cmems obs-oc blk bgc-transp NRT l4-multi-1km p1m
     "cmems_obs-oc_blk_bgc-plankton_nrt_l4-gapfree-multi-1km_P1D_202207",  # Cmems obs-oc blk bgc-plankton NRT l4-gapfree-multi-1km p1d
+    "cmems_obs-oc_blk_bgc-plankton_nrt_l4-multi-1km_P1M_202207",  # Cmems obs-oc blk bgc-plankton NRT l4-multi-1km p1m
+    "cmems_obs-oc_blk_bgc-plankton_nrt_l4-olci-300m_P1M_202207",  # Cmems obs-oc blk bgc-plankton NRT l4-olci-300m p1m
+    "cmems_obs-oc_blk_bgc-transp_nrt_l4-multi-1km_P1M_202207",  # Cmems obs-oc blk bgc-transp NRT l4-multi-1km p1m
+    "cmems_obs-oc_blk_bgc-transp_nrt_l4-olci-300m_P1M_202207",  # Cmems obs-oc blk bgc-transp NRT l4-olci-300m p1m
 ]
 
 
 class oceancolour_blk_bgc_l4_nrt(Main):
     name = "EO:MO:DAT:OCEANCOLOUR_BLK_BGC_L4_NRT_009_152"
     dataset = "EO:MO:DAT:OCEANCOLOUR_BLK_BGC_L4_NRT_009_152"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -31,6 +35,11 @@ class oceancolour_blk_bgc_l4_nrt(Main):
         "variables",
         [
             "CHL",
+            "CHL_count",
+            "CHL_error",
+            "KD490",
+            "KD490_count",
+            "KD490_error",
             "lat",
             "lon",
             "time",
@@ -52,6 +61,20 @@ class oceancolour_blk_bgc_l4_nrt(Main):
             if end is None:
                 end = "2023-04-30T00:00:00Z"
 
+        if layer == "cmems_obs-oc_blk_bgc-plankton_nrt_l4-gapfree-multi-1km_P1D_202207":
+            if start is None:
+                start = "2023-07-15T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-26T00:00:00Z"
+
+        if layer == "cmems_obs-oc_blk_bgc-transp_nrt_l4-multi-1km_P1M_202207":
+            if start is None:
+                start = "2022-01-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-04-30T00:00:00Z"
+
         if layer == "cmems_obs-oc_blk_bgc-plankton_nrt_l4-olci-300m_P1M_202207":
             if start is None:
                 start = "2023-03-01T00:00:00Z"
@@ -65,20 +88,6 @@ class oceancolour_blk_bgc_l4_nrt(Main):
 
             if end is None:
                 end = "2023-03-31T00:00:00Z"
-
-        if layer == "cmems_obs-oc_blk_bgc-transp_nrt_l4-multi-1km_P1M_202207":
-            if start is None:
-                start = "2022-01-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-04-30T00:00:00Z"
-
-        if layer == "cmems_obs-oc_blk_bgc-plankton_nrt_l4-gapfree-multi-1km_P1D_202207":
-            if start is None:
-                start = "2023-06-28T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-09T00:00:00Z"
 
         super().__init__(
             layer=layer,

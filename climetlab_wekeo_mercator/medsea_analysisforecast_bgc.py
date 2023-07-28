@@ -11,24 +11,28 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_mod_med_bgc-pft_anfc_4.2km_P1M-m_202211",  # Phytoplankton carbon biomass, zooplankton carbon biomass and chlorophyll (3d) - monthly mean
-    "cmems_mod_med_bgc-car_anfc_4.2km_P1D-m_202211",  # Dissolved inorganic carbon, ph and alkalinity (3d) - daily mean
-    "cmems_mod_med_bgc-bio_anfc_4.2km_P1M-m_202211",  # Primary production and oxygen (3d) - monthly mean
-    "cmems_mod_med_bgc-pft_anfc_4.2km_P1D-m_202211",  # Phytoplankton carbon biomass, zooplankton carbon biomass and chlorophyll (3d) - daily mean
-    "cmems_mod_med_bgc-optics_anfc_4.2km_P1D-m_202211",  # Attenuation coefficient of downwelling radiative flux (2d) - daily mean
-    "cmems_mod_med_bgc-car_anfc_4.2km_P1M-m_202211",  # Dissolved inorganic carbon, ph and alkalinity (3d) - monthly mean
-    "cmems_mod_med_bgc-co2_anfc_4.2km_P1M-m_202211",  # Surface partial pressure of co2 and surface co2 flux (2d) - monthly mean
     "cmems_mod_med_bgc-bio_anfc_4.2km_P1D-m_202211",  # Primary production and oxygen (3d) - daily mean
+    "cmems_mod_med_bgc-bio_anfc_4.2km_P1M-m_202211",  # Primary production and oxygen (3d) - monthly mean
+    "cmems_mod_med_bgc-car_anfc_4.2km_P1D-m_202211",  # Dissolved inorganic carbon, ph and alkalinity (3d) - daily mean
+    "cmems_mod_med_bgc-car_anfc_4.2km_P1M-m_202211",  # Dissolved inorganic carbon, ph and alkalinity (3d) - monthly mean
     "cmems_mod_med_bgc-co2_anfc_4.2km_P1D-m_202211",  # Surface partial pressure of co2 and surface co2 flux (2d) - daily mean
+    "cmems_mod_med_bgc-co2_anfc_4.2km_P1M-m_202211",  # Surface partial pressure of co2 and surface co2 flux (2d) - monthly mean
     "cmems_mod_med_bgc-nut_anfc_4.2km_P1D-m_202211",  # Nitrate, phosphate, ammonium and silicate (3d) - daily mean
     "cmems_mod_med_bgc-nut_anfc_4.2km_P1M-m_202211",  # Nitrate, phosphate, ammonium and silicate (3d) - monthly mean
+    "cmems_mod_med_bgc-optics_anfc_4.2km_P1D-m_202211",  # Attenuation coefficient of downwelling radiative flux (2d) - daily mean
     "cmems_mod_med_bgc-optics_anfc_4.2km_P1M-m_202211",  # Attenuation coefficient of downwelling radiative flux (2d) - monthly mean
+    "cmems_mod_med_bgc-pft_anfc_4.2km_P1D-m_202211",  # Phytoplankton carbon biomass, zooplankton carbon biomass and chlorophyll (3d) - daily mean
+    "cmems_mod_med_bgc-pft_anfc_4.2km_P1M-m_202211",  # Phytoplankton carbon biomass, zooplankton carbon biomass and chlorophyll (3d) - monthly mean
 ]
 
 
 class medsea_analysisforecast_bgc(Main):
     name = "EO:MO:DAT:MEDSEA_ANALYSISFORECAST_BGC_006_014"
     dataset = "EO:MO:DAT:MEDSEA_ANALYSISFORECAST_BGC_006_014"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -37,10 +41,25 @@ class medsea_analysisforecast_bgc(Main):
     @normalize(
         "variables",
         [
+            "chl",
+            "depth",
+            "dissic",
+            "fgco2",
             "kd490",
             "latitude",
             "longitude",
+            "nh4",
+            "no3",
+            "nppv",
+            "o2",
+            "ph",
+            "phyc",
+            "po4",
+            "si",
+            "spco2",
+            "talk",
             "time",
+            "zooc",
         ],
         multiple=True,
     )
@@ -52,89 +71,89 @@ class medsea_analysisforecast_bgc(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_mod_med_bgc-pft_anfc_4.2km_P1M-m_202211":
-            if start is None:
-                start = "2022-01-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-06-13T00:00:00Z"
-
-        if layer == "cmems_mod_med_bgc-car_anfc_4.2km_P1D-m_202211":
+        if layer == "cmems_mod_med_bgc-bio_anfc_4.2km_P1D-m_202211":
             if start is None:
                 start = "2022-10-13T00:00:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
-
-        if layer == "cmems_mod_med_bgc-bio_anfc_4.2km_P1M-m_202211":
-            if start is None:
-                start = "2022-01-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-06-13T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
         if layer == "cmems_mod_med_bgc-pft_anfc_4.2km_P1D-m_202211":
             if start is None:
                 start = "2022-10-13T00:00:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
+
+        if layer == "cmems_mod_med_bgc-bio_anfc_4.2km_P1M-m_202211":
+            if start is None:
+                start = "2022-01-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-11T00:00:00Z"
 
         if layer == "cmems_mod_med_bgc-optics_anfc_4.2km_P1D-m_202211":
             if start is None:
                 start = "2022-10-13T00:00:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
-
-        if layer == "cmems_mod_med_bgc-car_anfc_4.2km_P1M-m_202211":
-            if start is None:
-                start = "2022-01-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-06-13T00:00:00Z"
-
-        if layer == "cmems_mod_med_bgc-co2_anfc_4.2km_P1M-m_202211":
-            if start is None:
-                start = "2022-01-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-06-13T00:00:00Z"
-
-        if layer == "cmems_mod_med_bgc-bio_anfc_4.2km_P1D-m_202211":
-            if start is None:
-                start = "2022-10-13T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-10T00:00:00Z"
-
-        if layer == "cmems_mod_med_bgc-co2_anfc_4.2km_P1D-m_202211":
-            if start is None:
-                start = "2022-10-13T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-10T00:00:00Z"
-
-        if layer == "cmems_mod_med_bgc-nut_anfc_4.2km_P1D-m_202211":
-            if start is None:
-                start = "2022-10-13T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-10T00:00:00Z"
-
-        if layer == "cmems_mod_med_bgc-nut_anfc_4.2km_P1M-m_202211":
-            if start is None:
-                start = "2022-01-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-06-13T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
         if layer == "cmems_mod_med_bgc-optics_anfc_4.2km_P1M-m_202211":
             if start is None:
                 start = "2022-01-01T00:00:00Z"
 
             if end is None:
-                end = "2023-06-13T00:00:00Z"
+                end = "2023-07-11T00:00:00Z"
+
+        if layer == "cmems_mod_med_bgc-nut_anfc_4.2km_P1M-m_202211":
+            if start is None:
+                start = "2022-01-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-11T00:00:00Z"
+
+        if layer == "cmems_mod_med_bgc-co2_anfc_4.2km_P1D-m_202211":
+            if start is None:
+                start = "2022-10-13T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-27T00:00:00Z"
+
+        if layer == "cmems_mod_med_bgc-co2_anfc_4.2km_P1M-m_202211":
+            if start is None:
+                start = "2022-01-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-11T00:00:00Z"
+
+        if layer == "cmems_mod_med_bgc-car_anfc_4.2km_P1M-m_202211":
+            if start is None:
+                start = "2022-01-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-11T00:00:00Z"
+
+        if layer == "cmems_mod_med_bgc-pft_anfc_4.2km_P1M-m_202211":
+            if start is None:
+                start = "2022-01-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-11T00:00:00Z"
+
+        if layer == "cmems_mod_med_bgc-nut_anfc_4.2km_P1D-m_202211":
+            if start is None:
+                start = "2022-10-13T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-27T00:00:00Z"
+
+        if layer == "cmems_mod_med_bgc-car_anfc_4.2km_P1D-m_202211":
+            if start is None:
+                start = "2022-10-13T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-27T00:00:00Z"
 
         super().__init__(
             layer=layer,

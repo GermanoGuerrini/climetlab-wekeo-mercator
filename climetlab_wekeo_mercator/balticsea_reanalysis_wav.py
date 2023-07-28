@@ -19,6 +19,10 @@ class balticsea_reanalysis_wav(Main):
     name = "EO:MO:DAT:BALTICSEA_REANALYSIS_WAV_003_015"
     dataset = "EO:MO:DAT:BALTICSEA_REANALYSIS_WAV_003_015"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")

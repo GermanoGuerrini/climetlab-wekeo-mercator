@@ -11,14 +11,18 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs-si_ant_physic_my_drift-amsr_P3D_202112",  # Antarctic ocean - sea ice - 3 days drift, amsr
     "cmems_obs-si_ant_physic_my_drift-amsr_P2D_202112",  # Antarctic ocean - sea ice - 2 days drift, amsr
+    "cmems_obs-si_ant_physic_my_drift-amsr_P3D_202112",  # Antarctic ocean - sea ice - 3 days drift, amsr
 ]
 
 
 class seaice_ant_phy_l3_my(Main):
     name = "EO:MO:DAT:SEAICE_ANT_PHY_L3_MY_011_018"
     dataset = "EO:MO:DAT:SEAICE_ANT_PHY_L3_MY_011_018"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -44,19 +48,19 @@ class seaice_ant_phy_l3_my(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_obs-si_ant_physic_my_drift-amsr_P3D_202112":
-            if start is None:
-                start = "2003-04-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-04-04T00:00:00Z"
-
         if layer == "cmems_obs-si_ant_physic_my_drift-amsr_P2D_202112":
             if start is None:
                 start = "2003-04-01T00:00:00Z"
 
             if end is None:
                 end = "2023-04-03T00:00:00Z"
+
+        if layer == "cmems_obs-si_ant_physic_my_drift-amsr_P3D_202112":
+            if start is None:
+                start = "2003-04-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-04-04T00:00:00Z"
 
         super().__init__(
             layer=layer,

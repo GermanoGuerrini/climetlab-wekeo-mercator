@@ -20,6 +20,10 @@ class sealevel_glo_phy_l4_my(Main):
     name = "EO:MO:DAT:SEALEVEL_GLO_PHY_L4_MY_008_047"
     dataset = "EO:MO:DAT:SEALEVEL_GLO_PHY_L4_MY_008_047"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -27,8 +31,13 @@ class sealevel_glo_phy_l4_my(Main):
     @normalize(
         "variables",
         [
+            "adt",
             "climatology_bnds",
             "crs",
+            "err_sla",
+            "err_ugosa",
+            "err_vgosa",
+            "flag_ice",
             "lat_bnds",
             "latitude",
             "lon_bnds",
@@ -36,6 +45,11 @@ class sealevel_glo_phy_l4_my(Main):
             "nv",
             "sla",
             "time",
+            "tpa_correction",
+            "ugos",
+            "ugosa",
+            "vgos",
+            "vgosa",
         ],
         multiple=True,
     )
@@ -47,19 +61,19 @@ class sealevel_glo_phy_l4_my(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_obs-sl_glo_phy-ssh_my_allsat-l4-duacs-0.25deg_P1D_202112":
-            if start is None:
-                start = "1992-12-31T12:00:00Z"
-
-            if end is None:
-                end = "2022-08-04T12:00:00Z"
-
         if layer == "cmems_obs-sl_glo_phy-ssh_my_allsat-l4-duacs-0.25deg_P1M-m_202112":
             if start is None:
                 start = "1993-01-01T00:00:00Z"
 
             if end is None:
                 end = "2022-07-31T00:00:00Z"
+
+        if layer == "cmems_obs-sl_glo_phy-ssh_my_allsat-l4-duacs-0.25deg_P1D_202112":
+            if start is None:
+                start = "1992-12-31T12:00:00Z"
+
+            if end is None:
+                end = "2022-08-04T12:00:00Z"
 
         super().__init__(
             layer=layer,

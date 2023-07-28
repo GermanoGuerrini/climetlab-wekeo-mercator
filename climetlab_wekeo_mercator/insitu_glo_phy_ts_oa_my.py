@@ -19,6 +19,10 @@ class insitu_glo_phy_ts_oa_my(Main):
     name = "EO:MO:DAT:INSITU_GLO_PHY_TS_OA_MY_013_052"
     dataset = "EO:MO:DAT:INSITU_GLO_PHY_TS_OA_MY_013_052"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")

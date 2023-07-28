@@ -21,6 +21,10 @@ class arctic_multiyear_bgc(Main):
     name = "EO:MO:DAT:ARCTIC_MULTIYEAR_BGC_002_005"
     dataset = "EO:MO:DAT:ARCTIC_MULTIYEAR_BGC_002_005"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -56,12 +60,12 @@ class arctic_multiyear_bgc(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_mod_arc_bgc_my_ecosmo_P1D-m_202105":
+        if layer == "cmems_mod_arc_bgc_my_ecosmo_P1Y_202211":
             if start is None:
                 start = "2007-01-01T00:00:00Z"
 
             if end is None:
-                end = "2020-12-31T00:00:00Z"
+                end = "2020-01-01T00:00:00Z"
 
         if layer == "cmems_mod_arc_bgc_my_ecosmo_P1M_202105":
             if start is None:
@@ -70,12 +74,12 @@ class arctic_multiyear_bgc(Main):
             if end is None:
                 end = "2020-12-15T00:00:00Z"
 
-        if layer == "cmems_mod_arc_bgc_my_ecosmo_P1Y_202211":
+        if layer == "cmems_mod_arc_bgc_my_ecosmo_P1D-m_202105":
             if start is None:
                 start = "2007-01-01T00:00:00Z"
 
             if end is None:
-                end = "2020-01-01T00:00:00Z"
+                end = "2020-12-31T00:00:00Z"
 
         super().__init__(
             layer=layer,

@@ -12,15 +12,19 @@ from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
     "SST_MED_SST_L4_NRT_OBSERVATIONS_010_004_a_V2",  # Mediterranean sst analysis, l4, 1/16deg daily (sst med sst l4 NRT observations 010 004 a v2)
-    "SST_MED_SSTA_L4_NRT_OBSERVATIONS_010_004_d",  # Mediterranean sst anomaly, l4, 1km daily (sst med ssta l4 NRT observations 010 004 d)
     "SST_MED_SST_L4_NRT_OBSERVATIONS_010_004_c_V2",  # Mediterranean sst analysis, l4, 1km daily (sst med sst l4 NRT observations 010 004 c v2)
     "SST_MED_SSTA_L4_NRT_OBSERVATIONS_010_004_b",  # Mediterranean sst anomaly, l4, 1/16deg daily (sst med ssta l4 NRT observations 010 004 b)
+    "SST_MED_SSTA_L4_NRT_OBSERVATIONS_010_004_d",  # Mediterranean sst anomaly, l4, 1km daily (sst med ssta l4 NRT observations 010 004 d)
 ]
 
 
 class sst_med_sst_l4_nrt_observations(Main):
     name = "EO:MO:DAT:SST_MED_SST_L4_NRT_OBSERVATIONS_010_004"
     dataset = "EO:MO:DAT:SST_MED_SST_L4_NRT_OBSERVATIONS_010_004"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -29,8 +33,12 @@ class sst_med_sst_l4_nrt_observations(Main):
     @normalize(
         "variables",
         [
+            "analysed_sst",
+            "analysis_error",
             "lat",
             "lon",
+            "mask",
+            "sea_ice_fraction",
             "sst_anomaly",
             "time",
         ],
@@ -44,33 +52,33 @@ class sst_med_sst_l4_nrt_observations(Main):
         end=None,
         variables=None,
     ):
-        if layer == "SST_MED_SST_L4_NRT_OBSERVATIONS_010_004_a_V2":
-            if start is None:
-                start = "2007-12-31T19:00:00Z"
-
-            if end is None:
-                end = "2023-07-10T07:00:00Z"
-
-        if layer == "SST_MED_SSTA_L4_NRT_OBSERVATIONS_010_004_d":
-            if start is None:
-                start = "2007-12-31T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-10T00:00:00Z"
-
         if layer == "SST_MED_SST_L4_NRT_OBSERVATIONS_010_004_c_V2":
             if start is None:
                 start = "2007-12-31T19:00:00Z"
 
             if end is None:
-                end = "2023-07-10T06:00:00Z"
+                end = "2023-07-27T06:00:00Z"
 
         if layer == "SST_MED_SSTA_L4_NRT_OBSERVATIONS_010_004_b":
             if start is None:
                 start = "2007-12-31T00:00:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
+
+        if layer == "SST_MED_SST_L4_NRT_OBSERVATIONS_010_004_a_V2":
+            if start is None:
+                start = "2007-12-31T19:00:00Z"
+
+            if end is None:
+                end = "2023-07-27T07:00:00Z"
+
+        if layer == "SST_MED_SSTA_L4_NRT_OBSERVATIONS_010_004_d":
+            if start is None:
+                start = "2007-12-31T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-27T00:00:00Z"
 
         super().__init__(
             layer=layer,

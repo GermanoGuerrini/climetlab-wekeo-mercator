@@ -12,16 +12,20 @@ from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
     "cmems_mod_ibi_phy_anfc_0.027deg-2D_PT15M-i_202211",  # Ocean surface 15-minutes instantaneous fields for the iberia-biscay-ireland (ibi) region
-    "cmems_mod_ibi_phy_anfc_0.027deg-3D_PT1H-m_202211",  # Ocean 3d ibi hourly mean fields
     "cmems_mod_ibi_phy_anfc_0.027deg-2D_PT1H-m_202211",  # Ocean surface hourly mean fields for the iberia-biscay-ireland (ibi) region
     "cmems_mod_ibi_phy_anfc_0.027deg-3D_P1D-m_202211",  # Ocean 3d daily mean fields for the iberia-biscay-ireland (ibi) region
     "cmems_mod_ibi_phy_anfc_0.027deg-3D_P1M-m_202211",  # Ocean 3d monthly mean fields for the iberia-biscay-ireland (ibi) region
+    "cmems_mod_ibi_phy_anfc_0.027deg-3D_PT1H-m_202211",  # Ocean 3d ibi hourly mean fields
 ]
 
 
 class ibi_analysisforecast_phy(Main):
     name = "EO:MO:DAT:IBI_ANALYSISFORECAST_PHY_005_001"
     dataset = "EO:MO:DAT:IBI_ANALYSISFORECAST_PHY_005_001"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -38,7 +42,9 @@ class ibi_analysisforecast_phy(Main):
             "so",
             "thetao",
             "time",
+            "ubar",
             "uo",
+            "vbar",
             "vo",
             "zos",
         ],
@@ -57,35 +63,35 @@ class ibi_analysisforecast_phy(Main):
                 start = "2021-12-29T00:15:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
-
-        if layer == "cmems_mod_ibi_phy_anfc_0.027deg-3D_PT1H-m_202211":
-            if start is None:
-                start = "2023-07-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-10T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
         if layer == "cmems_mod_ibi_phy_anfc_0.027deg-2D_PT1H-m_202211":
             if start is None:
                 start = "2020-11-21T00:30:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
-        if layer == "cmems_mod_ibi_phy_anfc_0.027deg-3D_P1D-m_202211":
+        if layer == "cmems_mod_ibi_phy_anfc_0.027deg-3D_PT1H-m_202211":
             if start is None:
-                start = "2020-11-21T12:00:00Z"
+                start = "2023-07-20T00:00:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
         if layer == "cmems_mod_ibi_phy_anfc_0.027deg-3D_P1M-m_202211":
             if start is None:
                 start = "2020-12-16T12:00:00Z"
 
             if end is None:
-                end = "2023-05-31T00:00:00Z"
+                end = "2023-06-30T00:00:00Z"
+
+        if layer == "cmems_mod_ibi_phy_anfc_0.027deg-3D_P1D-m_202211":
+            if start is None:
+                start = "2020-11-21T12:00:00Z"
+
+            if end is None:
+                end = "2023-07-27T00:00:00Z"
 
         super().__init__(
             layer=layer,

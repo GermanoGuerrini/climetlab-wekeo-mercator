@@ -11,28 +11,32 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "MetO-NWS-PHY-hi-SSS_202012",  # Hourly-instantaneous surface salinity (2d)
-    "MetO-NWS-PHY-qh-SSH_202012",  # 15minute-instantaneous ssh (2d)
-    "MetO-NWS-PHY-hi-MLD_202012",  # Hourly-instantaneous mixed layer depth (2d)
     "MetO-NWS-PHY-dm-BED_202012",  # Daily-mean seabed temperature (2d)
-    "MetO-NWS-PHY-hi-SST_202012",  # Hourly-instantaneous surface temperature (2d)
-    "MetO-NWS-PHY-hi-CUR_202012",  # Hourly-instantaneous horizontal velocity (3d)
-    "MetO-NWS-PHY-hi-SSC_202012",  # Hourly-instantaneous horizontal velocity (2d)
+    "MetO-NWS-PHY-dm-CUR_202012",  # Daily-mean horizontal velocity (3d)
     "MetO-NWS-PHY-dm-MLD_202012",  # Daily-mean mixed layer depth (2d)
-    "MetO-NWS-PHY-hi-TEM_202012",  # Hourly-instantaneous potential temperature (3d)
-    "MetO-NWS-PHY-hi-SAL_202012",  # Hourly-instantaneous salinity (3d)
+    "MetO-NWS-PHY-dm-SAL_202012",  # Daily-mean salinity (3d)
     "MetO-NWS-PHY-dm-TEM_202012",  # Daily-mean potential temperature (3d)
     "MetO-NWS-PHY-hi-BED_202012",  # Hourly-instantaneous seabed temperature (2d)
-    "MetO-NWS-PHY-qh-SSC_202012",  # 15minute-instantaneous horizontal velocity (2d)
+    "MetO-NWS-PHY-hi-CUR_202012",  # Hourly-instantaneous horizontal velocity (3d)
+    "MetO-NWS-PHY-hi-MLD_202012",  # Hourly-instantaneous mixed layer depth (2d)
+    "MetO-NWS-PHY-hi-SAL_202012",  # Hourly-instantaneous salinity (3d)
+    "MetO-NWS-PHY-hi-SSC_202012",  # Hourly-instantaneous horizontal velocity (2d)
     "MetO-NWS-PHY-hi-SSH_202012",  # Hourly-instantaneous ssh (2d)
-    "MetO-NWS-PHY-dm-SAL_202012",  # Daily-mean salinity (3d)
-    "MetO-NWS-PHY-dm-CUR_202012",  # Daily-mean horizontal velocity (3d)
+    "MetO-NWS-PHY-hi-SSS_202012",  # Hourly-instantaneous surface salinity (2d)
+    "MetO-NWS-PHY-hi-SST_202012",  # Hourly-instantaneous surface temperature (2d)
+    "MetO-NWS-PHY-hi-TEM_202012",  # Hourly-instantaneous potential temperature (3d)
+    "MetO-NWS-PHY-qh-SSC_202012",  # 15minute-instantaneous horizontal velocity (2d)
+    "MetO-NWS-PHY-qh-SSH_202012",  # 15minute-instantaneous ssh (2d)
 ]
 
 
 class northwestshelf_analysis_forecast_phy(Main):
     name = "EO:MO:DAT:NORTHWESTSHELF_ANALYSIS_FORECAST_PHY_004_013"
     dataset = "EO:MO:DAT:NORTHWESTSHELF_ANALYSIS_FORECAST_PHY_004_013"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -41,12 +45,17 @@ class northwestshelf_analysis_forecast_phy(Main):
     @normalize(
         "variables",
         [
+            "bottomT",
             "depth",
             "lat",
             "lon",
+            "mlotst",
+            "so",
+            "thetao",
             "time",
             "uo",
             "vo",
+            "zos",
         ],
         multiple=True,
     )
@@ -58,117 +67,117 @@ class northwestshelf_analysis_forecast_phy(Main):
         end=None,
         variables=None,
     ):
+        if layer == "MetO-NWS-PHY-hi-SSH_202012":
+            if start is None:
+                start = "2019-01-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-08-01T00:00:00Z"
+
         if layer == "MetO-NWS-PHY-hi-SSS_202012":
             if start is None:
                 start = "2019-01-03T00:00:00Z"
 
             if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "MetO-NWS-PHY-qh-SSH_202012":
-            if start is None:
-                start = "2019-07-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "MetO-NWS-PHY-hi-MLD_202012":
-            if start is None:
-                start = "2019-07-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "MetO-NWS-PHY-dm-BED_202012":
-            if start is None:
-                start = "2019-01-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "MetO-NWS-PHY-hi-SST_202012":
-            if start is None:
-                start = "2019-01-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "MetO-NWS-PHY-hi-CUR_202012":
-            if start is None:
-                start = "2019-01-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "MetO-NWS-PHY-hi-SSC_202012":
-            if start is None:
-                start = "2019-01-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "MetO-NWS-PHY-dm-MLD_202012":
-            if start is None:
-                start = "2019-01-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "MetO-NWS-PHY-hi-TEM_202012":
-            if start is None:
-                start = "2019-01-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "MetO-NWS-PHY-hi-SAL_202012":
-            if start is None:
-                start = "2019-01-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "MetO-NWS-PHY-dm-TEM_202012":
-            if start is None:
-                start = "2019-01-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
+                end = "2023-08-01T00:00:00Z"
 
         if layer == "MetO-NWS-PHY-hi-BED_202012":
             if start is None:
                 start = "2019-01-03T00:00:00Z"
 
             if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "MetO-NWS-PHY-qh-SSC_202012":
-            if start is None:
-                start = "2019-07-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "MetO-NWS-PHY-hi-SSH_202012":
-            if start is None:
-                start = "2019-01-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
+                end = "2023-08-01T00:00:00Z"
 
         if layer == "MetO-NWS-PHY-dm-SAL_202012":
             if start is None:
                 start = "2019-01-03T00:00:00Z"
 
             if end is None:
-                end = "2023-07-15T00:00:00Z"
+                end = "2023-08-01T00:00:00Z"
+
+        if layer == "MetO-NWS-PHY-dm-MLD_202012":
+            if start is None:
+                start = "2019-01-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-08-01T00:00:00Z"
+
+        if layer == "MetO-NWS-PHY-hi-MLD_202012":
+            if start is None:
+                start = "2019-07-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-08-01T00:00:00Z"
+
+        if layer == "MetO-NWS-PHY-hi-CUR_202012":
+            if start is None:
+                start = "2019-01-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-08-01T00:00:00Z"
 
         if layer == "MetO-NWS-PHY-dm-CUR_202012":
             if start is None:
                 start = "2019-01-03T00:00:00Z"
 
             if end is None:
-                end = "2023-07-15T00:00:00Z"
+                end = "2023-08-01T00:00:00Z"
+
+        if layer == "MetO-NWS-PHY-dm-TEM_202012":
+            if start is None:
+                start = "2019-01-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-08-01T00:00:00Z"
+
+        if layer == "MetO-NWS-PHY-hi-SAL_202012":
+            if start is None:
+                start = "2019-01-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-08-01T00:00:00Z"
+
+        if layer == "MetO-NWS-PHY-dm-BED_202012":
+            if start is None:
+                start = "2019-01-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-08-01T00:00:00Z"
+
+        if layer == "MetO-NWS-PHY-hi-TEM_202012":
+            if start is None:
+                start = "2019-01-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-08-01T00:00:00Z"
+
+        if layer == "MetO-NWS-PHY-hi-SSC_202012":
+            if start is None:
+                start = "2019-01-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-08-01T00:00:00Z"
+
+        if layer == "MetO-NWS-PHY-qh-SSC_202012":
+            if start is None:
+                start = "2019-07-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-08-01T00:00:00Z"
+
+        if layer == "MetO-NWS-PHY-hi-SST_202012":
+            if start is None:
+                start = "2019-01-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-08-01T00:00:00Z"
+
+        if layer == "MetO-NWS-PHY-qh-SSH_202012":
+            if start is None:
+                start = "2019-07-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-08-01T00:00:00Z"
 
         super().__init__(
             layer=layer,

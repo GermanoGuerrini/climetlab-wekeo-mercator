@@ -11,14 +11,18 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "SST_MED_SST_L3S_NRT_OBSERVATIONS_010_012_b",  # Mediterranean sst, l3s, 1km daily (sst med sst l3s NRT observations 010 012 b)
     "SST_MED_SST_L3S_NRT_OBSERVATIONS_010_012_a",  # Mediterranean sst, l3s, 1/16deg daily (sst med sst l3s NRT observations 010 012 a)
+    "SST_MED_SST_L3S_NRT_OBSERVATIONS_010_012_b",  # Mediterranean sst, l3s, 1km daily (sst med sst l3s NRT observations 010 012 b)
 ]
 
 
 class sst_med_sst_l3s_nrt_observations(Main):
     name = "EO:MO:DAT:SST_MED_SST_L3S_NRT_OBSERVATIONS_010_012"
     dataset = "EO:MO:DAT:SST_MED_SST_L3S_NRT_OBSERVATIONS_010_012"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -58,19 +62,19 @@ class sst_med_sst_l3s_nrt_observations(Main):
         end=None,
         variables=None,
     ):
-        if layer == "SST_MED_SST_L3S_NRT_OBSERVATIONS_010_012_b":
-            if start is None:
-                start = "2007-12-31T19:00:00Z"
-
-            if end is None:
-                end = "2023-07-10T07:00:00Z"
-
         if layer == "SST_MED_SST_L3S_NRT_OBSERVATIONS_010_012_a":
             if start is None:
                 start = "2007-12-31T19:00:00Z"
 
             if end is None:
-                end = "2023-07-10T07:00:00Z"
+                end = "2023-07-27T07:00:00Z"
+
+        if layer == "SST_MED_SST_L3S_NRT_OBSERVATIONS_010_012_b":
+            if start is None:
+                start = "2007-12-31T19:00:00Z"
+
+            if end is None:
+                end = "2023-07-27T07:00:00Z"
 
         super().__init__(
             layer=layer,

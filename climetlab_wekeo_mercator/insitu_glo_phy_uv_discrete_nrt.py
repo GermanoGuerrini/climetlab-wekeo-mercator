@@ -22,6 +22,10 @@ class insitu_glo_phy_uv_discrete_nrt(Main):
     name = "EO:MO:DAT:INSITU_GLO_PHY_UV_DISCRETE_NRT_013_048"
     dataset = "EO:MO:DAT:INSITU_GLO_PHY_UV_DISCRETE_NRT_013_048"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -29,23 +33,47 @@ class insitu_glo_phy_uv_discrete_nrt(Main):
     @normalize(
         "variables",
         [
+            "AVRB_QC",
+            "BEAR",
             "CCOV",
             "CSPD_QC",
+            "CURRENT_TEST",
+            "CURRENT_TEST_QC",
+            "CYCLE_NUMBER",
+            "DC_REFERENCE",
             "DDNS_QC",
             "DEPH",
             "DEPH_QC",
+            "DRVA",
+            "DURATION",
+            "ERSC",
+            "ERTC",
+            "ESPC",
+            "ETMP",
             "EWCS",
             "EWCT",
+            "EWCT_QC",
             "GDOP",
             "GDOP_QC",
+            "GROUNDED",
             "LATITUDE",
             "LONGITUDE",
+            "MAXV",
+            "MDFL_QC",
+            "MINV",
             "NARX",
             "NATX",
             "NSCS",
             "NSCT",
+            "NSCT_QC",
+            "OWTR_QC",
             "POSITION_QC",
+            "PRES",
+            "PRES_QC",
             "QCflag",
+            "RDCT_QC",
+            "RDVA",
+            "RNGE",
             "SCDR",
             "SCDT",
             "SDN_CRUISE",
@@ -58,9 +86,22 @@ class insitu_glo_phy_uv_discrete_nrt(Main):
             "SLNT",
             "SLTR",
             "SLTT",
+            "SPRC",
+            "TEMP",
+            "TEMP_QC",
             "TIME",
             "TIME_QC",
             "VART_QC",
+            "WSPE_MODEL",
+            "WSPE_MODEL_QC",
+            "WSPN_MODEL",
+            "WSPN_MODEL_QC",
+            "WSTE_MODEL",
+            "WSTE_MODEL_QC",
+            "WSTN_MODEL",
+            "WSTN_MODEL_QC",
+            "XDST",
+            "YDST",
             "crs",
         ],
         multiple=True,
@@ -87,19 +128,19 @@ class insitu_glo_phy_uv_discrete_nrt(Main):
             if end is None:
                 end = "2023-06-25T12:00:00Z"
 
-        if layer == "cmems_obs-ins_glo_phy-cur_nrt_radar-radial_irr_202211":
-            if start is None:
-                start = "2016-06-22T10:30:00Z"
-
-            if end is None:
-                end = "2023-06-27T21:45:00Z"
-
         if layer == "cmems_obs-ins_glo_phy-cur_nrt_radar-total_irr_202211":
             if start is None:
                 start = "2012-03-20T00:45:00Z"
 
             if end is None:
                 end = "2023-06-27T20:35:00Z"
+
+        if layer == "cmems_obs-ins_glo_phy-cur_nrt_radar-radial_irr_202211":
+            if start is None:
+                start = "2016-06-22T10:30:00Z"
+
+            if end is None:
+                end = "2023-06-27T21:45:00Z"
 
         super().__init__(
             layer=layer,

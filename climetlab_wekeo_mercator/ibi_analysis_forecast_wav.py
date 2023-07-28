@@ -19,6 +19,10 @@ class ibi_analysis_forecast_wav(Main):
     name = "EO:MO:DAT:IBI_ANALYSIS_FORECAST_WAV_005_005"
     dataset = "EO:MO:DAT:IBI_ANALYSIS_FORECAST_WAV_005_005"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -62,7 +66,7 @@ class ibi_analysis_forecast_wav(Main):
                 start = "2020-03-10T00:00:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
         super().__init__(
             layer=layer,

@@ -11,8 +11,8 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "OSISAF-GLO-SEAICE_CONC_CONT_TIMESERIES-SH-LA-OBS_202003",  # Interim sea ice concentration climate data record version 3 from the eumetsat osi saf
     "OSISAF-GLO-SEAICE_CONC_CONT_TIMESERIES-NH-LA-OBS_202003",  # Interim sea ice concentration climate data record version 3 from the eumetsat osi saf
+    "OSISAF-GLO-SEAICE_CONC_CONT_TIMESERIES-SH-LA-OBS_202003",  # Interim sea ice concentration climate data record version 3 from the eumetsat osi saf
     "OSISAF-GLO-SEAICE_CONC_TIMESERIES-NH-LA-OBS_202003",  # Sea ice concentration climate data record version 3 (smmr, ssm/i, and ssmis) from the eumetsat osi saf
     "OSISAF-GLO-SEAICE_CONC_TIMESERIES-SH-LA-OBS_202003",  # Sea ice concentration climate data record version 3 (smmr, ssm/i, and ssmis) from the eumetsat osi saf
 ]
@@ -21,6 +21,10 @@ LAYERS = [
 class seaice_glo_seaice_l4_rep_observations(Main):
     name = "EO:MO:DAT:SEAICE_GLO_SEAICE_L4_REP_OBSERVATIONS_011_009"
     dataset = "EO:MO:DAT:SEAICE_GLO_SEAICE_L4_REP_OBSERVATIONS_011_009"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -53,28 +57,28 @@ class seaice_glo_seaice_l4_rep_observations(Main):
         end=None,
         variables=None,
     ):
-        if layer == "OSISAF-GLO-SEAICE_CONC_CONT_TIMESERIES-SH-LA-OBS_202003":
-            if start is None:
-                start = "2021-01-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-06-25T00:00:00Z"
-
         if layer == "OSISAF-GLO-SEAICE_CONC_CONT_TIMESERIES-NH-LA-OBS_202003":
             if start is None:
                 start = "2021-01-01T00:00:00Z"
 
             if end is None:
-                end = "2023-06-25T00:00:00Z"
+                end = "2023-07-12T00:00:00Z"
 
-        if layer == "OSISAF-GLO-SEAICE_CONC_TIMESERIES-NH-LA-OBS_202003":
+        if layer == "OSISAF-GLO-SEAICE_CONC_TIMESERIES-SH-LA-OBS_202003":
             if start is None:
                 start = "1978-10-25T00:00:00Z"
 
             if end is None:
                 end = "2021-01-01T00:00:00Z"
 
-        if layer == "OSISAF-GLO-SEAICE_CONC_TIMESERIES-SH-LA-OBS_202003":
+        if layer == "OSISAF-GLO-SEAICE_CONC_CONT_TIMESERIES-SH-LA-OBS_202003":
+            if start is None:
+                start = "2021-01-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-12T00:00:00Z"
+
+        if layer == "OSISAF-GLO-SEAICE_CONC_TIMESERIES-NH-LA-OBS_202003":
             if start is None:
                 start = "1978-10-25T00:00:00Z"
 

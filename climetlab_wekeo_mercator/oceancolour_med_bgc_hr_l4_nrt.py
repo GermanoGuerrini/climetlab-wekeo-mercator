@@ -11,12 +11,12 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs_oc_med_bgc_optics_nrt_l4-hr_P1D-m_202105",  # cmems_obs_oc_med_bgc_optics_nrt_l4-hr_P1D-m_202105
-    "cmems_obs_oc_med_bgc_transp_nrt_l4-hr_P1M-m_202105",  # cmems_obs_oc_med_bgc_transp_nrt_l4-hr_P1M-m_202105
-    "cmems_obs_oc_med_bgc_optics_nrt_l4-hr_P1M-m_202105",  # cmems_obs_oc_med_bgc_optics_nrt_l4-hr_P1M-m_202105
     "cmems_obs_oc_med_bgc_geophy_nrt_l4-hr_P1D-m_202105",  # cmems_obs_oc_med_bgc_geophy_nrt_l4-hr_P1D-m_202105
-    "cmems_obs_oc_med_bgc_transp_nrt_l4-hr_P1D-m_202105",  # cmems_obs_oc_med_bgc_transp_nrt_l4-hr_P1D-m_202105
     "cmems_obs_oc_med_bgc_geophy_nrt_l4-hr_P1M-m_202105",  # cmems_obs_oc_med_bgc_geophy_nrt_l4-hr_P1M-m_202105
+    "cmems_obs_oc_med_bgc_optics_nrt_l4-hr_P1D-m_202105",  # cmems_obs_oc_med_bgc_optics_nrt_l4-hr_P1D-m_202105
+    "cmems_obs_oc_med_bgc_optics_nrt_l4-hr_P1M-m_202105",  # cmems_obs_oc_med_bgc_optics_nrt_l4-hr_P1M-m_202105
+    "cmems_obs_oc_med_bgc_transp_nrt_l4-hr_P1D-m_202105",  # cmems_obs_oc_med_bgc_transp_nrt_l4-hr_P1D-m_202105
+    "cmems_obs_oc_med_bgc_transp_nrt_l4-hr_P1M-m_202105",  # cmems_obs_oc_med_bgc_transp_nrt_l4-hr_P1M-m_202105
     "cmems_obs_oc_med_bgc_tur-spm-chl_nrt_l4-hr-mosaic_P1D-m_202107",  # Cmems hr-oc mediterranean sea transparency (spm, tur) and geophysical (chl) daily interpolated observations mosaic
 ]
 
@@ -25,6 +25,10 @@ class oceancolour_med_bgc_hr_l4_nrt(Main):
     name = "EO:MO:DAT:OCEANCOLOUR_MED_BGC_HR_L4_NRT_009_211"
     dataset = "EO:MO:DAT:OCEANCOLOUR_MED_BGC_HR_L4_NRT_009_211"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -32,9 +36,18 @@ class oceancolour_med_bgc_hr_l4_nrt(Main):
     @normalize(
         "variables",
         [
+            "BBP443",
+            "BBP443_count",
+            "BBP443_error",
             "CHL",
+            "CHL_count",
+            "CHL_error",
             "SPM",
+            "SPM_count",
+            "SPM_error",
             "TUR",
+            "TUR_count",
+            "TUR_error",
             "crs",
             "lat",
             "lon",
@@ -62,14 +75,7 @@ class oceancolour_med_bgc_hr_l4_nrt(Main):
                 start = "2020-01-01T00:00:00Z"
 
             if end is None:
-                end = "2023-05-31T23:59:59Z"
-
-        if layer == "cmems_obs_oc_med_bgc_optics_nrt_l4-hr_P1M-m_202105":
-            if start is None:
-                start = "2020-01-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-05-31T23:59:59Z"
+                end = "2023-06-30T23:59:59Z"
 
         if layer == "cmems_obs_oc_med_bgc_geophy_nrt_l4-hr_P1D-m_202105":
             if start is None:
@@ -85,12 +91,19 @@ class oceancolour_med_bgc_hr_l4_nrt(Main):
             if end is None:
                 end = "2023-04-30T23:59:59Z"
 
+        if layer == "cmems_obs_oc_med_bgc_optics_nrt_l4-hr_P1M-m_202105":
+            if start is None:
+                start = "2020-01-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-06-30T23:59:59Z"
+
         if layer == "cmems_obs_oc_med_bgc_geophy_nrt_l4-hr_P1M-m_202105":
             if start is None:
                 start = "2020-01-01T00:00:00Z"
 
             if end is None:
-                end = "2023-05-31T23:59:59Z"
+                end = "2023-06-30T23:59:59Z"
 
         if layer == "cmems_obs_oc_med_bgc_tur-spm-chl_nrt_l4-hr-mosaic_P1D-m_202107":
             if start is None:

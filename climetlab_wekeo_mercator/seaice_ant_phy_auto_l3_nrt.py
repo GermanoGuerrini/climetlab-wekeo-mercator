@@ -19,6 +19,10 @@ class seaice_ant_phy_auto_l3_nrt(Main):
     name = "EO:MO:DAT:SEAICE_ANT_PHY_AUTO_L3_NRT_011_012"
     dataset = "EO:MO:DAT:SEAICE_ANT_PHY_AUTO_L3_NRT_011_012"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -51,7 +55,7 @@ class seaice_ant_phy_auto_l3_nrt(Main):
                 start = "2023-02-02T13:35:15Z"
 
             if end is None:
-                end = "2023-07-09T19:12:43Z"
+                end = "2023-07-26T19:20:55Z"
 
         super().__init__(
             layer=layer,

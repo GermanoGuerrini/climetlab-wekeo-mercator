@@ -19,6 +19,10 @@ class arctic_analysisforecast_phy_tide(Main):
     name = "EO:MO:DAT:ARCTIC_ANALYSISFORECAST_PHY_TIDE_002_015"
     dataset = "EO:MO:DAT:ARCTIC_ANALYSISFORECAST_PHY_TIDE_002_015"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -52,7 +56,7 @@ class arctic_analysisforecast_phy_tide(Main):
                 start = "2018-01-01T00:00:00Z"
 
             if end is None:
-                end = "2023-07-09T00:00:00Z"
+                end = "2023-07-26T00:00:00Z"
 
         super().__init__(
             layer=layer,

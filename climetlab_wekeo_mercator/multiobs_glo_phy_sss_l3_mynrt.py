@@ -19,6 +19,10 @@ class multiobs_glo_phy_sss_l3_mynrt(Main):
     name = "EO:MO:DAT:MULTIOBS_GLO_PHY_SSS_L3_MYNRT_015_014"
     dataset = "EO:MO:DAT:MULTIOBS_GLO_PHY_SSS_L3_MYNRT_015_014"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -52,7 +56,7 @@ class multiobs_glo_phy_sss_l3_mynrt(Main):
                 start = "2010-01-12T00:00:00Z"
 
             if end is None:
-                end = "2023-07-09T00:00:00Z"
+                end = "2023-07-26T00:00:00Z"
 
         super().__init__(
             layer=layer,

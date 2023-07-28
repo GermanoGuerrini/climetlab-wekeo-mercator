@@ -11,21 +11,21 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_mod_blk_phy-ssh_anfc_2.5km_P1M-m_202211",  # Sea surface height (2d) - monthly mean
+    "cmems_mod_blk_phy-cur_anfc_2.5km_P1D-m_202211",  # Horizontal and vertical velocity (3d) - daily mean
+    "cmems_mod_blk_phy-cur_anfc_2.5km_P1M-m_202211",  # Horizontal and vertical velocity (3d) - monthly mean
+    "cmems_mod_blk_phy-cur_anfc_2.5km_PT1H-m_202211",  # Horizontal and vertical velocity (3d) - hourly mean
+    "cmems_mod_blk_phy-mld_anfc_2.5km_P1D-m_202211",  # Mixed layer depth (2d) - daily mean
+    "cmems_mod_blk_phy-mld_anfc_2.5km_P1M-m_202211",  # Mixed layer depth (2d) - monthly mean
+    "cmems_mod_blk_phy-mld_anfc_2.5km_PT1H-m_202211",  # Mixed layer depth (2d) - hourly mean
+    "cmems_mod_blk_phy-sal_anfc_2.5km_P1D-m_202211",  # Salinity (3d) - daily mean
+    "cmems_mod_blk_phy-sal_anfc_2.5km_P1M-m_202211",  # Salinity (3d) - monthly mean
     "cmems_mod_blk_phy-sal_anfc_2.5km_PT1H-m_202211",  # Salinity (3d) - hourly mean
+    "cmems_mod_blk_phy-ssh_anfc_2.5km_P1D-m_202211",  # Sea surface height (2d) - daily mean
+    "cmems_mod_blk_phy-ssh_anfc_2.5km_P1M-m_202211",  # Sea surface height (2d) - monthly mean
     "cmems_mod_blk_phy-ssh_anfc_2.5km_PT1H-m_202211",  # Sea surface height (2d) - hourly mean
     "cmems_mod_blk_phy-tem_anfc_2.5km_P1D-m_202211",  # Potential temperature (3d), bottom temperature (2d) - daily mean
-    "cmems_mod_blk_phy-ssh_anfc_2.5km_P1D-m_202211",  # Sea surface height (2d) - daily mean
-    "cmems_mod_blk_phy-cur_anfc_2.5km_PT1H-m_202211",  # Horizontal and vertical velocity (3d) - hourly mean
-    "cmems_mod_blk_phy-cur_anfc_2.5km_P1D-m_202211",  # Horizontal and vertical velocity (3d) - daily mean
-    "cmems_mod_blk_phy-mld_anfc_2.5km_P1M-m_202211",  # Mixed layer depth (2d) - monthly mean
-    "cmems_mod_blk_phy-sal_anfc_2.5km_P1M-m_202211",  # Salinity (3d) - monthly mean
-    "cmems_mod_blk_phy-mld_anfc_2.5km_PT1H-m_202211",  # Mixed layer depth (2d) - hourly mean
-    "cmems_mod_blk_phy-tem_anfc_2.5km_PT1H-m_202211",  # Potential temperature (3d), bottom temperature (2d) - hourly mean
-    "cmems_mod_blk_phy-cur_anfc_2.5km_P1M-m_202211",  # Horizontal and vertical velocity (3d) - monthly mean
-    "cmems_mod_blk_phy-mld_anfc_2.5km_P1D-m_202211",  # Mixed layer depth (2d) - daily mean
-    "cmems_mod_blk_phy-sal_anfc_2.5km_P1D-m_202211",  # Salinity (3d) - daily mean
     "cmems_mod_blk_phy-tem_anfc_2.5km_P1M-m_202211",  # Potential temperature (3d), bottom temperature (2d) - monthly mean
+    "cmems_mod_blk_phy-tem_anfc_2.5km_PT1H-m_202211",  # Potential temperature (3d), bottom temperature (2d) - hourly mean
 ]
 
 
@@ -48,8 +48,14 @@ class blksea_analysisforecast_phy(Main):
             "depth",
             "lat",
             "lon",
+            "mlotst",
+            "so",
             "thetao",
             "time",
+            "uo",
+            "vo",
+            "wo",
+            "zos",
         ],
         multiple=True,
     )
@@ -61,84 +67,42 @@ class blksea_analysisforecast_phy(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_mod_blk_phy-ssh_anfc_2.5km_P1M-m_202211":
-            if start is None:
-                start = "2022-11-22T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-14T00:00:00Z"
-
         if layer == "cmems_mod_blk_phy-sal_anfc_2.5km_PT1H-m_202211":
             if start is None:
                 start = "2022-11-22T00:00:00Z"
 
             if end is None:
-                end = "2023-07-26T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
         if layer == "cmems_mod_blk_phy-ssh_anfc_2.5km_PT1H-m_202211":
             if start is None:
                 start = "2022-11-22T00:00:00Z"
 
             if end is None:
-                end = "2023-07-26T00:00:00Z"
-
-        if layer == "cmems_mod_blk_phy-tem_anfc_2.5km_P1D-m_202211":
-            if start is None:
-                start = "2022-11-22T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-26T00:00:00Z"
-
-        if layer == "cmems_mod_blk_phy-ssh_anfc_2.5km_P1D-m_202211":
-            if start is None:
-                start = "2022-11-22T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-26T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
         if layer == "cmems_mod_blk_phy-cur_anfc_2.5km_PT1H-m_202211":
             if start is None:
                 start = "2022-11-22T00:00:00Z"
 
             if end is None:
-                end = "2023-07-26T00:00:00Z"
-
-        if layer == "cmems_mod_blk_phy-cur_anfc_2.5km_P1D-m_202211":
-            if start is None:
-                start = "2022-11-22T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-26T00:00:00Z"
-
-        if layer == "cmems_mod_blk_phy-mld_anfc_2.5km_P1M-m_202211":
-            if start is None:
-                start = "2022-11-22T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-14T00:00:00Z"
-
-        if layer == "cmems_mod_blk_phy-sal_anfc_2.5km_P1M-m_202211":
-            if start is None:
-                start = "2022-11-22T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-14T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
         if layer == "cmems_mod_blk_phy-mld_anfc_2.5km_PT1H-m_202211":
             if start is None:
                 start = "2022-11-22T00:00:00Z"
 
             if end is None:
-                end = "2023-07-26T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
-        if layer == "cmems_mod_blk_phy-tem_anfc_2.5km_PT1H-m_202211":
+        if layer == "cmems_mod_blk_phy-sal_anfc_2.5km_P1D-m_202211":
             if start is None:
                 start = "2022-11-22T00:00:00Z"
 
             if end is None:
-                end = "2023-07-26T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
-        if layer == "cmems_mod_blk_phy-cur_anfc_2.5km_P1M-m_202211":
+        if layer == "cmems_mod_blk_phy-tem_anfc_2.5km_P1M-m_202211":
             if start is None:
                 start = "2022-11-22T00:00:00Z"
 
@@ -150,21 +114,63 @@ class blksea_analysisforecast_phy(Main):
                 start = "2022-11-22T00:00:00Z"
 
             if end is None:
-                end = "2023-07-26T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
-        if layer == "cmems_mod_blk_phy-sal_anfc_2.5km_P1D-m_202211":
-            if start is None:
-                start = "2022-11-22T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-26T00:00:00Z"
-
-        if layer == "cmems_mod_blk_phy-tem_anfc_2.5km_P1M-m_202211":
+        if layer == "cmems_mod_blk_phy-sal_anfc_2.5km_P1M-m_202211":
             if start is None:
                 start = "2022-11-22T00:00:00Z"
 
             if end is None:
                 end = "2023-07-14T00:00:00Z"
+
+        if layer == "cmems_mod_blk_phy-ssh_anfc_2.5km_P1D-m_202211":
+            if start is None:
+                start = "2022-11-22T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-27T00:00:00Z"
+
+        if layer == "cmems_mod_blk_phy-mld_anfc_2.5km_P1M-m_202211":
+            if start is None:
+                start = "2022-11-22T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-14T00:00:00Z"
+
+        if layer == "cmems_mod_blk_phy-ssh_anfc_2.5km_P1M-m_202211":
+            if start is None:
+                start = "2022-11-22T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-14T00:00:00Z"
+
+        if layer == "cmems_mod_blk_phy-tem_anfc_2.5km_P1D-m_202211":
+            if start is None:
+                start = "2022-11-22T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-27T00:00:00Z"
+
+        if layer == "cmems_mod_blk_phy-cur_anfc_2.5km_P1M-m_202211":
+            if start is None:
+                start = "2022-11-22T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-14T00:00:00Z"
+
+        if layer == "cmems_mod_blk_phy-cur_anfc_2.5km_P1D-m_202211":
+            if start is None:
+                start = "2022-11-22T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-27T00:00:00Z"
+
+        if layer == "cmems_mod_blk_phy-tem_anfc_2.5km_PT1H-m_202211":
+            if start is None:
+                start = "2022-11-22T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-27T00:00:00Z"
 
         super().__init__(
             layer=layer,

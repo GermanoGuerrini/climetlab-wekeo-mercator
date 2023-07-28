@@ -12,15 +12,19 @@ from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
     "dataset-armor-3d-nrt-monthly_202012",  # Armor3d NRT - tshuvmld global ocean observation-based product monthly average
+    "dataset-armor-3d-nrt-weekly_202012",  # Armor3d NRT - tshuvmld global ocean observation-based product
     "dataset-armor-3d-rep-monthly_202012",  # Armor3d rep - tshuvmld global ocean observation-based product monthly average
     "dataset-armor-3d-rep-weekly_202012",  # Armor3d rep - tshuvmld global ocean observation-based product
-    "dataset-armor-3d-nrt-weekly_202012",  # Armor3d NRT - tshuvmld global ocean observation-based product
 ]
 
 
 class multiobs_glo_phy_tsuv_3d_mynrt(Main):
     name = "EO:MO:DAT:MULTIOBS_GLO_PHY_TSUV_3D_MYNRT_015_012"
     dataset = "EO:MO:DAT:MULTIOBS_GLO_PHY_TSUV_3D_MYNRT_015_012"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -50,20 +54,6 @@ class multiobs_glo_phy_tsuv_3d_mynrt(Main):
         end=None,
         variables=None,
     ):
-        if layer == "dataset-armor-3d-nrt-monthly_202012":
-            if start is None:
-                start = "2020-11-17T00:00:00Z"
-
-            if end is None:
-                end = "2023-06-13T00:00:00Z"
-
-        if layer == "dataset-armor-3d-rep-monthly_202012":
-            if start is None:
-                start = "2020-11-06T00:00:00Z"
-
-            if end is None:
-                end = "2022-11-20T00:00:00Z"
-
         if layer == "dataset-armor-3d-rep-weekly_202012":
             if start is None:
                 start = "2020-10-23T00:00:00Z"
@@ -76,7 +66,21 @@ class multiobs_glo_phy_tsuv_3d_mynrt(Main):
                 start = "2020-11-16T00:00:00Z"
 
             if end is None:
-                end = "2023-07-04T00:00:00Z"
+                end = "2023-07-25T00:00:00Z"
+
+        if layer == "dataset-armor-3d-nrt-monthly_202012":
+            if start is None:
+                start = "2020-11-17T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-11T00:00:00Z"
+
+        if layer == "dataset-armor-3d-rep-monthly_202012":
+            if start is None:
+                start = "2020-11-06T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-20T00:00:00Z"
 
         super().__init__(
             layer=layer,

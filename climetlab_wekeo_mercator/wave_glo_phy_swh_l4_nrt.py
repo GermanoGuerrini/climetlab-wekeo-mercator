@@ -19,6 +19,10 @@ class wave_glo_phy_swh_l4_nrt(Main):
     name = "EO:MO:DAT:WAVE_GLO_PHY_SWH_L4_NRT_014_003"
     dataset = "EO:MO:DAT:WAVE_GLO_PHY_SWH_L4_NRT_014_003"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -55,7 +59,7 @@ class wave_glo_phy_swh_l4_nrt(Main):
                 start = "2020-01-01T12:00:00Z"
 
             if end is None:
-                end = "2023-07-09T12:00:00Z"
+                end = "2023-07-26T12:00:00Z"
 
         super().__init__(
             layer=layer,

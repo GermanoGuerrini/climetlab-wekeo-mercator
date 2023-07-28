@@ -11,14 +11,18 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs-si_bal_seaice-conc_my_1km_202112",  # Baltic ice concentration and classification, l4, 1km daily
     "cmems_obs-si_bal_phy-sit_my_l4-1km_P1D-m_202211",  # Baltic ice thickness, l4, 1km daily
+    "cmems_obs-si_bal_seaice-conc_my_1km_202112",  # Baltic ice concentration and classification, l4, 1km daily
 ]
 
 
 class seaice_bal_phy_l4_my(Main):
     name = "EO:MO:DAT:SEAICE_BAL_PHY_L4_MY_011_019"
     dataset = "EO:MO:DAT:SEAICE_BAL_PHY_L4_MY_011_019"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -27,11 +31,15 @@ class seaice_bal_phy_l4_my(Main):
     @normalize(
         "variables",
         [
+            "concentration_range",
             "crs",
+            "ice_concentration",
             "ice_thickness",
             "lat",
             "lon",
             "product_quality",
+            "sea_ice_classification",
+            "sea_ice_extent",
             "thickness_range",
             "time",
         ],
@@ -45,14 +53,14 @@ class seaice_bal_phy_l4_my(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_obs-si_bal_seaice-conc_my_1km_202112":
+        if layer == "cmems_obs-si_bal_phy-sit_my_l4-1km_P1D-m_202211":
             if start is None:
                 start = "1980-11-03T14:00:00Z"
 
             if end is None:
                 end = "2022-05-30T14:00:00Z"
 
-        if layer == "cmems_obs-si_bal_phy-sit_my_l4-1km_P1D-m_202211":
+        if layer == "cmems_obs-si_bal_seaice-conc_my_1km_202112":
             if start is None:
                 start = "1980-11-03T14:00:00Z"
 

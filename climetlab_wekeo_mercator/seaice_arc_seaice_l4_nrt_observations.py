@@ -11,15 +11,19 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "METNO-ARC-SEAICE_CONC-L4-NRT-OBS",  # Arctic sea ice svalbard
-    "cmems_obs-si_arc_physic_nrt_1km-grl_P1WT3D-m_202012",  # Arctic sea ice greenland overview
     "cmems_obs-si_arc_physic_nrt_1km-grl_P1D-irr_202012",  # Arctic sea ice greenland
+    "cmems_obs-si_arc_physic_nrt_1km-grl_P1WT3D-m_202012",  # Arctic sea ice greenland overview
+    "METNO-ARC-SEAICE_CONC-L4-NRT-OBS",  # Arctic sea ice svalbard
 ]
 
 
 class seaice_arc_seaice_l4_nrt_observations(Main):
     name = "EO:MO:DAT:SEAICE_ARC_SEAICE_L4_NRT_OBSERVATIONS_011_002"
     dataset = "EO:MO:DAT:SEAICE_ARC_SEAICE_L4_NRT_OBSERVATIONS_011_002"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")

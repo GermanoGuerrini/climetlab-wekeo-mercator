@@ -19,6 +19,10 @@ class global_multiyear_wav(Main):
     name = "EO:MO:DAT:GLOBAL_MULTIYEAR_WAV_001_032"
     dataset = "EO:MO:DAT:GLOBAL_MULTIYEAR_WAV_001_032"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")

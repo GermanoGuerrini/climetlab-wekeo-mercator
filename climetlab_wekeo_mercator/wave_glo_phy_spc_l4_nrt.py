@@ -19,6 +19,10 @@ class wave_glo_phy_spc_l4_nrt(Main):
     name = "EO:MO:DAT:WAVE_GLO_PHY_SPC_L4_NRT_014_004"
     dataset = "EO:MO:DAT:WAVE_GLO_PHY_SPC_L4_NRT_014_004"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")

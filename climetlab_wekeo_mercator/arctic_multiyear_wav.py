@@ -19,6 +19,10 @@ class arctic_multiyear_wav(Main):
     name = "EO:MO:DAT:ARCTIC_MULTIYEAR_WAV_002_013"
     dataset = "EO:MO:DAT:ARCTIC_MULTIYEAR_WAV_002_013"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -68,7 +72,7 @@ class arctic_multiyear_wav(Main):
                 start = "1985-01-01T00:00:00Z"
 
             if end is None:
-                end = "2020-12-31T00:00:00Z"
+                end = "2022-12-31T00:00:00Z"
 
         super().__init__(
             layer=layer,

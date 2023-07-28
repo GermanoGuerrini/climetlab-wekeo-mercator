@@ -19,6 +19,10 @@ class multiobs_glo_phy_w_3d_rep(Main):
     name = "EO:MO:DAT:MULTIOBS_GLO_PHY_W_3D_REP_015_007"
     dataset = "EO:MO:DAT:MULTIOBS_GLO_PHY_W_3D_REP_015_007"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")

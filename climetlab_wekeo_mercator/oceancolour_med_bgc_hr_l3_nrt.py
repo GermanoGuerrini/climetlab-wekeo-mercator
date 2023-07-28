@@ -11,16 +11,20 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs_oc_med_bgc_tur-spm-chl_nrt_l3-hr-mosaic_P1D-m_202107",  # Cmems hr-oc mediterranean sea transparency (spm, tur) and geophysical (chl) daily observations mosaic
     "cmems_obs_oc_med_bgc_geophy_nrt_l3-hr_P1D-m_202105",  # cmems_obs_oc_med_bgc_geophy_nrt_l3-hr_P1D-m_202105
-    "cmems_obs_oc_med_bgc_transp_nrt_l3-hr_P1D-m_202105",  # cmems_obs_oc_med_bgc_transp_nrt_l3-hr_P1D-m_202105
     "cmems_obs_oc_med_bgc_optics_nrt_l3-hr_P1D-m_202105",  # cmems_obs_oc_med_bgc_optics_nrt_l3-hr_P1D-m_202105
+    "cmems_obs_oc_med_bgc_transp_nrt_l3-hr_P1D-m_202105",  # cmems_obs_oc_med_bgc_transp_nrt_l3-hr_P1D-m_202105
+    "cmems_obs_oc_med_bgc_tur-spm-chl_nrt_l3-hr-mosaic_P1D-m_202107",  # Cmems hr-oc mediterranean sea transparency (spm, tur) and geophysical (chl) daily observations mosaic
 ]
 
 
 class oceancolour_med_bgc_hr_l3_nrt(Main):
     name = "EO:MO:DAT:OCEANCOLOUR_MED_BGC_HR_L3_NRT_009_205"
     dataset = "EO:MO:DAT:OCEANCOLOUR_MED_BGC_HR_L3_NRT_009_205"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -37,6 +41,7 @@ class oceancolour_med_bgc_hr_l3_nrt(Main):
             "BBP740",
             "BBP783",
             "BBP865",
+            "CHL",
             "RRS443",
             "RRS443_UNC",
             "RRS492",
@@ -53,6 +58,10 @@ class oceancolour_med_bgc_hr_l3_nrt(Main):
             "RRS783_UNC",
             "RRS865",
             "RRS865_UNC",
+            "SPM",
+            "SPM_QI",
+            "TUR",
+            "TUR_QI",
             "crs",
             "lat",
             "lon",
@@ -68,33 +77,33 @@ class oceancolour_med_bgc_hr_l3_nrt(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_obs_oc_med_bgc_tur-spm-chl_nrt_l3-hr-mosaic_P1D-m_202107":
-            if start is None:
-                start = "2020-01-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-09T23:59:59Z"
-
         if layer == "cmems_obs_oc_med_bgc_geophy_nrt_l3-hr_P1D-m_202105":
             if start is None:
                 start = "2020-01-01T00:00:00Z"
 
             if end is None:
-                end = "2023-07-09T23:59:59Z"
-
-        if layer == "cmems_obs_oc_med_bgc_transp_nrt_l3-hr_P1D-m_202105":
-            if start is None:
-                start = "2020-01-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-09T23:59:59Z"
+                end = "2023-07-26T23:59:59Z"
 
         if layer == "cmems_obs_oc_med_bgc_optics_nrt_l3-hr_P1D-m_202105":
             if start is None:
                 start = "2020-01-01T00:00:00Z"
 
             if end is None:
-                end = "2023-07-09T23:59:59Z"
+                end = "2023-07-26T23:59:59Z"
+
+        if layer == "cmems_obs_oc_med_bgc_tur-spm-chl_nrt_l3-hr-mosaic_P1D-m_202107":
+            if start is None:
+                start = "2020-01-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-26T23:59:59Z"
+
+        if layer == "cmems_obs_oc_med_bgc_transp_nrt_l3-hr_P1D-m_202105":
+            if start is None:
+                start = "2020-01-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-26T23:59:59Z"
 
         super().__init__(
             layer=layer,

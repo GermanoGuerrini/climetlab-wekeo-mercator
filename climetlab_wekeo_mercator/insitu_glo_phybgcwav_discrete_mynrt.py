@@ -19,6 +19,10 @@ class insitu_glo_phybgcwav_discrete_mynrt(Main):
     name = "EO:MO:DAT:INSITU_GLO_PHYBGCWAV_DISCRETE_MYNRT_013_030"
     dataset = "EO:MO:DAT:INSITU_GLO_PHYBGCWAV_DISCRETE_MYNRT_013_030"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")

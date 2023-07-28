@@ -20,6 +20,10 @@ class ibi_analysisforecast_bgc(Main):
     name = "EO:MO:DAT:IBI_ANALYSISFORECAST_BGC_005_004"
     dataset = "EO:MO:DAT:IBI_ANALYSISFORECAST_BGC_005_004"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -58,17 +62,17 @@ class ibi_analysisforecast_bgc(Main):
     ):
         if layer == "cmems_mod_ibi_bgc_anfc_0.027deg-3D_P1D-m_202211":
             if start is None:
-                start = "2021-07-12T00:00:00Z"
+                start = "2021-07-26T00:00:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
+                end = "2023-07-26T00:00:00Z"
 
         if layer == "cmems_mod_ibi_bgc_anfc_0.027deg-3D_P1M-m_202211":
             if start is None:
                 start = "2020-12-31T00:00:00Z"
 
             if end is None:
-                end = "2023-05-31T00:00:00Z"
+                end = "2023-06-30T00:00:00Z"
 
         super().__init__(
             layer=layer,

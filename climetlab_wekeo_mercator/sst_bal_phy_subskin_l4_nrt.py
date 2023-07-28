@@ -19,6 +19,10 @@ class sst_bal_phy_subskin_l4_nrt(Main):
     name = "EO:MO:DAT:SST_BAL_PHY_SUBSKIN_L4_NRT_010_034"
     dataset = "EO:MO:DAT:SST_BAL_PHY_SUBSKIN_L4_NRT_010_034"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -49,7 +53,7 @@ class sst_bal_phy_subskin_l4_nrt(Main):
                 start = "2022-05-01T00:00:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
         super().__init__(
             layer=layer,

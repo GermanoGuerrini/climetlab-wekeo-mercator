@@ -12,14 +12,18 @@ from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
     "cmems_mod_bal_phy_my_P1D-m_202303",  # Cmems nemo daily integrated model fields
-    "cmems_mod_bal_phy_my_P1Y-m_202303",  # Cmems nemo annual integrated model fields
     "cmems_mod_bal_phy_my_P1M-m_202303",  # Cmems nemo monthly integrated model fields
+    "cmems_mod_bal_phy_my_P1Y-m_202303",  # Cmems nemo annual integrated model fields
 ]
 
 
 class balticsea_multiyear_phy(Main):
     name = "EO:MO:DAT:BALTICSEA_MULTIYEAR_PHY_003_011"
     dataset = "EO:MO:DAT:BALTICSEA_MULTIYEAR_PHY_003_011"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -60,19 +64,19 @@ class balticsea_multiyear_phy(Main):
             if end is None:
                 end = "2021-12-31T12:00:00Z"
 
-        if layer == "cmems_mod_bal_phy_my_P1Y-m_202303":
-            if start is None:
-                start = "1993-01-01T12:00:00Z"
-
-            if end is None:
-                end = "2021-01-01T12:00:00Z"
-
         if layer == "cmems_mod_bal_phy_my_P1M-m_202303":
             if start is None:
                 start = "1993-01-01T12:00:00Z"
 
             if end is None:
                 end = "2021-12-01T12:00:00Z"
+
+        if layer == "cmems_mod_bal_phy_my_P1Y-m_202303":
+            if start is None:
+                start = "1993-01-01T12:00:00Z"
+
+            if end is None:
+                end = "2021-01-01T12:00:00Z"
 
         super().__init__(
             layer=layer,

@@ -19,6 +19,10 @@ class oceancolour_atl_bgc_l4_my(Main):
     name = "EO:MO:DAT:OCEANCOLOUR_ATL_BGC_L4_MY_009_118"
     dataset = "EO:MO:DAT:OCEANCOLOUR_ATL_BGC_L4_MY_009_118"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -48,7 +52,7 @@ class oceancolour_atl_bgc_l4_my(Main):
                 start = "1997-09-06T16:08:10Z"
 
             if end is None:
-                end = "2023-07-02T22:10:16Z"
+                end = "2023-07-19T21:29:09Z"
 
         super().__init__(
             layer=layer,

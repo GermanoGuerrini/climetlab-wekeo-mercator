@@ -20,6 +20,10 @@ class global_analysis_forecast_bio(Main):
     name = "EO:MO:DAT:GLOBAL_ANALYSIS_FORECAST_BIO_001_028"
     dataset = "EO:MO:DAT:GLOBAL_ANALYSIS_FORECAST_BIO_001_028"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -59,14 +63,14 @@ class global_analysis_forecast_bio(Main):
                 start = "0201-10-01T00:00:00Z"
 
             if end is None:
-                end = "2023-07-14T00:00:00Z"
+                end = "2023-08-04T00:00:00Z"
 
         if layer == "global-analysis-forecast-bio-001-028-monthly_202211":
             if start is None:
                 start = "2022-11-01T00:00:00Z"
 
             if end is None:
-                end = "2023-05-28T00:00:00Z"
+                end = "2023-06-28T00:00:00Z"
 
         super().__init__(
             layer=layer,

@@ -11,18 +11,22 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_mod_nws_phy-mld_anfc_7km-2D_P1D-m_202105",  # Daily-mean mixed layer depth (2d)
-    "cmems_mod_nws_phy-uv_anfc_7km-3D_P1D-m_202105",  # Daily-mean horizontal velocity (3d)
-    "cmems_mod_nws_phy-s_anfc_7km-3D_P1D-m_202105",  # Daily-mean salinity (3d)
-    "cmems_mod_nws_phy-t_anfc_7km-3D_P1D-m_202105",  # Daily-mean potential temperature (3d)
     "cmems_mod_nws_phy-bottomt_anfc_7km-2D_P1D-m_202105",  # Daily-mean seabed temperature (2d)
+    "cmems_mod_nws_phy-mld_anfc_7km-2D_P1D-m_202105",  # Daily-mean mixed layer depth (2d)
+    "cmems_mod_nws_phy-s_anfc_7km-3D_P1D-m_202105",  # Daily-mean salinity (3d)
     "cmems_mod_nws_phy-ssh_anfc_7km-2D_P1D-m_202105",  # Daily-mean ssh (2d)
+    "cmems_mod_nws_phy-t_anfc_7km-3D_P1D-m_202105",  # Daily-mean potential temperature (3d)
+    "cmems_mod_nws_phy-uv_anfc_7km-3D_P1D-m_202105",  # Daily-mean horizontal velocity (3d)
 ]
 
 
 class nwshelf_analysisforecast_phy_lr(Main):
     name = "EO:MO:DAT:NWSHELF_ANALYSISFORECAST_PHY_LR_004_001"
     dataset = "EO:MO:DAT:NWSHELF_ANALYSISFORECAST_PHY_LR_004_001"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -31,9 +35,16 @@ class nwshelf_analysisforecast_phy_lr(Main):
     @normalize(
         "variables",
         [
+            "bottomT",
+            "depth",
             "latitude",
             "longitude",
+            "mlotst",
+            "so",
+            "thetao",
             "time",
+            "uo",
+            "vo",
             "zos",
         ],
         multiple=True,
@@ -46,47 +57,47 @@ class nwshelf_analysisforecast_phy_lr(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_mod_nws_phy-mld_anfc_7km-2D_P1D-m_202105":
-            if start is None:
-                start = "2019-05-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "cmems_mod_nws_phy-uv_anfc_7km-3D_P1D-m_202105":
-            if start is None:
-                start = "2019-05-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
-
         if layer == "cmems_mod_nws_phy-s_anfc_7km-3D_P1D-m_202105":
             if start is None:
                 start = "2019-05-03T00:00:00Z"
 
             if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "cmems_mod_nws_phy-t_anfc_7km-3D_P1D-m_202105":
-            if start is None:
-                start = "2019-05-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
+                end = "2023-07-31T00:00:00Z"
 
         if layer == "cmems_mod_nws_phy-bottomt_anfc_7km-2D_P1D-m_202105":
             if start is None:
                 start = "2019-05-03T00:00:00Z"
 
             if end is None:
-                end = "2023-07-15T00:00:00Z"
+                end = "2023-07-31T00:00:00Z"
 
         if layer == "cmems_mod_nws_phy-ssh_anfc_7km-2D_P1D-m_202105":
             if start is None:
                 start = "2019-05-03T00:00:00Z"
 
             if end is None:
-                end = "2023-07-15T00:00:00Z"
+                end = "2023-07-31T00:00:00Z"
+
+        if layer == "cmems_mod_nws_phy-t_anfc_7km-3D_P1D-m_202105":
+            if start is None:
+                start = "2019-05-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-31T00:00:00Z"
+
+        if layer == "cmems_mod_nws_phy-mld_anfc_7km-2D_P1D-m_202105":
+            if start is None:
+                start = "2019-05-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-31T00:00:00Z"
+
+        if layer == "cmems_mod_nws_phy-uv_anfc_7km-3D_P1D-m_202105":
+            if start is None:
+                start = "2019-05-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-31T00:00:00Z"
 
         super().__init__(
             layer=layer,

@@ -19,6 +19,10 @@ class blksea_analysisforecast_wav(Main):
     name = "EO:MO:DAT:BLKSEA_ANALYSISFORECAST_WAV_007_003"
     dataset = "EO:MO:DAT:BLKSEA_ANALYSISFORECAST_WAV_007_003"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -61,10 +65,10 @@ class blksea_analysisforecast_wav(Main):
     ):
         if layer == "cmems_mod_blk_wav_anfc_2.5km_PT1H-i_202211":
             if start is None:
-                start = "2021-07-10T00:00:00Z"
+                start = "2021-07-27T00:00:00Z"
 
             if end is None:
-                end = "2023-07-09T00:00:00Z"
+                end = "2023-07-26T00:00:00Z"
 
         super().__init__(
             layer=layer,

@@ -11,8 +11,8 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_mod_glo_phy_my_0.083_P1D-m_202112",  # Daily mean fields from global ocean physics analysis and forecast updated daily
     "cmems_mod_glo_phy_my_0.083-climatology_P1M-m_202112",  # cmems_mod_glo_phy_my_0.083-climatology_P1M-m_202112
+    "cmems_mod_glo_phy_my_0.083_P1D-m_202112",  # Daily mean fields from global ocean physics analysis and forecast updated daily
     "cmems_mod_glo_phy_my_0.083_P1M-m_202112",  # Monthly mean fields for product global reanalysis phy 001 030
 ]
 
@@ -20,6 +20,10 @@ LAYERS = [
 class global_multiyear_phy(Main):
     name = "EO:MO:DAT:GLOBAL_MULTIYEAR_PHY_001_030"
     dataset = "EO:MO:DAT:GLOBAL_MULTIYEAR_PHY_001_030"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -54,13 +58,6 @@ class global_multiyear_phy(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_mod_glo_phy_my_0.083_P1D-m_202112":
-            if start is None:
-                start = "1993-01-01T00:00:00Z"
-
-            if end is None:
-                end = "2020-12-31T00:00:00Z"
-
         if layer == "cmems_mod_glo_phy_my_0.083-climatology_P1M-m_202112":
             if start is None:
                 start = "2021-12-01T00:00:00Z"
@@ -74,6 +71,13 @@ class global_multiyear_phy(Main):
 
             if end is None:
                 end = "2021-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_glo_phy_my_0.083_P1D-m_202112":
+            if start is None:
+                start = "1993-01-01T00:00:00Z"
+
+            if end is None:
+                end = "2020-12-31T00:00:00Z"
 
         super().__init__(
             layer=layer,

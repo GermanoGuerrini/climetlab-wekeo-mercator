@@ -11,15 +11,19 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
+    "global-reanalysis-phy-001-026-grepv1-ice-monthly_202003",  # Monthly mean from reanalyses
     "global-reanalysis-phy-001-026-grepv1-monthly_202003",  # Monthly mean from reanalyses
     "global-reanalysis-phy-001-026-grepv1-uv-monthly_202003",  # Monthly mean from reanalyses
-    "global-reanalysis-phy-001-026-grepv1-ice-monthly_202003",  # Monthly mean from reanalyses
 ]
 
 
 class global_reanalysis_phy(Main):
     name = "EO:MO:DAT:GLOBAL_REANALYSIS_PHY_001_026"
     dataset = "EO:MO:DAT:GLOBAL_REANALYSIS_PHY_001_026"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -28,6 +32,7 @@ class global_reanalysis_phy(Main):
     @normalize(
         "variables",
         [
+            "depth",
             "latitude",
             "longitude",
             "siconc_cglo",
@@ -42,7 +47,31 @@ class global_reanalysis_phy(Main):
             "sithick_mean",
             "sithick_oras",
             "sithick_std",
+            "so_cglo",
+            "so_foam",
+            "so_glor",
+            "so_mean",
+            "so_oras",
+            "so_std",
+            "thetao_cglo",
+            "thetao_foam",
+            "thetao_glor",
+            "thetao_mean",
+            "thetao_oras",
+            "thetao_std",
             "time",
+            "uo_cglo",
+            "uo_foam",
+            "uo_glor",
+            "uo_mean",
+            "uo_oras",
+            "uo_std",
+            "vo_cglo",
+            "vo_foam",
+            "vo_glor",
+            "vo_mean",
+            "vo_oras",
+            "vo_std",
         ],
         multiple=True,
     )
@@ -61,14 +90,14 @@ class global_reanalysis_phy(Main):
             if end is None:
                 end = "2020-12-15T00:00:00Z"
 
-        if layer == "global-reanalysis-phy-001-026-grepv1-uv-monthly_202003":
+        if layer == "global-reanalysis-phy-001-026-grepv1-ice-monthly_202003":
             if start is None:
                 start = "1993-01-15T00:00:00Z"
 
             if end is None:
                 end = "2020-12-15T00:00:00Z"
 
-        if layer == "global-reanalysis-phy-001-026-grepv1-ice-monthly_202003":
+        if layer == "global-reanalysis-phy-001-026-grepv1-uv-monthly_202003":
             if start is None:
                 start = "1993-01-15T00:00:00Z"
 

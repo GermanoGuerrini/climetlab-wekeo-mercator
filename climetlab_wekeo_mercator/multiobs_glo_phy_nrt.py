@@ -11,15 +11,19 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "dataset-uv-nrt-monthly",  # Monthly mean total surface and 15m velocities
-    "dataset-uv-nrt-hourly",  # Total surface and 15m velocities
     "dataset-uv-nrt-daily",  # Daily mean total surface and 15m velocities
+    "dataset-uv-nrt-hourly",  # Total surface and 15m velocities
+    "dataset-uv-nrt-monthly",  # Monthly mean total surface and 15m velocities
 ]
 
 
 class multiobs_glo_phy_nrt(Main):
     name = "EO:MO:DAT:MULTIOBS_GLO_PHY_NRT_015_003"
     dataset = "EO:MO:DAT:MULTIOBS_GLO_PHY_NRT_015_003"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -58,14 +62,14 @@ class multiobs_glo_phy_nrt(Main):
                 start = "2021-07-05T00:00:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
         if layer == "dataset-uv-nrt-daily":
             if start is None:
                 start = "2021-07-05T00:00:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
         super().__init__(
             layer=layer,

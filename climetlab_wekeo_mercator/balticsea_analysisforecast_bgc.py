@@ -21,6 +21,10 @@ class balticsea_analysisforecast_bgc(Main):
     name = "EO:MO:DAT:BALTICSEA_ANALYSISFORECAST_BGC_003_007"
     dataset = "EO:MO:DAT:BALTICSEA_ANALYSISFORECAST_BGC_003_007"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -36,6 +40,7 @@ class balticsea_analysisforecast_bgc(Main):
             "lon",
             "nh4",
             "no3",
+            "nppv",
             "o2",
             "o2b",
             "pH",
@@ -45,6 +50,7 @@ class balticsea_analysisforecast_bgc(Main):
             "spCO2",
             "time",
             "zooc",
+            "zsd",
         ],
         multiple=True,
     )
@@ -56,19 +62,19 @@ class balticsea_analysisforecast_bgc(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_mod_bal_bgc-pp_anfc_P1D-i_202211":
-            if start is None:
-                start = "2021-01-01T12:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T12:00:00Z"
-
         if layer == "cmems_mod_bal_bgc_anfc_P1D-m_202211":
             if start is None:
                 start = "2021-01-01T12:00:00Z"
 
             if end is None:
-                end = "2023-07-15T12:00:00Z"
+                end = "2023-08-01T12:00:00Z"
+
+        if layer == "cmems_mod_bal_bgc-pp_anfc_P1D-i_202211":
+            if start is None:
+                start = "2021-01-01T12:00:00Z"
+
+            if end is None:
+                end = "2023-08-01T12:00:00Z"
 
         if layer == "cmems_mod_bal_bgc_anfc_P1M-m_202211":
             if start is None:

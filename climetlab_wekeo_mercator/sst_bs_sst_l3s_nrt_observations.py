@@ -20,6 +20,10 @@ class sst_bs_sst_l3s_nrt_observations(Main):
     name = "EO:MO:DAT:SST_BS_SST_L3S_NRT_OBSERVATIONS_010_013"
     dataset = "EO:MO:DAT:SST_BS_SST_L3S_NRT_OBSERVATIONS_010_013"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -63,14 +67,14 @@ class sst_bs_sst_l3s_nrt_observations(Main):
                 start = "2007-12-31T19:00:00Z"
 
             if end is None:
-                end = "2023-07-10T07:00:00Z"
+                end = "2023-07-27T07:00:00Z"
 
         if layer == "SST_BS_SST_L3S_NRT_OBSERVATIONS_010_013_b":
             if start is None:
                 start = "2007-12-31T19:00:00Z"
 
             if end is None:
-                end = "2023-07-10T07:00:00Z"
+                end = "2023-07-27T07:00:00Z"
 
         super().__init__(
             layer=layer,

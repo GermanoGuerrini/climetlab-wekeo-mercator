@@ -11,15 +11,19 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "FMI-BAL-SEAICE_THICK-L4-NRT-OBS",  # Baltic ice thickness, l4, 1km daily (fmi-bal-seaice thick-l4-nrt-obs)
     "cmems_obs-si_bal_phy-sie_nrt_l4_P1D-m_202211",  # cmems_obs-si_bal_phy-sie_nrt_l4_P1D-m_202211
     "FMI-BAL-SEAICE_CONC-L4-NRT-OBS",  # Baltic ice concentration, l4, 1km daily (fmi-bal-seaice conc-l4-nrt-obs)
+    "FMI-BAL-SEAICE_THICK-L4-NRT-OBS",  # Baltic ice thickness, l4, 1km daily (fmi-bal-seaice thick-l4-nrt-obs)
 ]
 
 
 class seaice_bal_seaice_l4_nrt_observations(Main):
     name = "EO:MO:DAT:SEAICE_BAL_SEAICE_L4_NRT_OBSERVATIONS_011_004"
     dataset = "EO:MO:DAT:SEAICE_BAL_SEAICE_L4_NRT_OBSERVATIONS_011_004"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -31,9 +35,12 @@ class seaice_bal_seaice_l4_nrt_observations(Main):
             "concentration_range",
             "crs",
             "ice_concentration",
+            "ice_thickness",
             "lat",
             "lon",
             "product_quality",
+            "sea_ice_extent",
+            "thickness_range",
             "time",
         ],
         multiple=True,
@@ -53,19 +60,19 @@ class seaice_bal_seaice_l4_nrt_observations(Main):
             if end is None:
                 end = "2023-05-28T13:00:00Z"
 
-        if layer == "cmems_obs-si_bal_phy-sie_nrt_l4_P1D-m_202211":
-            if start is None:
-                start = "2022-11-21T14:00:00Z"
-
-            if end is None:
-                end = "2023-05-28T14:00:00Z"
-
         if layer == "FMI-BAL-SEAICE_CONC-L4-NRT-OBS":
             if start is None:
                 start = "2018-01-01T14:00:00Z"
 
             if end is None:
                 end = "2023-05-28T13:00:00Z"
+
+        if layer == "cmems_obs-si_bal_phy-sie_nrt_l4_P1D-m_202211":
+            if start is None:
+                start = "2022-11-21T14:00:00Z"
+
+            if end is None:
+                end = "2023-05-28T14:00:00Z"
 
         super().__init__(
             layer=layer,

@@ -19,6 +19,10 @@ class ibi_multiyear_wav(Main):
     name = "EO:MO:DAT:IBI_MULTIYEAR_WAV_005_006"
     dataset = "EO:MO:DAT:IBI_MULTIYEAR_WAV_005_006"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")

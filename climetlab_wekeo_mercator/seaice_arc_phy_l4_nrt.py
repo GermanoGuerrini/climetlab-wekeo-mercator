@@ -19,6 +19,10 @@ class seaice_arc_phy_l4_nrt(Main):
     name = "EO:MO:DAT:SEAICE_ARC_PHY_L4_NRT_011_014"
     dataset = "EO:MO:DAT:SEAICE_ARC_PHY_L4_NRT_011_014"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")

@@ -19,6 +19,10 @@ class nwshelf_reanalysis_wav(Main):
     name = "EO:MO:DAT:NWSHELF_REANALYSIS_WAV_004_015"
     dataset = "EO:MO:DAT:NWSHELF_REANALYSIS_WAV_004_015"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")

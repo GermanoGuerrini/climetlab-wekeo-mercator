@@ -19,6 +19,10 @@ class global_analysisforecast_wav(Main):
     name = "EO:MO:DAT:GLOBAL_ANALYSISFORECAST_WAV_001_027"
     dataset = "EO:MO:DAT:GLOBAL_ANALYSISFORECAST_WAV_001_027"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -62,7 +66,7 @@ class global_analysisforecast_wav(Main):
                 start = "2021-01-01T03:00:00Z"
 
             if end is None:
-                end = "2023-07-20T00:00:00Z"
+                end = "2023-08-06T00:00:00Z"
 
         super().__init__(
             layer=layer,

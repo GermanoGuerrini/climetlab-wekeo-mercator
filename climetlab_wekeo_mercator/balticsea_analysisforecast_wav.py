@@ -19,6 +19,10 @@ class balticsea_analysisforecast_wav(Main):
     name = "EO:MO:DAT:BALTICSEA_ANALYSISFORECAST_WAV_003_010"
     dataset = "EO:MO:DAT:BALTICSEA_ANALYSISFORECAST_WAV_003_010"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -62,7 +66,7 @@ class balticsea_analysisforecast_wav(Main):
                 start = "0190-10-10T00:00:00Z"
 
             if end is None:
-                end = "2307-12-13T00:00:00Z"
+                end = "2308-01-13T00:00:00Z"
 
         super().__init__(
             layer=layer,

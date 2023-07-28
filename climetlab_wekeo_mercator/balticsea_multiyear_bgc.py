@@ -11,8 +11,8 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_mod_bal_bgc_my_P1M-m_202303",  # Cmems ergom monthly integrated model fields
     "cmems_mod_bal_bgc_my_P1D-m_202303",  # Cmems ergom daily integrated model fields
+    "cmems_mod_bal_bgc_my_P1M-m_202303",  # Cmems ergom monthly integrated model fields
     "cmems_mod_bal_bgc_my_P1Y-m_202303",  # Cmems ergom annual integrated model fields
 ]
 
@@ -20,6 +20,10 @@ LAYERS = [
 class balticsea_multiyear_bgc(Main):
     name = "EO:MO:DAT:BALTICSEA_MULTIYEAR_BGC_003_012"
     dataset = "EO:MO:DAT:BALTICSEA_MULTIYEAR_BGC_003_012"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")

@@ -12,9 +12,9 @@ from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
     "cmems_mod_ibi_phy_my_0.083deg-2D_PT1H-m_202012",  # Cmems ibi reanalysis: hourly physical products
-    "cmems_mod_ibi_phy_my_0.083deg-3D_P1M-m_202012",  # Cmems ibi reanalysis: monthly physical products
     "cmems_mod_ibi_phy_my_0.083deg-3D-climatology_P1M-m_202211",  # cmems_mod_ibi_phy_my_0.083deg-3D-climatology_P1M-m_202211
     "cmems_mod_ibi_phy_my_0.083deg-3D_P1D-m_202012",  # Cmems ibi reanalysis: daily physical products
+    "cmems_mod_ibi_phy_my_0.083deg-3D_P1M-m_202012",  # Cmems ibi reanalysis: monthly physical products
     "cmems_mod_ibi_phy_my_0.083deg-3D_P1Y-m_202211",  # Cmems ibi reanalysis: yearly physical products
 ]
 
@@ -22,6 +22,10 @@ LAYERS = [
 class ibi_multiyear_phy(Main):
     name = "EO:MO:DAT:IBI_MULTIYEAR_PHY_005_002"
     dataset = "EO:MO:DAT:IBI_MULTIYEAR_PHY_005_002"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -31,16 +35,32 @@ class ibi_multiyear_phy(Main):
         "variables",
         [
             "bottomT",
+            "bottomT_mean",
+            "bottomT_standard_deviation",
             "depth",
             "latitude",
             "longitude",
             "mlotst",
+            "mlotst_mean",
+            "mlotst_standard_deviation",
             "so",
+            "so_mean",
+            "so_standard_deviation",
             "thetao",
+            "thetao_mean",
+            "thetao_standard_deviation",
             "time",
+            "ubar",
             "uo",
+            "uo_mean",
+            "uo_standard_deviation",
+            "vbar",
             "vo",
+            "vo_mean",
+            "vo_standard_deviation",
             "zos",
+            "zos_mean",
+            "zos_standard_deviation",
         ],
         multiple=True,
     )
@@ -52,6 +72,13 @@ class ibi_multiyear_phy(Main):
         end=None,
         variables=None,
     ):
+        if layer == "cmems_mod_ibi_phy_my_0.083deg-3D_P1D-m_202012":
+            if start is None:
+                start = "2020-12-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-01-01T00:00:00Z"
+
         if layer == "cmems_mod_ibi_phy_my_0.083deg-2D_PT1H-m_202012":
             if start is None:
                 start = "2020-12-01T00:00:00Z"
@@ -59,9 +86,9 @@ class ibi_multiyear_phy(Main):
             if end is None:
                 end = "2023-01-01T00:00:00Z"
 
-        if layer == "cmems_mod_ibi_phy_my_0.083deg-3D_P1M-m_202012":
+        if layer == "cmems_mod_ibi_phy_my_0.083deg-3D_P1Y-m_202211":
             if start is None:
-                start = "2020-12-01T00:00:00Z"
+                start = "2022-11-01T00:00:00Z"
 
             if end is None:
                 end = "2023-01-01T00:00:00Z"
@@ -73,16 +100,9 @@ class ibi_multiyear_phy(Main):
             if end is None:
                 end = "2022-11-28T00:00:00Z"
 
-        if layer == "cmems_mod_ibi_phy_my_0.083deg-3D_P1D-m_202012":
+        if layer == "cmems_mod_ibi_phy_my_0.083deg-3D_P1M-m_202012":
             if start is None:
                 start = "2020-12-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-01-01T00:00:00Z"
-
-        if layer == "cmems_mod_ibi_phy_my_0.083deg-3D_P1Y-m_202211":
-            if start is None:
-                start = "2022-11-01T00:00:00Z"
 
             if end is None:
                 end = "2023-01-01T00:00:00Z"

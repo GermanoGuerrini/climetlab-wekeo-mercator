@@ -11,14 +11,18 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_mod_arc_phy_anfc_nextsim_P1M-m_202211",  # Nextsim-f sea ice forecast, 3 km monthly averaged fields (cmems mod arc phy anfc nextsim p1m-m)
     "cmems_mod_arc_phy_anfc_nextsim_hm_202211",  # Nextsim-f sea ice forecast, 3 km hourly-averaged fields (cmems mod arc phy anfc nextsim hm)
+    "cmems_mod_arc_phy_anfc_nextsim_P1M-m_202211",  # Nextsim-f sea ice forecast, 3 km monthly averaged fields (cmems mod arc phy anfc nextsim p1m-m)
 ]
 
 
 class arctic_analysisforecast_phy_ice(Main):
     name = "EO:MO:DAT:ARCTIC_ANALYSISFORECAST_PHY_ICE_002_011"
     dataset = "EO:MO:DAT:ARCTIC_ANALYSISFORECAST_PHY_ICE_002_011"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -64,7 +68,7 @@ class arctic_analysisforecast_phy_ice(Main):
                 start = "2019-08-02T00:00:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
+                end = "2023-07-27T00:00:00Z"
 
         super().__init__(
             layer=layer,

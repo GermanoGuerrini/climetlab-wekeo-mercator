@@ -19,6 +19,10 @@ class medsea_analysisforecast_wav(Main):
     name = "EO:MO:DAT:MEDSEA_ANALYSISFORECAST_WAV_006_017"
     dataset = "EO:MO:DAT:MEDSEA_ANALYSISFORECAST_WAV_006_017"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -59,10 +63,10 @@ class medsea_analysisforecast_wav(Main):
     ):
         if layer == "med-hcmr-wav-an-fc-h_202105":
             if start is None:
-                start = "2021-07-10T00:00:00Z"
+                start = "2021-07-27T00:00:00Z"
 
             if end is None:
-                end = "2023-07-09T00:00:00Z"
+                end = "2023-07-26T00:00:00Z"
 
         super().__init__(
             layer=layer,

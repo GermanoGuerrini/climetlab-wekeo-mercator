@@ -20,7 +20,14 @@ class sis_tourism_fire_danger_indicators(Main):
         "product_type",
         "experiment",
         "version",
-        "format",
+        "format_",
+    ]
+
+    string_selects = [
+        "variable",
+        "gcm_model",
+        "period",
+        "period",
     ]
 
     @normalize(
@@ -254,7 +261,7 @@ class sis_tourism_fire_danger_indicators(Main):
         ],
     )
     @normalize(
-        "format",
+        "format_",
         [
             "tgz",
             "zip",
@@ -262,15 +269,15 @@ class sis_tourism_fire_danger_indicators(Main):
     )
     def __init__(
         self,
-        variable=None,
-        gcm_model=None,
-        period=None,
-        period=None,
-        time_aggregation=None,
-        product_type=None,
-        experiment=None,
-        version=None,
-        format=None,
+        variable,
+        gcm_model,
+        period,
+        period,
+        time_aggregation,
+        product_type,
+        experiment,
+        version,
+        format_,
     ):
         super().__init__(
             variable=variable,
@@ -281,5 +288,5 @@ class sis_tourism_fire_danger_indicators(Main):
             product_type=product_type,
             experiment=experiment,
             version=version,
-            format=format,
+            format_=format_,
         )

@@ -19,6 +19,10 @@ class wind_glo_phy_climate_l4_my(Main):
     name = "EO:MO:DAT:WIND_GLO_PHY_CLIMATE_L4_MY_012_003"
     dataset = "EO:MO:DAT:WIND_GLO_PHY_CLIMATE_L4_MY_012_003"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -58,7 +62,7 @@ class wind_glo_phy_climate_l4_my(Main):
                 start = "2007-01-01T00:00:00Z"
 
             if end is None:
-                end = "2023-02-28T23:59:59Z"
+                end = "2023-03-31T23:59:59Z"
 
         super().__init__(
             layer=layer,

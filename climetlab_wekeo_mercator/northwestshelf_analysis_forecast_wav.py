@@ -19,6 +19,10 @@ class northwestshelf_analysis_forecast_wav(Main):
     name = "EO:MO:DAT:NORTHWESTSHELF_ANALYSIS_FORECAST_WAV_004_014"
     dataset = "EO:MO:DAT:NORTHWESTSHELF_ANALYSIS_FORECAST_WAV_004_014"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -65,7 +69,7 @@ class northwestshelf_analysis_forecast_wav(Main):
                 start = "2019-01-03T00:00:00Z"
 
             if end is None:
-                end = "2023-07-15T00:00:00Z"
+                end = "2023-08-01T00:00:00Z"
 
         super().__init__(
             layer=layer,

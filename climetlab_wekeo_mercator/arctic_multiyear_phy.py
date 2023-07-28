@@ -11,15 +11,19 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
+    "cmems_mod_arc_phy_my_topaz4_P1D-m_202211",  # Arctic ocean physics reanalysis
     "cmems_mod_arc_phy_my_topaz4_P1M_202012",  # Arctic ocean physics reanalysis
     "cmems_mod_arc_phy_my_topaz4_P1Y_202211",  # Arctic ocean physics reanalysis
-    "cmems_mod_arc_phy_my_topaz4_P1D-m_202211",  # Arctic ocean physics reanalysis
 ]
 
 
 class arctic_multiyear_phy(Main):
     name = "EO:MO:DAT:ARCTIC_MULTIYEAR_PHY_002_003"
     dataset = "EO:MO:DAT:ARCTIC_MULTIYEAR_PHY_002_003"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -60,13 +64,6 @@ class arctic_multiyear_phy(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_mod_arc_phy_my_topaz4_P1M_202012":
-            if start is None:
-                start = "1991-01-15T00:00:00Z"
-
-            if end is None:
-                end = "2021-12-15T00:00:00Z"
-
         if layer == "cmems_mod_arc_phy_my_topaz4_P1Y_202211":
             if start is None:
                 start = "1991-01-01T00:00:00Z"
@@ -80,6 +77,13 @@ class arctic_multiyear_phy(Main):
 
             if end is None:
                 end = "2021-12-31T00:00:00Z"
+
+        if layer == "cmems_mod_arc_phy_my_topaz4_P1M_202012":
+            if start is None:
+                start = "1991-01-15T00:00:00Z"
+
+            if end is None:
+                end = "2021-12-15T00:00:00Z"
 
         super().__init__(
             layer=layer,

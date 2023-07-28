@@ -11,16 +11,20 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
+    "dataset-sss-ssd-nrt-monthly_202012",  # Global analysed sea surface salinity and density monthly average
     "dataset-sss-ssd-nrt-weekly_202012",  # Global analysed sea surface salinity and density
     "dataset-sss-ssd-rep-monthly_202012",  # Global analysed sea surface salinity and density monthly average
     "dataset-sss-ssd-rep-weekly_202012",  # Global analysed sea surface salinity and density
-    "dataset-sss-ssd-nrt-monthly_202012",  # Global analysed sea surface salinity and density monthly average
 ]
 
 
 class multiobs_glo_phy_s_surface_mynrt(Main):
     name = "EO:MO:DAT:MULTIOBS_GLO_PHY_S_SURFACE_MYNRT_015_013"
     dataset = "EO:MO:DAT:MULTIOBS_GLO_PHY_S_SURFACE_MYNRT_015_013"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -49,19 +53,12 @@ class multiobs_glo_phy_s_surface_mynrt(Main):
         end=None,
         variables=None,
     ):
-        if layer == "dataset-sss-ssd-nrt-weekly_202012":
+        if layer == "dataset-sss-ssd-nrt-monthly_202012":
             if start is None:
-                start = "2022-11-01T00:00:00Z"
+                start = "2022-10-27T00:00:00Z"
 
             if end is None:
-                end = "2023-07-04T00:00:00Z"
-
-        if layer == "dataset-sss-ssd-rep-monthly_202012":
-            if start is None:
-                start = "2020-09-04T00:00:00Z"
-
-            if end is None:
-                end = "2022-10-24T00:00:00Z"
+                end = "2023-05-31T00:00:00Z"
 
         if layer == "dataset-sss-ssd-rep-weekly_202012":
             if start is None:
@@ -70,12 +67,19 @@ class multiobs_glo_phy_s_surface_mynrt(Main):
             if end is None:
                 end = "2022-11-01T00:00:00Z"
 
-        if layer == "dataset-sss-ssd-nrt-monthly_202012":
+        if layer == "dataset-sss-ssd-nrt-weekly_202012":
             if start is None:
-                start = "2022-10-27T00:00:00Z"
+                start = "2022-11-01T00:00:00Z"
 
             if end is None:
-                end = "2023-05-31T00:00:00Z"
+                end = "2023-07-25T00:00:00Z"
+
+        if layer == "dataset-sss-ssd-rep-monthly_202012":
+            if start is None:
+                start = "2020-09-04T00:00:00Z"
+
+            if end is None:
+                end = "2022-10-24T00:00:00Z"
 
         super().__init__(
             layer=layer,

@@ -11,15 +11,19 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs-oc_blk_bgc-plankton_my_l4-olci-300m_P1M_202211",  # Cmems obs-oc blk bgc-plankton my l4-olci-300m p1m
     "cmems_obs-oc_blk_bgc-plankton_my_l4-gapfree-multi-1km_P1D_202207",  # Cmems obs-oc blk bgc-plankton my l4-gapfree-multi-1km p1d
     "cmems_obs-oc_blk_bgc-plankton_my_l4-multi-1km_P1M_202207",  # Cmems obs-oc blk bgc-plankton my l4-multi-1km p1m
+    "cmems_obs-oc_blk_bgc-plankton_my_l4-olci-300m_P1M_202211",  # Cmems obs-oc blk bgc-plankton my l4-olci-300m p1m
 ]
 
 
 class oceancolour_blk_bgc_l4_my(Main):
     name = "EO:MO:DAT:OCEANCOLOUR_BLK_BGC_L4_MY_009_154"
     dataset = "EO:MO:DAT:OCEANCOLOUR_BLK_BGC_L4_MY_009_154"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -52,19 +56,19 @@ class oceancolour_blk_bgc_l4_my(Main):
             if end is None:
                 end = "2023-04-30T00:00:00Z"
 
-        if layer == "cmems_obs-oc_blk_bgc-plankton_my_l4-gapfree-multi-1km_P1D_202207":
-            if start is None:
-                start = "1997-09-16T00:00:00Z"
-
-            if end is None:
-                end = "2023-06-28T00:00:00Z"
-
         if layer == "cmems_obs-oc_blk_bgc-plankton_my_l4-multi-1km_P1M_202207":
             if start is None:
                 start = "1997-09-01T00:00:00Z"
 
             if end is None:
                 end = "2023-04-30T00:00:00Z"
+
+        if layer == "cmems_obs-oc_blk_bgc-plankton_my_l4-gapfree-multi-1km_P1D_202207":
+            if start is None:
+                start = "1997-09-16T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-24T00:00:00Z"
 
         super().__init__(
             layer=layer,

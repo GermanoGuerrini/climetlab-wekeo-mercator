@@ -11,21 +11,25 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_mod_nws_bgc-no3_anfc_7km-3D_P1D-m_202105",  # Daily-mean nitrate (3d)
-    "cmems_mod_nws_bgc-pp_anfc_7km-3D_P1D-m_202105",  # Daily-mean primary productivity (3d)
-    "cmems_mod_nws_bgc-kd_anfc_7km-3D_P1D-m_202105",  # Daily-mean attenuation coefficient (3d)
-    "cmems_mod_nws_bgc-spco2_anfc_7km-2D_P1D-m_202105",  # Daily-mean spco2 (2d)
-    "cmems_mod_nws_bgc-phyc_anfc_7km-3D_P1D-m_202105",  # Daily-mean phytoplankton (3d)
-    "cmems_mod_nws_bgc-o2_anfc_7km-3D_P1D-m_202105",  # Daily-mean dissolved oxygen (3d)
     "cmems_mod_nws_bgc-chl_anfc_7km-3D_P1D-m_202105",  # Daily-mean chlorophyll concentration (3d)
-    "cmems_mod_nws_bgc-po4_anfc_7km-3D_P1D-m_202105",  # Daily-mean phosphate (3d)
+    "cmems_mod_nws_bgc-kd_anfc_7km-3D_P1D-m_202105",  # Daily-mean attenuation coefficient (3d)
+    "cmems_mod_nws_bgc-no3_anfc_7km-3D_P1D-m_202105",  # Daily-mean nitrate (3d)
+    "cmems_mod_nws_bgc-o2_anfc_7km-3D_P1D-m_202105",  # Daily-mean dissolved oxygen (3d)
     "cmems_mod_nws_bgc-ph_anfc_7km-3D_P1D-m_202105",  # Daily-mean ph (3d)
+    "cmems_mod_nws_bgc-phyc_anfc_7km-3D_P1D-m_202105",  # Daily-mean phytoplankton (3d)
+    "cmems_mod_nws_bgc-po4_anfc_7km-3D_P1D-m_202105",  # Daily-mean phosphate (3d)
+    "cmems_mod_nws_bgc-pp_anfc_7km-3D_P1D-m_202105",  # Daily-mean primary productivity (3d)
+    "cmems_mod_nws_bgc-spco2_anfc_7km-2D_P1D-m_202105",  # Daily-mean spco2 (2d)
 ]
 
 
 class nwshelf_analysisforecast_bgc(Main):
     name = "EO:MO:DAT:NWSHELF_ANALYSISFORECAST_BGC_004_002"
     dataset = "EO:MO:DAT:NWSHELF_ANALYSISFORECAST_BGC_004_002"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -34,10 +38,18 @@ class nwshelf_analysisforecast_bgc(Main):
     @normalize(
         "variables",
         [
+            "attn",
+            "chl",
             "depth",
             "latitude",
             "longitude",
+            "no3",
+            "nppv",
+            "o2",
             "ph",
+            "phyc",
+            "po4",
+            "spco2",
             "time",
         ],
         multiple=True,
@@ -50,68 +62,68 @@ class nwshelf_analysisforecast_bgc(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_mod_nws_bgc-no3_anfc_7km-3D_P1D-m_202105":
-            if start is None:
-                start = "2019-05-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-pp_anfc_7km-3D_P1D-m_202105":
-            if start is None:
-                start = "2019-05-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-kd_anfc_7km-3D_P1D-m_202105":
-            if start is None:
-                start = "2019-05-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
-
         if layer == "cmems_mod_nws_bgc-spco2_anfc_7km-2D_P1D-m_202105":
             if start is None:
                 start = "2019-05-03T00:00:00Z"
 
             if end is None:
-                end = "2023-07-15T00:00:00Z"
+                end = "2023-07-31T00:00:00Z"
 
         if layer == "cmems_mod_nws_bgc-phyc_anfc_7km-3D_P1D-m_202105":
             if start is None:
                 start = "2019-05-03T00:00:00Z"
 
             if end is None:
-                end = "2023-07-15T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-o2_anfc_7km-3D_P1D-m_202105":
-            if start is None:
-                start = "2019-05-03T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-15T00:00:00Z"
+                end = "2023-07-31T00:00:00Z"
 
         if layer == "cmems_mod_nws_bgc-chl_anfc_7km-3D_P1D-m_202105":
             if start is None:
                 start = "2019-05-03T00:00:00Z"
 
             if end is None:
-                end = "2023-07-15T00:00:00Z"
+                end = "2023-07-31T00:00:00Z"
 
         if layer == "cmems_mod_nws_bgc-po4_anfc_7km-3D_P1D-m_202105":
             if start is None:
                 start = "2019-05-03T00:00:00Z"
 
             if end is None:
-                end = "2023-07-15T00:00:00Z"
+                end = "2023-07-31T00:00:00Z"
 
         if layer == "cmems_mod_nws_bgc-ph_anfc_7km-3D_P1D-m_202105":
             if start is None:
                 start = "2019-05-03T00:00:00Z"
 
             if end is None:
-                end = "2023-07-15T00:00:00Z"
+                end = "2023-07-31T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-pp_anfc_7km-3D_P1D-m_202105":
+            if start is None:
+                start = "2019-05-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-31T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-no3_anfc_7km-3D_P1D-m_202105":
+            if start is None:
+                start = "2019-05-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-31T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-kd_anfc_7km-3D_P1D-m_202105":
+            if start is None:
+                start = "2019-05-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-31T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-o2_anfc_7km-3D_P1D-m_202105":
+            if start is None:
+                start = "2019-05-03T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-31T00:00:00Z"
 
         super().__init__(
             layer=layer,

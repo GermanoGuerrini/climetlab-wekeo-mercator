@@ -19,6 +19,10 @@ class oceancolour_bal_bgc_l4_nrt(Main):
     name = "EO:MO:DAT:OCEANCOLOUR_BAL_BGC_L4_NRT_009_132"
     dataset = "EO:MO:DAT:OCEANCOLOUR_BAL_BGC_L4_NRT_009_132"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")

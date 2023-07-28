@@ -19,6 +19,10 @@ class oceancolour_atl_bgc_l4_nrt(Main):
     name = "EO:MO:DAT:OCEANCOLOUR_ATL_BGC_L4_NRT_009_116"
     dataset = "EO:MO:DAT:OCEANCOLOUR_ATL_BGC_L4_NRT_009_116"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
@@ -45,10 +49,10 @@ class oceancolour_atl_bgc_l4_nrt(Main):
     ):
         if layer == "cmems_obs-oc_atl_bgc-plankton_nrt_l4-gapfree-multi-1km_P1D_202207":
             if start is None:
-                start = "2023-06-29T02:08:09Z"
+                start = "2023-07-19T04:13:37Z"
 
             if end is None:
-                end = "2023-07-09T21:26:57Z"
+                end = "2023-07-26T20:45:46Z"
 
         super().__init__(
             layer=layer,

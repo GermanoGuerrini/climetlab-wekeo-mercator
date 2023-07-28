@@ -11,15 +11,19 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "dataset-topaz4-arc-myoceanv2-be",  # Arctic ocean physics analysis and forecast, 12.5km daily mean (dataset-topaz4-arc-myoceanv2-be)
     "cmems_mod_arc_phy_anfc_topaz4_P1M-m_202211",  # Arctic ocean physics analysis, 12.5km monthly mean
     "dataset-topaz4-arc-1hr-myoceanv2-be",  # Arctic ocean physics analysis and forecast, 12.5km hourly instantaneous surface fields
+    "dataset-topaz4-arc-myoceanv2-be",  # Arctic ocean physics analysis and forecast, 12.5km daily mean (dataset-topaz4-arc-myoceanv2-be)
 ]
 
 
 class arctic_analysis_forecast_phys(Main):
     name = "EO:MO:DAT:ARCTIC_ANALYSIS_FORECAST_PHYS_002_001_a"
     dataset = "EO:MO:DAT:ARCTIC_ANALYSIS_FORECAST_PHYS_002_001_a"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -28,11 +32,18 @@ class arctic_analysis_forecast_phys(Main):
     @normalize(
         "variables",
         [
+            "albedo",
+            "bsfd",
+            "btemp",
+            "depth",
             "fice",
+            "fy_age",
+            "fy_frac",
             "hice",
             "hsnow",
             "latitude",
             "longitude",
+            "mlp",
             "model_depth",
             "salinity",
             "ssh",
@@ -56,12 +67,12 @@ class arctic_analysis_forecast_phys(Main):
         end=None,
         variables=None,
     ):
-        if layer == "dataset-topaz4-arc-myoceanv2-be":
+        if layer == "dataset-topaz4-arc-1hr-myoceanv2-be":
             if start is None:
-                start = "2018-01-08T00:00:00Z"
+                start = "2018-01-01T00:00:00Z"
 
             if end is None:
-                end = "2023-07-10T00:00:00Z"
+                end = "2023-07-26T00:00:00Z"
 
         if layer == "cmems_mod_arc_phy_anfc_topaz4_P1M-m_202211":
             if start is None:
@@ -70,12 +81,12 @@ class arctic_analysis_forecast_phys(Main):
             if end is None:
                 end = "2023-06-28T00:00:00Z"
 
-        if layer == "dataset-topaz4-arc-1hr-myoceanv2-be":
+        if layer == "dataset-topaz4-arc-myoceanv2-be":
             if start is None:
-                start = "2018-01-01T00:00:00Z"
+                start = "2018-01-08T00:00:00Z"
 
             if end is None:
-                end = "2023-07-09T00:00:00Z"
+                end = "2023-07-26T00:00:00Z"
 
         super().__init__(
             layer=layer,

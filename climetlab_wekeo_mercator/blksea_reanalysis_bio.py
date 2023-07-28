@@ -11,27 +11,31 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "bs-ulg-co2-rean-d_202007",  # Surface partial pressure of co2 and surface co2 flux (2d) - daily mean
-    "bs-ulg-car-int-m_202105",  # Dissolved inorganic carbon, alkalinity, ph (3d) - daily mean
-    "bs-ulg-pft-rean-m_202007",  # Phytoplankton carbon biomass and chlorophyll (3d) - daily mean
-    "bs-ulg-bio-rean-m_202007",  # Net primary production, dissolved oxygen (3d), bottom dissolved oxygen (2d) - daily mean
-    "bs-ulg-bio-rean-d_202007",  # Net primary production, dissolved oxygen (3d), bottom dissolved oxygen (2d) - daily mean
-    "bs-ulg-car-rean-d_202007",  # Dissolved inorganic carbon, alkalinity, ph (3d) - daily mean
-    "bs-ulg-pft-int-m_202105",  # Phytoplankton carbon biomass and chlorophyll (3d) - daily mean
     "bs-ulg-bio-int-m_202105",  # Net primary production, dissolved oxygen (3d), bottom dissolved oxygen (2d) - daily mean
+    "bs-ulg-bio-rean-d_202007",  # Net primary production, dissolved oxygen (3d), bottom dissolved oxygen (2d) - daily mean
+    "bs-ulg-bio-rean-m_202007",  # Net primary production, dissolved oxygen (3d), bottom dissolved oxygen (2d) - daily mean
+    "bs-ulg-car-int-m_202105",  # Dissolved inorganic carbon, alkalinity, ph (3d) - daily mean
+    "bs-ulg-car-rean-d_202007",  # Dissolved inorganic carbon, alkalinity, ph (3d) - daily mean
     "bs-ulg-car-rean-m_202007",  # Dissolved inorganic carbon, alkalinity, ph (3d) - daily mean
-    "bs-ulg-co2-rean-m_202007",  # Surface partial pressure of co2 and surface co2 flux (2d) - daily mean
     "bs-ulg-co2-int-m_202105",  # Surface partial pressure of co2 and surface co2 flux (2d) - daily mean
-    "bs-ulg-nut-rean-d_202007",  # Nitrate and phosphate (3d) - daily mean
+    "bs-ulg-co2-rean-d_202007",  # Surface partial pressure of co2 and surface co2 flux (2d) - daily mean
+    "bs-ulg-co2-rean-m_202007",  # Surface partial pressure of co2 and surface co2 flux (2d) - daily mean
     "bs-ulg-nut-int-m_202105",  # Nitrate and phosphate (3d) - daily mean
-    "bs-ulg-pft-rean-d_202007",  # Phytoplankton carbon biomass and chlorophyll (3d) - daily mean
+    "bs-ulg-nut-rean-d_202007",  # Nitrate and phosphate (3d) - daily mean
     "bs-ulg-nut-rean-m_202007",  # Nitrate and phosphate (3d) - daily mean
+    "bs-ulg-pft-int-m_202105",  # Phytoplankton carbon biomass and chlorophyll (3d) - daily mean
+    "bs-ulg-pft-rean-d_202007",  # Phytoplankton carbon biomass and chlorophyll (3d) - daily mean
+    "bs-ulg-pft-rean-m_202007",  # Phytoplankton carbon biomass and chlorophyll (3d) - daily mean
 ]
 
 
 class blksea_reanalysis_bio(Main):
     name = "EO:MO:DAT:BLKSEA_REANALYSIS_BIO_007_005"
     dataset = "EO:MO:DAT:BLKSEA_REANALYSIS_BIO_007_005"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -40,11 +44,21 @@ class blksea_reanalysis_bio(Main):
     @normalize(
         "variables",
         [
+            "chl",
             "depth",
+            "dissic",
+            "fpco2",
             "latitude",
             "longitude",
             "no3",
+            "nppv",
+            "o2",
+            "o2b",
+            "ph",
+            "phyc",
             "po4",
+            "spco2",
+            "talk",
             "time",
         ],
         multiple=True,
@@ -57,20 +71,6 @@ class blksea_reanalysis_bio(Main):
         end=None,
         variables=None,
     ):
-        if layer == "bs-ulg-co2-rean-d_202007":
-            if start is None:
-                start = "2020-05-19T00:00:00Z"
-
-            if end is None:
-                end = "2022-03-30T00:00:00Z"
-
-        if layer == "bs-ulg-car-int-m_202105":
-            if start is None:
-                start = "2021-03-26T00:00:00Z"
-
-            if end is None:
-                end = "2023-06-13T00:00:00Z"
-
         if layer == "bs-ulg-pft-rean-m_202007":
             if start is None:
                 start = "2020-05-19T00:00:00Z"
@@ -78,14 +78,28 @@ class blksea_reanalysis_bio(Main):
             if end is None:
                 end = "2022-03-30T00:00:00Z"
 
-        if layer == "bs-ulg-bio-rean-m_202007":
+        if layer == "bs-ulg-pft-int-m_202105":
+            if start is None:
+                start = "2021-03-26T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-14T00:00:00Z"
+
+        if layer == "bs-ulg-pft-rean-d_202007":
             if start is None:
                 start = "2020-05-19T00:00:00Z"
 
             if end is None:
                 end = "2022-03-30T00:00:00Z"
 
-        if layer == "bs-ulg-bio-rean-d_202007":
+        if layer == "bs-ulg-co2-int-m_202105":
+            if start is None:
+                start = "2021-03-26T00:00:00Z"
+
+            if end is None:
+                end = "2023-07-14T00:00:00Z"
+
+        if layer == "bs-ulg-nut-rean-m_202007":
             if start is None:
                 start = "2020-05-19T00:00:00Z"
 
@@ -99,21 +113,21 @@ class blksea_reanalysis_bio(Main):
             if end is None:
                 end = "2022-03-30T00:00:00Z"
 
-        if layer == "bs-ulg-pft-int-m_202105":
+        if layer == "bs-ulg-car-int-m_202105":
             if start is None:
                 start = "2021-03-26T00:00:00Z"
 
             if end is None:
-                end = "2023-06-13T00:00:00Z"
+                end = "2023-07-14T00:00:00Z"
 
         if layer == "bs-ulg-bio-int-m_202105":
             if start is None:
                 start = "2021-03-26T00:00:00Z"
 
             if end is None:
-                end = "2023-06-13T00:00:00Z"
+                end = "2023-07-14T00:00:00Z"
 
-        if layer == "bs-ulg-car-rean-m_202007":
+        if layer == "bs-ulg-bio-rean-m_202007":
             if start is None:
                 start = "2020-05-19T00:00:00Z"
 
@@ -127,14 +141,14 @@ class blksea_reanalysis_bio(Main):
             if end is None:
                 end = "2022-03-30T00:00:00Z"
 
-        if layer == "bs-ulg-co2-int-m_202105":
+        if layer == "bs-ulg-nut-rean-d_202007":
             if start is None:
-                start = "2021-03-26T00:00:00Z"
+                start = "2020-05-19T00:00:00Z"
 
             if end is None:
-                end = "2023-06-13T00:00:00Z"
+                end = "2022-03-30T00:00:00Z"
 
-        if layer == "bs-ulg-nut-rean-d_202007":
+        if layer == "bs-ulg-bio-rean-d_202007":
             if start is None:
                 start = "2020-05-19T00:00:00Z"
 
@@ -146,16 +160,16 @@ class blksea_reanalysis_bio(Main):
                 start = "2021-03-26T00:00:00Z"
 
             if end is None:
-                end = "2023-06-13T00:00:00Z"
+                end = "2023-07-14T00:00:00Z"
 
-        if layer == "bs-ulg-pft-rean-d_202007":
+        if layer == "bs-ulg-co2-rean-d_202007":
             if start is None:
                 start = "2020-05-19T00:00:00Z"
 
             if end is None:
                 end = "2022-03-30T00:00:00Z"
 
-        if layer == "bs-ulg-nut-rean-m_202007":
+        if layer == "bs-ulg-car-rean-m_202007":
             if start is None:
                 start = "2020-05-19T00:00:00Z"
 

@@ -19,6 +19,10 @@ class sealevel_glo_phy_mdt(Main):
     name = "EO:MO:DAT:SEALEVEL_GLO_PHY_MDT_008_063"
     dataset = "EO:MO:DAT:SEALEVEL_GLO_PHY_MDT_008_063"
 
+    string_selects = [
+        "variables",
+    ]
+
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")

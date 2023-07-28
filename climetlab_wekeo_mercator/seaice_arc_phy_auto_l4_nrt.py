@@ -11,15 +11,19 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs-si_arc_phy_nrt_l3_P1D_202211",  # Dmi-asip sea ice classification
-    "cmems_obs-si_arc_phy-siconc_nrt_L4-auto_P1D_202105",  # High resolution sea ice concentration
     "cmems_obs-si_arc_phy-icetype_nrt_L4-auto_P1D_202105",  # High resolution sea ice type
+    "cmems_obs-si_arc_phy-siconc_nrt_L4-auto_P1D_202105",  # High resolution sea ice concentration
+    "cmems_obs-si_arc_phy_nrt_l3_P1D_202211",  # Dmi-asip sea ice classification
 ]
 
 
 class seaice_arc_phy_auto_l4_nrt(Main):
     name = "EO:MO:DAT:SEAICE_ARC_PHY_AUTO_L4_NRT_011_015"
     dataset = "EO:MO:DAT:SEAICE_ARC_PHY_AUTO_L4_NRT_011_015"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -28,13 +32,19 @@ class seaice_arc_phy_auto_l4_nrt(Main):
     @normalize(
         "variables",
         [
+            "acq_time",
+            "conc",
             "confidence",
             "crs",
+            "ice_concentration",
             "ice_type",
             "lat",
             "lon",
+            "status_flag",
             "time",
+            "x",
             "xc",
+            "y",
             "yc",
         ],
         multiple=True,
@@ -47,26 +57,26 @@ class seaice_arc_phy_auto_l4_nrt(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_obs-si_arc_phy_nrt_l3_P1D_202211":
-            if start is None:
-                start = "2021-03-01T07:01:33Z"
-
-            if end is None:
-                end = "2023-07-09T20:01:25Z"
-
         if layer == "cmems_obs-si_arc_phy-siconc_nrt_L4-auto_P1D_202105":
             if start is None:
                 start = "2020-12-01T00:00:00Z"
 
             if end is None:
-                end = "2023-07-10T12:00:00Z"
+                end = "2023-07-27T12:00:00Z"
 
         if layer == "cmems_obs-si_arc_phy-icetype_nrt_L4-auto_P1D_202105":
             if start is None:
                 start = "2021-01-01T01:00:00Z"
 
             if end is None:
-                end = "2023-07-10T12:00:00Z"
+                end = "2023-07-21T12:00:00Z"
+
+        if layer == "cmems_obs-si_arc_phy_nrt_l3_P1D_202211":
+            if start is None:
+                start = "2021-03-01T07:01:33Z"
+
+            if end is None:
+                end = "2023-07-26T19:57:50Z"
 
         super().__init__(
             layer=layer,

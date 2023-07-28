@@ -11,51 +11,55 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_mod_nws_bgc-pp_my_7km-3D_P1M-m_202012",  # Monthly-mean net primary production (3d)
-    "cmems_mod_nws_bgc-pft_my_7km-3D-dino_P1M-m_202012",  # Monthly-mean chlorophyll concentration in dinoflagellates (3d)
-    "cmems_mod_nws_bgc-no3_my_7km-3D_P1D-m_202012",  # Daily-mean nitrate (3d)
-    "cmems_mod_nws_bgc-o2_my_7km-3D_P1D-m_202012",  # Daily-mean dissolved oxygen (3d)
-    "cmems_mod_nws_bgc-pft_my_7km-3D-nano_P1M-m_202012",  # Monthly-mean chlorophyll concentration in nanophytoplankton (3d)
-    "cmems_mod_nws_bgc-pft_myint_7km-3D-nano_P1M-m_202105",  # Monthly-mean chlorophyll concentration in nanophytoplankton (3d)
-    "cmems_mod_nws_bgc-pp_myint_7km-3D_P1M-m_202105",  # Monthly-mean net primary production (3d)
-    "cmems_mod_nws_bgc-o2_my_7km-3D_P1M-m_202012",  # Monthly-mean dissolved oxygen (3d)
     "cmems_mod_nws_bgc-chl_my_7km-3D_P1D-m_202012",  # Daily-mean chlorophyll concentration (3d)
-    "cmems_mod_nws_bgc-no3_myint_7km-3D_P1M-m_202105",  # Monthly-mean nitrate (3d)
-    "cmems_mod_nws_bgc-pft_myint_7km-3D-diato_P1M-m_202105",  # Monthly-mean chlorophyll concentration in diatoms (3d)
-    "cmems_mod_nws_bgc-spco2_my_7km-2D_P1M-m_202012",  # Monthly-mean spco2 (2d)
-    "cmems_mod_nws_bgc-spco2_my_7km-2D_P1D-m_202012",  # Daily-mean spco2 (2d)
-    "cmems_mod_nws_bgc-po4_myint_7km-3D_P1M-m_202105",  # Monthly-mean phosphate (3d)
-    "cmems_mod_nws_bgc-pft_my_7km-3D-pico_P1M-m_202012",  # Monthly-mean chlorophyll concentration in picophytoplankton (3d)
-    "cmems_mod_nws_bgc-kd_my_7km-3D_P1D-m_202012",  # Daily-mean attenuation coefficient (3d)
-    "cmems_mod_nws_bgc-po4_my_7km-3D_P1M-m_202012",  # Monthly-mean phosphate (3d)
-    "cmems_mod_nws_bgc-kd_myint_7km-3D_P1M-m_202105",  # Monthly-mean attenuation coefficient (3d)
-    "cmems_mod_nws_bgc-ph_my_7km-3D_P1M-m_202012",  # Monthly-mean ph (3d)
-    "cmems_mod_nws_bgc-phyc_my_7km-3D_P1D-m_202012",  # Daily-mean phytoplankton (3d)
-    "cmems_mod_nws_bgc-pft_myint_7km-3D-dino_P1M-m_202105",  # Monthly-mean chlorophyll concentration in dinoflagellates (3d)
-    "cmems_mod_nws_bgc-pft_my_7km-3D-diato_P1M-m_202012",  # Monthly-mean chlorophyll concentration in diatoms (3d)
-    "cmems_mod_nws_bgc-spco2_myint_7km-2D_P1M-m_202105",  # Monthly-mean spco2 (2d)
-    "cmems_mod_nws_bgc-pft_my_7km-3D-pico_P1D-m_202012",  # Daily-mean chlorophyll concentration in picophytoplankton (3d)
-    "cmems_mod_nws_bgc-phyc_myint_7km-3D_P1M-m_202105",  # Monthly-mean phytoplankton (3d)
-    "cmems_mod_nws_bgc-no3_my_7km-3D_P1M-m_202012",  # Monthly-mean nitrate (3d)
-    "cmems_mod_nws_bgc-pft_my_7km-3D-nano_P1D-m_202012",  # Daily-mean chlorophyll concentration in nanophytoplankton (3d)
-    "cmems_mod_nws_bgc-kd_my_7km-3D_P1M-m_202012",  # Monthly-mean attenuation coefficient (3d)
-    "cmems_mod_nws_bgc-chl_myint_7km-3D_P1M-m_202105",  # Monthly-mean chlorophyll concentration (3d)
-    "cmems_mod_nws_bgc-pp_my_7km-3D_P1D-m_202012",  # Daily-mean net primary production (3d)
-    "cmems_mod_nws_bgc-pft_myint_7km-3D-pico_P1M-m_202105",  # Monthly-mean chlorophyll concentration in picophytoplankton (3d)
     "cmems_mod_nws_bgc-chl_my_7km-3D_P1M-m_202012",  # Monthly-mean chlorophyll concentration (3d)
+    "cmems_mod_nws_bgc-chl_myint_7km-3D_P1M-m_202105",  # Monthly-mean chlorophyll concentration (3d)
+    "cmems_mod_nws_bgc-kd_my_7km-3D_P1D-m_202012",  # Daily-mean attenuation coefficient (3d)
+    "cmems_mod_nws_bgc-kd_my_7km-3D_P1M-m_202012",  # Monthly-mean attenuation coefficient (3d)
+    "cmems_mod_nws_bgc-kd_myint_7km-3D_P1M-m_202105",  # Monthly-mean attenuation coefficient (3d)
+    "cmems_mod_nws_bgc-no3_my_7km-3D_P1D-m_202012",  # Daily-mean nitrate (3d)
+    "cmems_mod_nws_bgc-no3_my_7km-3D_P1M-m_202012",  # Monthly-mean nitrate (3d)
+    "cmems_mod_nws_bgc-no3_myint_7km-3D_P1M-m_202105",  # Monthly-mean nitrate (3d)
+    "cmems_mod_nws_bgc-o2_my_7km-3D_P1D-m_202012",  # Daily-mean dissolved oxygen (3d)
+    "cmems_mod_nws_bgc-o2_my_7km-3D_P1M-m_202012",  # Monthly-mean dissolved oxygen (3d)
     "cmems_mod_nws_bgc-o2_myint_7km-3D_P1M-m_202105",  # Monthly-mean dissolved oxygen (3d)
     "cmems_mod_nws_bgc-pft_my_7km-3D-diato_P1D-m_202012",  # Daily-mean chlorophyll concentration in diatoms (3d)
-    "cmems_mod_nws_bgc-ph_myint_7km-3D_P1M-m_202105",  # Monthly-mean ph (3d)
+    "cmems_mod_nws_bgc-pft_my_7km-3D-diato_P1M-m_202012",  # Monthly-mean chlorophyll concentration in diatoms (3d)
     "cmems_mod_nws_bgc-pft_my_7km-3D-dino_P1D-m_202012",  # Daily-mean chlorophyll concentration in dinoflagellates (3d)
+    "cmems_mod_nws_bgc-pft_my_7km-3D-dino_P1M-m_202012",  # Monthly-mean chlorophyll concentration in dinoflagellates (3d)
+    "cmems_mod_nws_bgc-pft_my_7km-3D-nano_P1D-m_202012",  # Daily-mean chlorophyll concentration in nanophytoplankton (3d)
+    "cmems_mod_nws_bgc-pft_my_7km-3D-nano_P1M-m_202012",  # Monthly-mean chlorophyll concentration in nanophytoplankton (3d)
+    "cmems_mod_nws_bgc-pft_my_7km-3D-pico_P1D-m_202012",  # Daily-mean chlorophyll concentration in picophytoplankton (3d)
+    "cmems_mod_nws_bgc-pft_my_7km-3D-pico_P1M-m_202012",  # Monthly-mean chlorophyll concentration in picophytoplankton (3d)
+    "cmems_mod_nws_bgc-pft_myint_7km-3D-diato_P1M-m_202105",  # Monthly-mean chlorophyll concentration in diatoms (3d)
+    "cmems_mod_nws_bgc-pft_myint_7km-3D-dino_P1M-m_202105",  # Monthly-mean chlorophyll concentration in dinoflagellates (3d)
+    "cmems_mod_nws_bgc-pft_myint_7km-3D-nano_P1M-m_202105",  # Monthly-mean chlorophyll concentration in nanophytoplankton (3d)
+    "cmems_mod_nws_bgc-pft_myint_7km-3D-pico_P1M-m_202105",  # Monthly-mean chlorophyll concentration in picophytoplankton (3d)
     "cmems_mod_nws_bgc-ph_my_7km-3D_P1D-m_202012",  # Daily-mean ph (3d)
+    "cmems_mod_nws_bgc-ph_my_7km-3D_P1M-m_202012",  # Monthly-mean ph (3d)
+    "cmems_mod_nws_bgc-ph_myint_7km-3D_P1M-m_202105",  # Monthly-mean ph (3d)
+    "cmems_mod_nws_bgc-phyc_my_7km-3D_P1D-m_202012",  # Daily-mean phytoplankton (3d)
     "cmems_mod_nws_bgc-phyc_my_7km-3D_P1M-m_202012",  # Monthly-mean phytoplankton (3d)
+    "cmems_mod_nws_bgc-phyc_myint_7km-3D_P1M-m_202105",  # Monthly-mean phytoplankton (3d)
     "cmems_mod_nws_bgc-po4_my_7km-3D_P1D-m_202012",  # Daily-mean phosphate (3d)
+    "cmems_mod_nws_bgc-po4_my_7km-3D_P1M-m_202012",  # Monthly-mean phosphate (3d)
+    "cmems_mod_nws_bgc-po4_myint_7km-3D_P1M-m_202105",  # Monthly-mean phosphate (3d)
+    "cmems_mod_nws_bgc-pp_my_7km-3D_P1D-m_202012",  # Daily-mean net primary production (3d)
+    "cmems_mod_nws_bgc-pp_my_7km-3D_P1M-m_202012",  # Monthly-mean net primary production (3d)
+    "cmems_mod_nws_bgc-pp_myint_7km-3D_P1M-m_202105",  # Monthly-mean net primary production (3d)
+    "cmems_mod_nws_bgc-spco2_my_7km-2D_P1D-m_202012",  # Daily-mean spco2 (2d)
+    "cmems_mod_nws_bgc-spco2_my_7km-2D_P1M-m_202012",  # Monthly-mean spco2 (2d)
+    "cmems_mod_nws_bgc-spco2_myint_7km-2D_P1M-m_202105",  # Monthly-mean spco2 (2d)
 ]
 
 
 class nwshelf_multiyear_bgc(Main):
     name = "EO:MO:DAT:NWSHELF_MULTIYEAR_BGC_004_011"
     dataset = "EO:MO:DAT:NWSHELF_MULTIYEAR_BGC_004_011"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -64,10 +68,22 @@ class nwshelf_multiyear_bgc(Main):
     @normalize(
         "variables",
         [
+            "attn",
+            "chl",
             "depth",
+            "diato",
+            "dino",
             "latitude",
             "longitude",
+            "nano",
+            "no3",
+            "nppv",
+            "o2",
+            "ph",
+            "phyc",
+            "pico",
             "po4",
+            "spco2",
             "time",
         ],
         multiple=True,
@@ -80,138 +96,12 @@ class nwshelf_multiyear_bgc(Main):
         end=None,
         variables=None,
     ):
-        if layer == "cmems_mod_nws_bgc-pp_my_7km-3D_P1M-m_202012":
-            if start is None:
-                start = "2020-12-01T00:00:00Z"
-
-            if end is None:
-                end = "2020-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-pft_my_7km-3D-dino_P1M-m_202012":
-            if start is None:
-                start = "2020-12-01T00:00:00Z"
-
-            if end is None:
-                end = "2020-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-no3_my_7km-3D_P1D-m_202012":
+        if layer == "cmems_mod_nws_bgc-po4_my_7km-3D_P1D-m_202012":
             if start is None:
                 start = "0001-01-01T00:00:00Z"
 
             if end is None:
                 end = "9991-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-o2_my_7km-3D_P1D-m_202012":
-            if start is None:
-                start = "0001-01-01T00:00:00Z"
-
-            if end is None:
-                end = "9991-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-pft_my_7km-3D-nano_P1M-m_202012":
-            if start is None:
-                start = "2020-12-01T00:00:00Z"
-
-            if end is None:
-                end = "2020-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-pft_myint_7km-3D-nano_P1M-m_202105":
-            if start is None:
-                start = "2021-05-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-04-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-pp_myint_7km-3D_P1M-m_202105":
-            if start is None:
-                start = "2021-05-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-04-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-o2_my_7km-3D_P1M-m_202012":
-            if start is None:
-                start = "2020-12-01T00:00:00Z"
-
-            if end is None:
-                end = "2020-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-chl_my_7km-3D_P1D-m_202012":
-            if start is None:
-                start = "0001-01-01T00:00:00Z"
-
-            if end is None:
-                end = "9991-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-no3_myint_7km-3D_P1M-m_202105":
-            if start is None:
-                start = "2021-05-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-04-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-pft_myint_7km-3D-diato_P1M-m_202105":
-            if start is None:
-                start = "2021-05-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-04-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-spco2_my_7km-2D_P1M-m_202012":
-            if start is None:
-                start = "2020-12-01T00:00:00Z"
-
-            if end is None:
-                end = "2020-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-spco2_my_7km-2D_P1D-m_202012":
-            if start is None:
-                start = "0001-01-01T00:00:00Z"
-
-            if end is None:
-                end = "9991-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-po4_myint_7km-3D_P1M-m_202105":
-            if start is None:
-                start = "2021-05-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-04-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-pft_my_7km-3D-pico_P1M-m_202012":
-            if start is None:
-                start = "2020-12-01T00:00:00Z"
-
-            if end is None:
-                end = "2020-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-kd_my_7km-3D_P1D-m_202012":
-            if start is None:
-                start = "0001-01-01T00:00:00Z"
-
-            if end is None:
-                end = "9991-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-po4_my_7km-3D_P1M-m_202012":
-            if start is None:
-                start = "2020-12-01T00:00:00Z"
-
-            if end is None:
-                end = "2020-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-kd_myint_7km-3D_P1M-m_202105":
-            if start is None:
-                start = "2021-05-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-04-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-ph_my_7km-3D_P1M-m_202012":
-            if start is None:
-                start = "2020-12-01T00:00:00Z"
-
-            if end is None:
-                end = "2020-12-28T00:00:00Z"
 
         if layer == "cmems_mod_nws_bgc-phyc_my_7km-3D_P1D-m_202012":
             if start is None:
@@ -220,28 +110,35 @@ class nwshelf_multiyear_bgc(Main):
             if end is None:
                 end = "9991-12-28T00:00:00Z"
 
-        if layer == "cmems_mod_nws_bgc-pft_myint_7km-3D-dino_P1M-m_202105":
+        if layer == "cmems_mod_nws_bgc-o2_my_7km-3D_P1M-m_202012":
             if start is None:
-                start = "2021-05-01T00:00:00Z"
+                start = "2020-12-01T00:00:00Z"
 
             if end is None:
-                end = "2023-04-28T00:00:00Z"
+                end = "2022-12-28T00:00:00Z"
 
         if layer == "cmems_mod_nws_bgc-pft_my_7km-3D-diato_P1M-m_202012":
             if start is None:
                 start = "2020-12-01T00:00:00Z"
 
             if end is None:
-                end = "2020-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-spco2_myint_7km-2D_P1M-m_202105":
-            if start is None:
-                start = "2021-05-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-04-28T00:00:00Z"
+                end = "2022-12-28T00:00:00Z"
 
         if layer == "cmems_mod_nws_bgc-pft_my_7km-3D-pico_P1D-m_202012":
+            if start is None:
+                start = "0001-01-01T00:00:00Z"
+
+            if end is None:
+                end = "9991-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-pft_my_7km-3D-dino_P1D-m_202012":
+            if start is None:
+                start = "0001-01-01T00:00:00Z"
+
+            if end is None:
+                end = "9991-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-chl_my_7km-3D_P1D-m_202012":
             if start is None:
                 start = "0001-01-01T00:00:00Z"
 
@@ -253,35 +150,14 @@ class nwshelf_multiyear_bgc(Main):
                 start = "2021-05-01T00:00:00Z"
 
             if end is None:
-                end = "2023-04-28T00:00:00Z"
+                end = "2023-05-28T00:00:00Z"
 
-        if layer == "cmems_mod_nws_bgc-no3_my_7km-3D_P1M-m_202012":
-            if start is None:
-                start = "2020-12-01T00:00:00Z"
-
-            if end is None:
-                end = "2020-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-pft_my_7km-3D-nano_P1D-m_202012":
-            if start is None:
-                start = "0001-01-01T00:00:00Z"
-
-            if end is None:
-                end = "9991-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-kd_my_7km-3D_P1M-m_202012":
-            if start is None:
-                start = "2020-12-01T00:00:00Z"
-
-            if end is None:
-                end = "2020-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-chl_myint_7km-3D_P1M-m_202105":
+        if layer == "cmems_mod_nws_bgc-po4_myint_7km-3D_P1M-m_202105":
             if start is None:
                 start = "2021-05-01T00:00:00Z"
 
             if end is None:
-                end = "2023-04-28T00:00:00Z"
+                end = "2023-05-28T00:00:00Z"
 
         if layer == "cmems_mod_nws_bgc-pp_my_7km-3D_P1D-m_202012":
             if start is None:
@@ -290,28 +166,21 @@ class nwshelf_multiyear_bgc(Main):
             if end is None:
                 end = "9991-12-28T00:00:00Z"
 
-        if layer == "cmems_mod_nws_bgc-pft_myint_7km-3D-pico_P1M-m_202105":
-            if start is None:
-                start = "2021-05-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-04-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-chl_my_7km-3D_P1M-m_202012":
+        if layer == "cmems_mod_nws_bgc-ph_my_7km-3D_P1M-m_202012":
             if start is None:
                 start = "2020-12-01T00:00:00Z"
 
             if end is None:
-                end = "2020-12-28T00:00:00Z"
+                end = "2022-12-28T00:00:00Z"
 
-        if layer == "cmems_mod_nws_bgc-o2_myint_7km-3D_P1M-m_202105":
+        if layer == "cmems_mod_nws_bgc-no3_myint_7km-3D_P1M-m_202105":
             if start is None:
                 start = "2021-05-01T00:00:00Z"
 
             if end is None:
-                end = "2023-04-28T00:00:00Z"
+                end = "2023-05-28T00:00:00Z"
 
-        if layer == "cmems_mod_nws_bgc-pft_my_7km-3D-diato_P1D-m_202012":
+        if layer == "cmems_mod_nws_bgc-no3_my_7km-3D_P1D-m_202012":
             if start is None:
                 start = "0001-01-01T00:00:00Z"
 
@@ -323,14 +192,119 @@ class nwshelf_multiyear_bgc(Main):
                 start = "2021-05-01T00:00:00Z"
 
             if end is None:
-                end = "2023-04-28T00:00:00Z"
+                end = "2023-05-28T00:00:00Z"
 
-        if layer == "cmems_mod_nws_bgc-pft_my_7km-3D-dino_P1D-m_202012":
+        if layer == "cmems_mod_nws_bgc-pft_my_7km-3D-nano_P1D-m_202012":
             if start is None:
                 start = "0001-01-01T00:00:00Z"
 
             if end is None:
                 end = "9991-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-pft_myint_7km-3D-nano_P1M-m_202105":
+            if start is None:
+                start = "2021-05-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-05-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-pft_my_7km-3D-nano_P1M-m_202012":
+            if start is None:
+                start = "2020-12-01T00:00:00Z"
+
+            if end is None:
+                end = "2022-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-pp_myint_7km-3D_P1M-m_202105":
+            if start is None:
+                start = "2021-05-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-05-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-o2_my_7km-3D_P1D-m_202012":
+            if start is None:
+                start = "0001-01-01T00:00:00Z"
+
+            if end is None:
+                end = "9991-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-chl_myint_7km-3D_P1M-m_202105":
+            if start is None:
+                start = "2021-05-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-05-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-chl_my_7km-3D_P1M-m_202012":
+            if start is None:
+                start = "2020-12-01T00:00:00Z"
+
+            if end is None:
+                end = "2022-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-pp_my_7km-3D_P1M-m_202012":
+            if start is None:
+                start = "2020-12-01T00:00:00Z"
+
+            if end is None:
+                end = "2022-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-spco2_my_7km-2D_P1D-m_202012":
+            if start is None:
+                start = "0001-01-01T00:00:00Z"
+
+            if end is None:
+                end = "9991-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-pft_myint_7km-3D-pico_P1M-m_202105":
+            if start is None:
+                start = "2021-05-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-05-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-o2_myint_7km-3D_P1M-m_202105":
+            if start is None:
+                start = "2021-05-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-05-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-pft_my_7km-3D-diato_P1D-m_202012":
+            if start is None:
+                start = "0001-01-01T00:00:00Z"
+
+            if end is None:
+                end = "9991-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-po4_my_7km-3D_P1M-m_202012":
+            if start is None:
+                start = "2020-12-01T00:00:00Z"
+
+            if end is None:
+                end = "2022-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-kd_my_7km-3D_P1M-m_202012":
+            if start is None:
+                start = "2020-12-01T00:00:00Z"
+
+            if end is None:
+                end = "2022-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-pft_my_7km-3D-dino_P1M-m_202012":
+            if start is None:
+                start = "2020-12-01T00:00:00Z"
+
+            if end is None:
+                end = "2022-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-spco2_myint_7km-2D_P1M-m_202105":
+            if start is None:
+                start = "2021-05-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-05-28T00:00:00Z"
 
         if layer == "cmems_mod_nws_bgc-ph_my_7km-3D_P1D-m_202012":
             if start is None:
@@ -339,19 +313,61 @@ class nwshelf_multiyear_bgc(Main):
             if end is None:
                 end = "9991-12-28T00:00:00Z"
 
-        if layer == "cmems_mod_nws_bgc-phyc_my_7km-3D_P1M-m_202012":
-            if start is None:
-                start = "2020-12-01T00:00:00Z"
-
-            if end is None:
-                end = "2020-12-28T00:00:00Z"
-
-        if layer == "cmems_mod_nws_bgc-po4_my_7km-3D_P1D-m_202012":
+        if layer == "cmems_mod_nws_bgc-kd_my_7km-3D_P1D-m_202012":
             if start is None:
                 start = "0001-01-01T00:00:00Z"
 
             if end is None:
                 end = "9991-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-spco2_my_7km-2D_P1M-m_202012":
+            if start is None:
+                start = "2020-12-01T00:00:00Z"
+
+            if end is None:
+                end = "2022-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-phyc_my_7km-3D_P1M-m_202012":
+            if start is None:
+                start = "2020-12-01T00:00:00Z"
+
+            if end is None:
+                end = "2022-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-pft_myint_7km-3D-diato_P1M-m_202105":
+            if start is None:
+                start = "2021-05-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-05-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-kd_myint_7km-3D_P1M-m_202105":
+            if start is None:
+                start = "2021-05-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-05-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-pft_my_7km-3D-pico_P1M-m_202012":
+            if start is None:
+                start = "2020-12-01T00:00:00Z"
+
+            if end is None:
+                end = "2022-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-no3_my_7km-3D_P1M-m_202012":
+            if start is None:
+                start = "2020-12-01T00:00:00Z"
+
+            if end is None:
+                end = "2022-12-28T00:00:00Z"
+
+        if layer == "cmems_mod_nws_bgc-pft_myint_7km-3D-dino_P1M-m_202105":
+            if start is None:
+                start = "2021-05-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-05-28T00:00:00Z"
 
         super().__init__(
             layer=layer,

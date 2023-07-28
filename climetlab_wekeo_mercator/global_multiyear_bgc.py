@@ -11,14 +11,18 @@ from climetlab.decorators import normalize
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_mod_glo_bgc_my_0.25_P1M-m_202112",  # Monthly mean fields for product global reanalysis bio 001 029
     "cmems_mod_glo_bgc_my_0.25_P1D-m_202112",  # Daily mean fields for product global reanalysis bio 001 029
+    "cmems_mod_glo_bgc_my_0.25_P1M-m_202112",  # Monthly mean fields for product global reanalysis bio 001 029
 ]
 
 
 class global_multiyear_bgc(Main):
     name = "EO:MO:DAT:GLOBAL_MULTIYEAR_BGC_001_029"
     dataset = "EO:MO:DAT:GLOBAL_MULTIYEAR_BGC_001_029"
+
+    string_selects = [
+        "variables",
+    ]
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
@@ -29,13 +33,17 @@ class global_multiyear_bgc(Main):
         [
             "chl",
             "depth",
+            "fe",
             "latitude",
             "longitude",
             "no3",
             "nppv",
             "o2",
+            "ph",
+            "phyc",
             "po4",
             "si",
+            "spco2",
             "time",
         ],
         multiple=True,
