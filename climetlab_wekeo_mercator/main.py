@@ -83,6 +83,9 @@ class Main(Dataset):
         return array
 
     def to_xarray(self, **kwargs):
+        if self._xarray is not None:
+            return self._xarray
+
         options = dict()
         options.update(self.default_options["xarray_open_dataset_kwargs"])
         options.update(kwargs.get("xarray_open_dataset_kwargs", {}))
@@ -94,8 +97,10 @@ class Main(Dataset):
             datasets = self.pre_concat(datasets)
             array = xr.concat(datasets, dim="time")
             array = self.post_concat(datasets, array)
-            return array
+            self._xarray = array
+            return self._xarray
         except AttributeError:
             # Single file
-            return super().to_xarray(**options)
+            self._xarray = super().to_xarray(**options)
+            return self._xarray
 
