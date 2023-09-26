@@ -6,14 +6,15 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_mod_glo_phy_my_0.083-climatology_P1M-m_202112",  # cmems_mod_glo_phy_my_0.083-climatology_P1M-m_202112
-    "cmems_mod_glo_phy_my_0.083_P1D-m_202112",  # Daily mean fields from global ocean physics analysis and forecast updated daily
-    "cmems_mod_glo_phy_my_0.083_P1M-m_202112",  # Monthly mean fields for product global reanalysis phy 001 030
+    "cmems_mod_glo_phy_my_0.083-climatology_P1M-m_202112",  # noqa: E501 cmems_mod_glo_phy_my_0.083-climatology_P1M-m_202112
+    "cmems_mod_glo_phy_my_0.083_P1D-m_202112",  # noqa: E501 Daily mean fields from global ocean physics analysis and forecast updated daily
+    "cmems_mod_glo_phy_my_0.083_P1M-m_202112",  # noqa: E501 Monthly mean fields for product global reanalysis phy 001 030
 ]
 
 
@@ -27,8 +28,6 @@ class global_multiyear_phy(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -50,14 +49,23 @@ class global_multiyear_phy(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer,
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
+        if layer == "cmems_mod_glo_phy_my_0.083_P1D-m_202112":
+            if start is None:
+                start = "1993-01-01T00:00:00Z"
+
+            if end is None:
+                end = "2020-12-31T00:00:00Z"
+
         if layer == "cmems_mod_glo_phy_my_0.083-climatology_P1M-m_202112":
             if start is None:
                 start = "2021-12-01T00:00:00Z"
@@ -72,17 +80,10 @@ class global_multiyear_phy(Main):
             if end is None:
                 end = "2021-12-28T00:00:00Z"
 
-        if layer == "cmems_mod_glo_phy_my_0.083_P1D-m_202112":
-            if start is None:
-                start = "1993-01-01T00:00:00Z"
-
-            if end is None:
-                end = "2020-12-31T00:00:00Z"
-
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

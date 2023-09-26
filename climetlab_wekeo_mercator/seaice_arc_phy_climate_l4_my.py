@@ -6,12 +6,13 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs_si_arc_phy_my_L4-DMIOI_P1D-m_202105",  # Arctic sea and ice surface temperature, l4, 5km daily reprocessed sst and ist
+    "cmems_obs_si_arc_phy_my_L4-DMIOI_P1D-m_202105",  # noqa: E501 Arctic sea and ice surface temperature, l4, 5km daily reprocessed sst and ist
 ]
 
 
@@ -25,8 +26,6 @@ class seaice_arc_phy_climate_l4_my(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -44,13 +43,15 @@ class seaice_arc_phy_climate_l4_my(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer="cmems_obs_si_arc_phy_my_L4-DMIOI_P1D-m_202105",
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
         if layer == "cmems_obs_si_arc_phy_my_L4-DMIOI_P1D-m_202105":
             if start is None:
@@ -62,7 +63,7 @@ class seaice_arc_phy_climate_l4_my(Main):
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

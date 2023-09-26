@@ -6,12 +6,13 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "med-hcmr-wav-an-fc-h_202105",  # Wave fields (2d) - hourly instantaneous
+    "med-hcmr-wav-an-fc-h_202105",  # noqa: E501 Wave fields (2d) - hourly instantaneous
 ]
 
 
@@ -25,8 +26,6 @@ class medsea_analysisforecast_wav(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -53,25 +52,27 @@ class medsea_analysisforecast_wav(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer="med-hcmr-wav-an-fc-h_202105",
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
         if layer == "med-hcmr-wav-an-fc-h_202105":
             if start is None:
-                start = "2021-07-27T00:00:00Z"
+                start = "2021-09-25T00:00:00Z"
 
             if end is None:
-                end = "2023-07-26T00:00:00Z"
+                end = "2023-09-25T00:00:00Z"
 
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

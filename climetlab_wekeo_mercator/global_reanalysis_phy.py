@@ -6,14 +6,15 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "global-reanalysis-phy-001-026-grepv1-ice-monthly_202003",  # Monthly mean from reanalyses
-    "global-reanalysis-phy-001-026-grepv1-monthly_202003",  # Monthly mean from reanalyses
-    "global-reanalysis-phy-001-026-grepv1-uv-monthly_202003",  # Monthly mean from reanalyses
+    "global-reanalysis-phy-001-026-grepv1-ice-monthly_202003",  # noqa: E501 Monthly mean from reanalyses
+    "global-reanalysis-phy-001-026-grepv1-monthly_202003",  # noqa: E501 Monthly mean from reanalyses
+    "global-reanalysis-phy-001-026-grepv1-uv-monthly_202003",  # noqa: E501 Monthly mean from reanalyses
 ]
 
 
@@ -27,8 +28,6 @@ class global_reanalysis_phy(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -75,21 +74,16 @@ class global_reanalysis_phy(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer,
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
-        if layer == "global-reanalysis-phy-001-026-grepv1-monthly_202003":
-            if start is None:
-                start = "1993-01-15T00:00:00Z"
-
-            if end is None:
-                end = "2020-12-15T00:00:00Z"
-
         if layer == "global-reanalysis-phy-001-026-grepv1-ice-monthly_202003":
             if start is None:
                 start = "1993-01-15T00:00:00Z"
@@ -104,10 +98,17 @@ class global_reanalysis_phy(Main):
             if end is None:
                 end = "2020-12-15T00:00:00Z"
 
+        if layer == "global-reanalysis-phy-001-026-grepv1-monthly_202003":
+            if start is None:
+                start = "1993-01-15T00:00:00Z"
+
+            if end is None:
+                end = "2020-12-15T00:00:00Z"
+
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

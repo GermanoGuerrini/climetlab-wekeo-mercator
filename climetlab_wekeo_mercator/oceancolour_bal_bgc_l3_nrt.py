@@ -6,15 +6,16 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs-oc_bal_bgc-optics_nrt_l3-olci-300m_P1D_202207",  # Cmems obs-oc bal bgc-optics NRT l3-olci-300m p1d
-    "cmems_obs-oc_bal_bgc-plankton_nrt_l3-olci-300m_P1D_202211",  # Cmems obs-oc bal bgc-plankton NRT l3-olci-300m p1d
-    "cmems_obs-oc_bal_bgc-reflectance_nrt_l3-olci-300m_P1D_202207",  # Cmems obs-oc bal bgc-reflectance NRT l3-olci-300m p1d
-    "cmems_obs-oc_bal_bgc-transp_nrt_l3-olci-300m_P1D_202207",  # Cmems obs-oc bal bgc-transp NRT l3-olci-300m p1d
+    "cmems_obs-oc_bal_bgc-optics_nrt_l3-olci-300m_P1D_202207",  # noqa: E501 Cmems obs-oc bal bgc-optics NRT l3-olci-300m p1d
+    "cmems_obs-oc_bal_bgc-plankton_nrt_l3-olci-300m_P1D_202211",  # noqa: E501 Cmems obs-oc bal bgc-plankton NRT l3-olci-300m p1d
+    "cmems_obs-oc_bal_bgc-reflectance_nrt_l3-olci-300m_P1D_202207",  # noqa: E501 Cmems obs-oc bal bgc-reflectance NRT l3-olci-300m p1d
+    "cmems_obs-oc_bal_bgc-transp_nrt_l3-olci-300m_P1D_202207",  # noqa: E501 Cmems obs-oc bal bgc-transp NRT l3-olci-300m p1d
 ]
 
 
@@ -28,8 +29,6 @@ class oceancolour_bal_bgc_l3_nrt(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -74,46 +73,48 @@ class oceancolour_bal_bgc_l3_nrt(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer,
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
-        if layer == "cmems_obs-oc_bal_bgc-reflectance_nrt_l3-olci-300m_P1D_202207":
-            if start is None:
-                start = "2023-07-19T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-26T00:00:00Z"
-
         if layer == "cmems_obs-oc_bal_bgc-transp_nrt_l3-olci-300m_P1D_202207":
             if start is None:
-                start = "2023-07-19T00:00:00Z"
+                start = "2023-09-17T00:00:00Z"
 
             if end is None:
-                end = "2023-07-26T00:00:00Z"
-
-        if layer == "cmems_obs-oc_bal_bgc-optics_nrt_l3-olci-300m_P1D_202207":
-            if start is None:
-                start = "2023-07-19T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-26T00:00:00Z"
+                end = "2023-09-24T00:00:00Z"
 
         if layer == "cmems_obs-oc_bal_bgc-plankton_nrt_l3-olci-300m_P1D_202211":
             if start is None:
-                start = "2023-07-19T00:00:00Z"
+                start = "2023-09-17T00:00:00Z"
 
             if end is None:
-                end = "2023-07-26T00:00:00Z"
+                end = "2023-09-24T00:00:00Z"
+
+        if layer == "cmems_obs-oc_bal_bgc-optics_nrt_l3-olci-300m_P1D_202207":
+            if start is None:
+                start = "2023-09-17T00:00:00Z"
+
+            if end is None:
+                end = "2023-09-24T00:00:00Z"
+
+        if layer == "cmems_obs-oc_bal_bgc-reflectance_nrt_l3-olci-300m_P1D_202207":
+            if start is None:
+                start = "2023-09-17T00:00:00Z"
+
+            if end is None:
+                end = "2023-09-24T00:00:00Z"
 
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

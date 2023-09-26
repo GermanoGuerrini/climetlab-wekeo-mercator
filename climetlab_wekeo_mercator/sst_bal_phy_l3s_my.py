@@ -6,12 +6,13 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs-sst_bal_phy_my_l3s_P1D-m_202211",  # North sea/baltic sea sst, l3s, (sst bal phy l3s my 010 040)
+    "cmems_obs-sst_bal_phy_my_l3s_P1D-m_202211",  # noqa: E501 North sea/baltic sea sst, l3s, (sst bal phy l3s my 010 040)
 ]
 
 
@@ -25,8 +26,6 @@ class sst_bal_phy_l3s_my(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -47,13 +46,15 @@ class sst_bal_phy_l3s_my(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer="cmems_obs-sst_bal_phy_my_l3s_P1D-m_202211",
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
         if layer == "cmems_obs-sst_bal_phy_my_l3s_P1D-m_202211":
             if start is None:
@@ -65,7 +66,7 @@ class sst_bal_phy_l3s_my(Main):
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

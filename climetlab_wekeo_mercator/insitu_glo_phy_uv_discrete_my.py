@@ -6,15 +6,16 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs-ins_glo_phy-cur_my_adcp_irr_202211",  # cmems_obs-ins_glo_phy-cur_my_adcp_irr_202211
-    "cmems_obs-ins_glo_phy-cur_my_drifter_PT6H_202211",  # cmems_obs-ins_glo_phy-cur_my_drifter_PT6H_202211
-    "cmems_obs-ins_glo_phy-cur_my_radar-radial_irr_202211",  # cmems_obs-ins_glo_phy-cur_my_radar-radial_irr_202211
-    "cmems_obs-ins_glo_phy-cur_my_radar-total_irr_202211",  # cmems_obs-ins_glo_phy-cur_my_radar-total_irr_202211
+    "cmems_obs-ins_glo_phy-cur_my_adcp_irr_202211",  # noqa: E501 cmems_obs-ins_glo_phy-cur_my_adcp_irr_202211
+    "cmems_obs-ins_glo_phy-cur_my_drifter_PT6H_202211",  # noqa: E501 cmems_obs-ins_glo_phy-cur_my_drifter_PT6H_202211
+    "cmems_obs-ins_glo_phy-cur_my_radar-radial_irr_202211",  # noqa: E501 cmems_obs-ins_glo_phy-cur_my_radar-radial_irr_202211
+    "cmems_obs-ins_glo_phy-cur_my_radar-total_irr_202211",  # noqa: E501 cmems_obs-ins_glo_phy-cur_my_radar-total_irr_202211
 ]
 
 
@@ -28,8 +29,6 @@ class insitu_glo_phy_uv_discrete_my(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -90,13 +89,15 @@ class insitu_glo_phy_uv_discrete_my(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer,
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
         if layer == "cmems_obs-ins_glo_phy-cur_my_drifter_PT6H_202211":
             if start is None:
@@ -105,12 +106,12 @@ class insitu_glo_phy_uv_discrete_my(Main):
             if end is None:
                 end = "2022-11-07T00:00:00Z"
 
-        if layer == "cmems_obs-ins_glo_phy-cur_my_adcp_irr_202211":
+        if layer == "cmems_obs-ins_glo_phy-cur_my_radar-radial_irr_202211":
             if start is None:
-                start = "2001-01-04T16:47:52Z"
+                start = "2008-12-31T23:30:00Z"
 
             if end is None:
-                end = "2021-11-16T21:30:00Z"
+                end = "2021-12-31T23:30:00Z"
 
         if layer == "cmems_obs-ins_glo_phy-cur_my_radar-total_irr_202211":
             if start is None:
@@ -119,17 +120,17 @@ class insitu_glo_phy_uv_discrete_my(Main):
             if end is None:
                 end = "2021-12-31T23:30:00Z"
 
-        if layer == "cmems_obs-ins_glo_phy-cur_my_radar-radial_irr_202211":
+        if layer == "cmems_obs-ins_glo_phy-cur_my_adcp_irr_202211":
             if start is None:
-                start = "2008-12-31T23:30:00Z"
+                start = "2001-01-04T16:47:52Z"
 
             if end is None:
-                end = "2021-12-31T23:30:00Z"
+                end = "2021-11-16T21:30:00Z"
 
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

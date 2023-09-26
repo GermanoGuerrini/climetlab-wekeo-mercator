@@ -6,12 +6,13 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs-oc_atl_bgc-plankton_nrt_l4-gapfree-multi-1km_P1D_202207",  # Cmems obs-oc atl bgc-plankton NRT l4-gapfree-multi-1km p1d
+    "cmems_obs-oc_atl_bgc-plankton_nrt_l4-gapfree-multi-1km_P1D_202207",  # noqa: E501 Cmems obs-oc atl bgc-plankton NRT l4-gapfree-multi-1km p1d
 ]
 
 
@@ -25,8 +26,6 @@ class oceancolour_atl_bgc_l4_nrt(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -39,25 +38,27 @@ class oceancolour_atl_bgc_l4_nrt(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer="cmems_obs-oc_atl_bgc-plankton_nrt_l4-gapfree-multi-1km_P1D_202207",
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
         if layer == "cmems_obs-oc_atl_bgc-plankton_nrt_l4-gapfree-multi-1km_P1D_202207":
             if start is None:
-                start = "2023-07-19T04:13:37Z"
+                start = "2023-09-17T07:06:01Z"
 
             if end is None:
-                end = "2023-07-26T20:45:46Z"
+                end = "2023-09-24T16:57:46Z"
 
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

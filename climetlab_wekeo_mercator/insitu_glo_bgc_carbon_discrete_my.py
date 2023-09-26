@@ -6,13 +6,14 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs-ins_glo_bgc-car_my_glodap-obs_irr_202211",  # cmems_obs-ins_glo_bgc-car_my_glodap-obs_irr_202211
-    "cmems_obs-ins_glo_bgc-car_my_socat-obs_irr_202211",  # cmems_obs-ins_glo_bgc-car_my_socat-obs_irr_202211
+    "cmems_obs-ins_glo_bgc-car_my_glodap-obs_irr_202211",  # noqa: E501 cmems_obs-ins_glo_bgc-car_my_glodap-obs_irr_202211
+    "cmems_obs-ins_glo_bgc-car_my_socat-obs_irr_202211",  # noqa: E501 cmems_obs-ins_glo_bgc-car_my_socat-obs_irr_202211
 ]
 
 
@@ -26,8 +27,6 @@ class insitu_glo_bgc_carbon_discrete_my(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -77,13 +76,15 @@ class insitu_glo_bgc_carbon_discrete_my(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer,
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
         if layer == "cmems_obs-ins_glo_bgc-car_my_socat-obs_irr_202211":
             if start is None:
@@ -102,7 +103,7 @@ class insitu_glo_bgc_carbon_discrete_my(Main):
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

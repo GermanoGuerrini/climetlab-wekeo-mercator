@@ -6,12 +6,13 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems-IFREMER-ATL-SST-L4-REP-OBS_FULL_TIME_SERIE_202012",  # European north west shelf/iberia biscay irish seas - high resolution l4 sea surface temperature reprocessed
+    "cmems-IFREMER-ATL-SST-L4-REP-OBS_FULL_TIME_SERIE_202012",  # noqa: E501 European north west shelf/iberia biscay irish seas - high resolution l4 sea surface temperature reprocessed
 ]
 
 
@@ -25,8 +26,6 @@ class sst_atl_sst_l4_rep_observations(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -38,13 +37,15 @@ class sst_atl_sst_l4_rep_observations(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer="cmems-IFREMER-ATL-SST-L4-REP-OBS_FULL_TIME_SERIE_202012",
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
         if layer == "cmems-IFREMER-ATL-SST-L4-REP-OBS_FULL_TIME_SERIE_202012":
             if start is None:
@@ -56,7 +57,7 @@ class sst_atl_sst_l4_rep_observations(Main):
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

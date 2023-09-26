@@ -6,12 +6,13 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "dataset-wam-arctic-1hr3km-be_201912",  # Arctic ocean physics analysis and forecast
+    "dataset-wam-arctic-1hr3km-be_201912",  # noqa: E501 Arctic ocean physics analysis and forecast
 ]
 
 
@@ -25,8 +26,6 @@ class arctic_analysis_forecast_wav(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -62,25 +61,27 @@ class arctic_analysis_forecast_wav(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer="dataset-wam-arctic-1hr3km-be_201912",
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
         if layer == "dataset-wam-arctic-1hr3km-be_201912":
             if start is None:
                 start = "2018-01-01T00:00:00Z"
 
             if end is None:
-                end = "2023-08-05T12:00:00Z"
+                end = "2023-10-04T12:00:00Z"
 
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

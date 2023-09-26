@@ -6,12 +6,13 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "dataset-bal-reanalysis-wav-hourly_202003",  # Cmems wam hindcast (hourly)
+    "dataset-bal-reanalysis-wav-hourly_202003",  # noqa: E501 Cmems wam hindcast (hourly)
 ]
 
 
@@ -25,8 +26,6 @@ class balticsea_reanalysis_wav(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -53,13 +52,15 @@ class balticsea_reanalysis_wav(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer="dataset-bal-reanalysis-wav-hourly_202003",
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
         if layer == "dataset-bal-reanalysis-wav-hourly_202003":
             if start is None:
@@ -71,7 +72,7 @@ class balticsea_reanalysis_wav(Main):
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

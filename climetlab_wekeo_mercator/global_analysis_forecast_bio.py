@@ -6,13 +6,14 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "global-analysis-forecast-bio-001-028-daily_202211",  # Daily mean fields from global ocean biogeochemistry analysis and forecast
-    "global-analysis-forecast-bio-001-028-monthly_202211",  # Monthly mean fields for product global analysis forecast bio 001 028
+    "global-analysis-forecast-bio-001-028-daily_202211",  # noqa: E501 Daily mean fields from global ocean biogeochemistry analysis and forecast
+    "global-analysis-forecast-bio-001-028-monthly_202211",  # noqa: E501 Monthly mean fields for product global analysis forecast bio 001 028
 ]
 
 
@@ -26,8 +27,6 @@ class global_analysis_forecast_bio(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -50,32 +49,34 @@ class global_analysis_forecast_bio(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer,
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
-        if layer == "global-analysis-forecast-bio-001-028-daily_202211":
-            if start is None:
-                start = "0201-10-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-08-04T00:00:00Z"
-
         if layer == "global-analysis-forecast-bio-001-028-monthly_202211":
             if start is None:
                 start = "2022-11-01T00:00:00Z"
 
             if end is None:
-                end = "2023-06-28T00:00:00Z"
+                end = "2023-08-28T00:00:00Z"
+
+        if layer == "global-analysis-forecast-bio-001-028-daily_202211":
+            if start is None:
+                start = "0201-10-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-09-29T00:00:00Z"
 
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

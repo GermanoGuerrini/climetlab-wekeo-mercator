@@ -6,13 +6,14 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_mod_glo_bgc_my_0.25_P1D-m_202112",  # Daily mean fields for product global reanalysis bio 001 029
-    "cmems_mod_glo_bgc_my_0.25_P1M-m_202112",  # Monthly mean fields for product global reanalysis bio 001 029
+    "cmems_mod_glo_bgc_my_0.25_P1D-m_202112",  # noqa: E501 Daily mean fields for product global reanalysis bio 001 029
+    "cmems_mod_glo_bgc_my_0.25_P1M-m_202112",  # noqa: E501 Monthly mean fields for product global reanalysis bio 001 029
 ]
 
 
@@ -26,8 +27,6 @@ class global_multiyear_bgc(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -48,13 +47,15 @@ class global_multiyear_bgc(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer,
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
         if layer == "cmems_mod_glo_bgc_my_0.25_P1M-m_202112":
             if start is None:
@@ -73,7 +74,7 @@ class global_multiyear_bgc(Main):
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

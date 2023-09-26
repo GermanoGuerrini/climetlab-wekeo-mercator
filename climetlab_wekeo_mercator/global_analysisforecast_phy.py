@@ -6,26 +6,27 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_mod_glo_phy-cur_anfc_0.083deg_P1D-m_202211",  # Daily mean fields from global ocean physics analysis and forecast updated daily
-    "cmems_mod_glo_phy-cur_anfc_0.083deg_P1M-m_202211",  # Monthly mean fields for product global analysisforecast phy 001 024
-    "cmems_mod_glo_phy-cur_anfc_0.083deg_PT6H-i_202211",  # Instantaneous fields for product global analysisforecast phy 001 024
-    "cmems_mod_glo_phy-so_anfc_0.083deg_P1D-m_202211",  # Daily mean fields from global ocean physics analysis and forecast updated daily
-    "cmems_mod_glo_phy-so_anfc_0.083deg_P1M-m_202211",  # Monthly mean fields for product global analysisforecast phy 001 024
-    "cmems_mod_glo_phy-so_anfc_0.083deg_PT6H-i_202211",  # Instantaneous fields for product global analysisforecast phy 001 024
-    "cmems_mod_glo_phy-thetao_anfc_0.083deg_P1D-m_202211",  # Daily mean fields from global ocean physics analysis and forecast updated daily
-    "cmems_mod_glo_phy-thetao_anfc_0.083deg_P1M-m_202211",  # Monthly mean fields for product global analysisforecast phy 001 024
-    "cmems_mod_glo_phy-thetao_anfc_0.083deg_PT6H-i_202211",  # Instantaneous fields for product global analysisforecast phy 001 024
-    "cmems_mod_glo_phy-wcur_anfc_0.083deg_P1D-m_202211",  # Daily mean fields from global ocean physics analysis and forecast updated daily
-    "cmems_mod_glo_phy-wcur_anfc_0.083deg_P1M-m_202211",  # Monthly mean fields for product global analysisforecast phy 001 024
-    "cmems_mod_glo_phy_anfc_0.083deg_P1D-m_202211",  # Daily mean fields from global ocean physics analysis and forecast updated daily
-    "cmems_mod_glo_phy_anfc_0.083deg_P1M-m_202211",  # Monthly mean fields for product global analysisforecast phy 001 024
-    "cmems_mod_glo_phy_anfc_0.083deg_PT1H-m_202211",  # Hourly mean fields from global ocean physics analysis and forecast updated daily
-    "cmems_mod_glo_phy_anfc_merged-uv_PT1H-i_202211",  # Hourly mean merged surface currents from oceanic circulation, tides and waves
+    "cmems_mod_glo_phy-cur_anfc_0.083deg_P1D-m_202211",  # noqa: E501 Daily mean fields from global ocean physics analysis and forecast updated daily
+    "cmems_mod_glo_phy-cur_anfc_0.083deg_P1M-m_202211",  # noqa: E501 Monthly mean fields for product global analysisforecast phy 001 024
+    "cmems_mod_glo_phy-cur_anfc_0.083deg_PT6H-i_202211",  # noqa: E501 Instantaneous fields for product global analysisforecast phy 001 024
+    "cmems_mod_glo_phy-so_anfc_0.083deg_P1D-m_202211",  # noqa: E501 Daily mean fields from global ocean physics analysis and forecast updated daily
+    "cmems_mod_glo_phy-so_anfc_0.083deg_P1M-m_202211",  # noqa: E501 Monthly mean fields for product global analysisforecast phy 001 024
+    "cmems_mod_glo_phy-so_anfc_0.083deg_PT6H-i_202211",  # noqa: E501 Instantaneous fields for product global analysisforecast phy 001 024
+    "cmems_mod_glo_phy-thetao_anfc_0.083deg_P1D-m_202211",  # noqa: E501 Daily mean fields from global ocean physics analysis and forecast updated daily
+    "cmems_mod_glo_phy-thetao_anfc_0.083deg_P1M-m_202211",  # noqa: E501 Monthly mean fields for product global analysisforecast phy 001 024
+    "cmems_mod_glo_phy-thetao_anfc_0.083deg_PT6H-i_202211",  # noqa: E501 Instantaneous fields for product global analysisforecast phy 001 024
+    "cmems_mod_glo_phy-wcur_anfc_0.083deg_P1D-m_202211",  # noqa: E501 Daily mean fields from global ocean physics analysis and forecast updated daily
+    "cmems_mod_glo_phy-wcur_anfc_0.083deg_P1M-m_202211",  # noqa: E501 Monthly mean fields for product global analysisforecast phy 001 024
+    "cmems_mod_glo_phy_anfc_0.083deg_P1D-m_202211",  # noqa: E501 Daily mean fields from global ocean physics analysis and forecast updated daily
+    "cmems_mod_glo_phy_anfc_0.083deg_P1M-m_202211",  # noqa: E501 Monthly mean fields for product global analysisforecast phy 001 024
+    "cmems_mod_glo_phy_anfc_0.083deg_PT1H-m_202211",  # noqa: E501 Hourly mean fields from global ocean physics analysis and forecast updated daily
+    "cmems_mod_glo_phy_anfc_merged-uv_PT1H-i_202211",  # noqa: E501 Hourly mean merged surface currents from oceanic circulation, tides and waves
 ]
 
 
@@ -39,8 +40,6 @@ class global_analysisforecast_phy(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -76,123 +75,125 @@ class global_analysisforecast_phy(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer,
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
+        if layer == "cmems_mod_glo_phy-thetao_anfc_0.083deg_P1M-m_202211":
+            if start is None:
+                start = "2020-11-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-08-28T00:00:00Z"
+
         if layer == "cmems_mod_glo_phy-thetao_anfc_0.083deg_PT6H-i_202211":
             if start is None:
                 start = "2020-11-01T00:00:00Z"
 
             if end is None:
-                end = "2023-07-27T00:00:00Z"
-
-        if layer == "cmems_mod_glo_phy-cur_anfc_0.083deg_P1D-m_202211":
-            if start is None:
-                start = "2020-11-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-27T00:00:00Z"
+                end = "2023-09-25T00:00:00Z"
 
         if layer == "cmems_mod_glo_phy-thetao_anfc_0.083deg_P1D-m_202211":
             if start is None:
                 start = "2020-11-01T00:00:00Z"
 
             if end is None:
-                end = "2023-07-27T00:00:00Z"
-
-        if layer == "cmems_mod_glo_phy-cur_anfc_0.083deg_P1M-m_202211":
-            if start is None:
-                start = "2020-11-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-06-28T00:00:00Z"
-
-        if layer == "cmems_mod_glo_phy-wcur_anfc_0.083deg_P1M-m_202211":
-            if start is None:
-                start = "2020-11-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-06-28T00:00:00Z"
-
-        if layer == "cmems_mod_glo_phy_anfc_0.083deg_P1D-m_202211":
-            if start is None:
-                start = "2020-11-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-27T00:00:00Z"
-
-        if layer == "cmems_mod_glo_phy_anfc_0.083deg_PT1H-m_202211":
-            if start is None:
-                start = "2020-11-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-27T00:00:00Z"
-
-        if layer == "cmems_mod_glo_phy-so_anfc_0.083deg_P1D-m_202211":
-            if start is None:
-                start = "2020-11-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-27T00:00:00Z"
+                end = "2023-09-25T00:00:00Z"
 
         if layer == "cmems_mod_glo_phy-cur_anfc_0.083deg_PT6H-i_202211":
             if start is None:
                 start = "2020-11-01T00:00:00Z"
 
             if end is None:
-                end = "2023-07-27T00:00:00Z"
+                end = "2023-09-25T00:00:00Z"
 
-        if layer == "cmems_mod_glo_phy-so_anfc_0.083deg_P1M-m_202211":
+        if layer == "cmems_mod_glo_phy_anfc_0.083deg_P1D-m_202211":
             if start is None:
                 start = "2020-11-01T00:00:00Z"
 
             if end is None:
-                end = "2023-06-28T00:00:00Z"
+                end = "2023-09-25T00:00:00Z"
 
-        if layer == "cmems_mod_glo_phy-thetao_anfc_0.083deg_P1M-m_202211":
+        if layer == "cmems_mod_glo_phy_anfc_0.083deg_PT1H-m_202211":
             if start is None:
                 start = "2020-11-01T00:00:00Z"
 
             if end is None:
-                end = "2023-06-28T00:00:00Z"
-
-        if layer == "cmems_mod_glo_phy_anfc_merged-uv_PT1H-i_202211":
-            if start is None:
-                start = "2020-11-01T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-27T00:00:00Z"
+                end = "2023-09-25T00:00:00Z"
 
         if layer == "cmems_mod_glo_phy_anfc_0.083deg_P1M-m_202211":
             if start is None:
                 start = "2020-11-01T00:00:00Z"
 
             if end is None:
-                end = "2023-06-28T00:00:00Z"
+                end = "2023-08-28T00:00:00Z"
 
-        if layer == "cmems_mod_glo_phy-wcur_anfc_0.083deg_P1D-m_202211":
+        if layer == "cmems_mod_glo_phy-cur_anfc_0.083deg_P1M-m_202211":
             if start is None:
                 start = "2020-11-01T00:00:00Z"
 
             if end is None:
-                end = "2023-07-27T00:00:00Z"
+                end = "2023-08-28T00:00:00Z"
+
+        if layer == "cmems_mod_glo_phy-so_anfc_0.083deg_P1D-m_202211":
+            if start is None:
+                start = "2020-11-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-09-25T00:00:00Z"
+
+        if layer == "cmems_mod_glo_phy-so_anfc_0.083deg_P1M-m_202211":
+            if start is None:
+                start = "2020-11-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-08-28T00:00:00Z"
 
         if layer == "cmems_mod_glo_phy-so_anfc_0.083deg_PT6H-i_202211":
             if start is None:
                 start = "2020-11-01T00:00:00Z"
 
             if end is None:
-                end = "2023-07-27T00:00:00Z"
+                end = "2023-09-25T00:00:00Z"
+
+        if layer == "cmems_mod_glo_phy-cur_anfc_0.083deg_P1D-m_202211":
+            if start is None:
+                start = "2020-11-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-09-25T00:00:00Z"
+
+        if layer == "cmems_mod_glo_phy_anfc_merged-uv_PT1H-i_202211":
+            if start is None:
+                start = "2020-11-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-09-25T00:00:00Z"
+
+        if layer == "cmems_mod_glo_phy-wcur_anfc_0.083deg_P1M-m_202211":
+            if start is None:
+                start = "2020-11-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-08-28T00:00:00Z"
+
+        if layer == "cmems_mod_glo_phy-wcur_anfc_0.083deg_P1D-m_202211":
+            if start is None:
+                start = "2020-11-01T00:00:00Z"
+
+            if end is None:
+                end = "2023-09-25T00:00:00Z"
 
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

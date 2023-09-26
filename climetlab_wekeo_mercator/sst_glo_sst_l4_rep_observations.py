@@ -6,12 +6,13 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "METOFFICE-GLO-SST-L4-REP-OBS-SST_202003",  # Global sst & sea ice analysis, l4 ostia, 0.05 deg daily (metoffice-glo-sst-l4-rep-obs-sst-v2)
+    "METOFFICE-GLO-SST-L4-REP-OBS-SST_202003",  # noqa: E501 Global sst & sea ice analysis, l4 ostia, 0.05 deg daily (metoffice-glo-sst-l4-rep-obs-sst-v2)
 ]
 
 
@@ -25,8 +26,6 @@ class sst_glo_sst_l4_rep_observations(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -40,13 +39,15 @@ class sst_glo_sst_l4_rep_observations(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer="METOFFICE-GLO-SST-L4-REP-OBS-SST_202003",
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
         if layer == "METOFFICE-GLO-SST-L4-REP-OBS-SST_202003":
             if start is None:
@@ -58,7 +59,7 @@ class sst_glo_sst_l4_rep_observations(Main):
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

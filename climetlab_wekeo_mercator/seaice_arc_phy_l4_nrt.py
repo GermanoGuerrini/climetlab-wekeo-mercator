@@ -6,12 +6,13 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "esa_obs-si_arc_phy-sit_nrt_l4_multi_P1D-m_202207",  # Sea ice thickness derived from merging cryosat-2 and smos ice thickness
+    "esa_obs-si_arc_phy-sit_nrt_l4_multi_P1D-m_202207",  # noqa: E501 Sea ice thickness derived from merging cryosat-2 and smos ice thickness
 ]
 
 
@@ -25,8 +26,6 @@ class seaice_arc_phy_l4_nrt(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -52,13 +51,15 @@ class seaice_arc_phy_l4_nrt(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer="esa_obs-si_arc_phy-sit_nrt_l4_multi_P1D-m_202207",
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
         if layer == "esa_obs-si_arc_phy-sit_nrt_l4_multi_P1D-m_202207":
             if start is None:
@@ -70,7 +71,7 @@ class seaice_arc_phy_l4_nrt(Main):
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

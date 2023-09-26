@@ -6,13 +6,14 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_mod_med_wav_myint_4.2km_PT1H-i_202112",  # Wave fields (2d) - hourly instantaneous
-    "med-hcmr-wav-rean-h_202105",  # Wave fields (2d) - hourly instantaneous
+    "cmems_mod_med_wav_myint_4.2km_PT1H-i_202112",  # noqa: E501 Wave fields (2d) - hourly instantaneous
+    "med-hcmr-wav-rean-h_202105",  # noqa: E501 Wave fields (2d) - hourly instantaneous
 ]
 
 
@@ -26,8 +27,6 @@ class medsea_multiyear_wav(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -54,14 +53,23 @@ class medsea_multiyear_wav(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer,
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
+        if layer == "cmems_mod_med_wav_myint_4.2km_PT1H-i_202112":
+            if start is None:
+                start = "2022-09-20T00:00:00Z"
+
+            if end is None:
+                end = "2023-09-20T00:00:00Z"
+
         if layer == "med-hcmr-wav-rean-h_202105":
             if start is None:
                 start = "2020-06-01T00:00:00Z"
@@ -69,17 +77,10 @@ class medsea_multiyear_wav(Main):
             if end is None:
                 end = "2022-06-01T00:00:00Z"
 
-        if layer == "cmems_mod_med_wav_myint_4.2km_PT1H-i_202112":
-            if start is None:
-                start = "2022-09-20T00:00:00Z"
-
-            if end is None:
-                end = "2023-07-20T00:00:00Z"
-
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

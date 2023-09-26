@@ -6,12 +6,13 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_obs-sst_bal_phy-subskin_nrt_l4_PT1H-m_202211",  # North sea/baltic sea sst l4 diurnal sub-skin sea surface temperature analysis (sst bal phy subskin l4 NRT 010 034, cmems obs-sst bal phy-subskin NRT l4 pt1h-m)
+    "cmems_obs-sst_bal_phy-subskin_nrt_l4_PT1H-m_202211",  # noqa: E501 North sea/baltic sea sst l4 diurnal sub-skin sea surface temperature analysis (sst bal phy subskin l4 NRT 010 034, cmems obs-sst bal phy-subskin NRT l4 pt1h-m)
 ]
 
 
@@ -25,8 +26,6 @@ class sst_bal_phy_subskin_l4_nrt(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -40,25 +39,27 @@ class sst_bal_phy_subskin_l4_nrt(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer="cmems_obs-sst_bal_phy-subskin_nrt_l4_PT1H-m_202211",
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
         if layer == "cmems_obs-sst_bal_phy-subskin_nrt_l4_PT1H-m_202211":
             if start is None:
                 start = "2022-05-01T00:00:00Z"
 
             if end is None:
-                end = "2023-07-27T00:00:00Z"
+                end = "2023-09-25T00:00:00Z"
 
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

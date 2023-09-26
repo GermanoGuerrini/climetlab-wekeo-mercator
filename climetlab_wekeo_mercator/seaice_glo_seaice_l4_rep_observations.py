@@ -6,15 +6,16 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "OSISAF-GLO-SEAICE_CONC_CONT_TIMESERIES-NH-LA-OBS_202003",  # Interim sea ice concentration climate data record version 3 from the eumetsat osi saf
-    "OSISAF-GLO-SEAICE_CONC_CONT_TIMESERIES-SH-LA-OBS_202003",  # Interim sea ice concentration climate data record version 3 from the eumetsat osi saf
-    "OSISAF-GLO-SEAICE_CONC_TIMESERIES-NH-LA-OBS_202003",  # Sea ice concentration climate data record version 3 (smmr, ssm/i, and ssmis) from the eumetsat osi saf
-    "OSISAF-GLO-SEAICE_CONC_TIMESERIES-SH-LA-OBS_202003",  # Sea ice concentration climate data record version 3 (smmr, ssm/i, and ssmis) from the eumetsat osi saf
+    "OSISAF-GLO-SEAICE_CONC_CONT_TIMESERIES-NH-LA-OBS_202003",  # noqa: E501 Interim sea ice concentration climate data record version 3 from the eumetsat osi saf
+    "OSISAF-GLO-SEAICE_CONC_CONT_TIMESERIES-SH-LA-OBS_202003",  # noqa: E501 Interim sea ice concentration climate data record version 3 from the eumetsat osi saf
+    "OSISAF-GLO-SEAICE_CONC_TIMESERIES-NH-LA-OBS_202003",  # noqa: E501 Sea ice concentration climate data record version 3 (smmr, ssm/i, and ssmis) from the eumetsat osi saf
+    "OSISAF-GLO-SEAICE_CONC_TIMESERIES-SH-LA-OBS_202003",  # noqa: E501 Sea ice concentration climate data record version 3 (smmr, ssm/i, and ssmis) from the eumetsat osi saf
 ]
 
 
@@ -28,8 +29,6 @@ class seaice_glo_seaice_l4_rep_observations(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -49,20 +48,22 @@ class seaice_glo_seaice_l4_rep_observations(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer,
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
         if layer == "OSISAF-GLO-SEAICE_CONC_CONT_TIMESERIES-NH-LA-OBS_202003":
             if start is None:
                 start = "2021-01-01T00:00:00Z"
 
             if end is None:
-                end = "2023-07-12T00:00:00Z"
+                end = "2023-09-10T00:00:00Z"
 
         if layer == "OSISAF-GLO-SEAICE_CONC_TIMESERIES-SH-LA-OBS_202003":
             if start is None:
@@ -76,7 +77,7 @@ class seaice_glo_seaice_l4_rep_observations(Main):
                 start = "2021-01-01T00:00:00Z"
 
             if end is None:
-                end = "2023-07-12T00:00:00Z"
+                end = "2023-09-10T00:00:00Z"
 
         if layer == "OSISAF-GLO-SEAICE_CONC_TIMESERIES-NH-LA-OBS_202003":
             if start is None:
@@ -88,7 +89,7 @@ class seaice_glo_seaice_l4_rep_observations(Main):
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

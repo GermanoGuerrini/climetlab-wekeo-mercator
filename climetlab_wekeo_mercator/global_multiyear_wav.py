@@ -6,12 +6,13 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main
 
 LAYERS = [
-    "cmems_mod_glo_wav_my_0.2_PT3H-i_202112",  # Mean fields from global wave model mfwam of meteo-france with ecmwf forcing
+    "cmems_mod_glo_wav_my_0.2_PT3H-i_202112",  # noqa: E501 Mean fields from global wave model mfwam of meteo-france with ecmwf forcing
 ]
 
 
@@ -25,8 +26,6 @@ class global_multiyear_wav(Main):
 
     @normalize("layer", LAYERS)
     @normalize("area", "bounding-box(list)")
-    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
-    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize(
         "variables",
         [
@@ -53,13 +52,15 @@ class global_multiyear_wav(Main):
         ],
         multiple=True,
     )
+    @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
+    @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
     def __init__(
         self,
         layer="cmems_mod_glo_wav_my_0.2_PT3H-i_202112",
         area=None,
+        variables=None,
         start=None,
         end=None,
-        variables=None,
     ):
         if layer == "cmems_mod_glo_wav_my_0.2_PT3H-i_202112":
             if start is None:
@@ -71,7 +72,7 @@ class global_multiyear_wav(Main):
         super().__init__(
             layer=layer,
             area=area,
+            variables=variables,
             start=start,
             end=end,
-            variables=variables,
         )

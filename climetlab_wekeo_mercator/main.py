@@ -7,9 +7,8 @@
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
 
-import xarray as xr
-
 import climetlab as cml
+import xarray as xr
 from climetlab import Dataset
 
 __version__ = "0.1.0"
@@ -66,21 +65,10 @@ class Main(Dataset):
 
         if variables is not None:
             query["multiStringSelectValues"] = [
-                {
-                    "name": "variables",
-                    "value": variables
-                }
+                {"name": "variables", "value": variables}
             ]
         self.source = cml.load_source("wekeo", query)
         self._xarray = None
-
-    def pre_concat(self, datasets):
-        """Hook for subclasses."""
-        return datasets
-
-    def post_concat(self, datasets, array):
-        """Hook for subclasses."""
-        return array
 
     def to_xarray(self, **kwargs):
         if self._xarray is not None:
@@ -91,16 +79,11 @@ class Main(Dataset):
         options.update(kwargs.get("xarray_open_dataset_kwargs", {}))
 
         try:
-            datasets = [
-                xr.open_dataset(s, **options) for s in self.source.sources
-            ]
-            datasets = self.pre_concat(datasets)
+            datasets = [xr.open_dataset(s, **options) for s in self.source.sources]
             array = xr.concat(datasets, dim="time")
-            array = self.post_concat(datasets, array)
             self._xarray = array
             return self._xarray
         except AttributeError:
             # Single file
             self._xarray = super().to_xarray(**options)
             return self._xarray
-

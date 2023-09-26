@@ -6,16 +6,15 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 from __future__ import annotations
+
 from climetlab.decorators import normalize
 
 from climetlab_wekeo_mercator.main import Main2
 
 
-
 class test_clms(Main2):
     name = "EO:CLMS:DAT:CGLS_HOURLY_LST_GLOBAL_V2"
     dataset = "EO:CLMS:DAT:CGLS_HOURLY_LST_GLOBAL_V2"
-
 
     @normalize("start", "date(%Y-%m-%dT%H:%M:%SZ)")
     @normalize("end", "date(%Y-%m-%dT%H:%M:%SZ)")
