@@ -83,7 +83,7 @@ class Main(Dataset):
             array = xr.concat(datasets, dim="time")
             self._xarray = array
             return self._xarray
-        except AttributeError:
+        except (AttributeError, ValueError):
             # Single file
             self._xarray = super().to_xarray(**options)
             return self._xarray
