@@ -29,12 +29,12 @@ To find out which layers and variables are available for a dataset, there are tw
 The datasets are available in the WEkEO Catalogue. 
 
 .. image:: ../images/mercator-wekeo-catalogue.png
-    :width: 200
+    :width: 400
 
 When klicking on "Add to map..." the available layers are shown.
 
 .. image:: ../images/wekeo-layers.png
-    :width: 200
+    :width: 400
 
 
 The layer of choice can then be added to the WEkEO Viewer, where the availabe attributes for subsetting the dataset are shown as well. 
@@ -51,6 +51,7 @@ The above-described ERA5 dataset can be found `here <https://github.com/wekeo/cl
 Now, a CliMetLab query for WEkEO data can be created: 
 
 .. code-block:: python
+
     ds = cml.load_dataset(
         "wekeo-mercator-sst-med-sst-l4-nrt-observations", 
         layer="SST_MED_SST_L4_NRT_OBSERVATIONS_010_004_a_V2", # Mediterranean sst analysis, l4, 1/16deg daily (sst med sst l4 NRT observations 010 004 a v2)
@@ -92,7 +93,7 @@ Using the python `xarray` module, the dataset can be analyzed and plotted.
     plt.axis('scaled')
 
 .. image:: ../images/wekeo-plot-sst.png
-    :width: 200
+    :width: 600
 
 Working with two or more datasets using CliMetLab
 -------------------------------------------------
