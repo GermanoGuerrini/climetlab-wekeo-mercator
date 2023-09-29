@@ -2,17 +2,7 @@
 
 A dataset plugin for climetlab for the Mercator Ocean datasets available on WEkEO.
 
-> **Note**
-> This plugin is currently in beta stage and not yet available on Pypi nor Conda.
-> Please follow the installation instruction as "pip install" or "conda install" won't work.
-
-Installation
-------------
-To install the plugin, clone the GitHub repository on the target machine.
-Once done, activate the Python virtual environment or the Conda environment, depending on the tool you have chosen, and then run:
-
-    cd climentlab-wekeo-mercator
-    pip install .
+For installation and usage instructions, please refer to [the documentation](https://climetlab-wekeo-mercator.readthedocs.io/).
 
 Features
 --------
